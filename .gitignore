@@ -5,6 +5,7 @@ __pycache__/
 
 # Virtual environments
 venv/
+.venv/
 .env/
 .env
 
@@ -20,6 +21,9 @@ venv/
 *.npy
 *.npz
 *.db
+
+# ChromaDB persistent index (regenerable con generate_embeddings.py)
+chroma_db/
 
 # Logs and runtime files
 *.log

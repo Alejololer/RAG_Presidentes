@@ -1,24 +1,24 @@
 @echo off
 echo ==========================================
-echo     INICIANDO SISTEMA RAG (FAISS)
+echo     INICIANDO SISTEMA RAG (ChromaDB)
 echo ==========================================
 
 REM Crear entorno virtual si no existe
-IF NOT EXIST venv (
+IF NOT EXIST .venv (
   echo [1/4] Creando entorno virtual...
-  python -m venv venv
+  python -m venv .venv
 )
 
 REM Activar entorno virtual
-call venv\Scripts\activate
+call .venv\Scripts\activate
 
 REM Instalar dependencias
 echo [2/4] Instalando dependencias...
 pip install -r requirements.txt
 
-REM Generar embeddings si aún no existe la base FAISS
-IF NOT EXIST faiss_index.bin (
-  echo [3/4] Generando índice FAISS...
+REM Generar embeddings si aun no existe la base ChromaDB
+IF NOT EXIST chroma_db (
+  echo [3/4] Generando indice ChromaDB...
   python generate_embeddings.py
 )
 

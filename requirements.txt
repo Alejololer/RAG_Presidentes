@@ -1,8 +1,10 @@
-pandas
-faiss-cpu
-sentence-transformers
 fastapi
 uvicorn
 jinja2
 requests
-openpyxl
+sentence-transformers
+chromadb
+
+# NOTA GPU (NVIDIA): sentence-transformers instala torch CPU por defecto.
+# Para usar la GPU (RTX 50xx / Blackwell), tras instalar lo de arriba ejecuta:
+#   pip install --force-reinstall torch --index-url https://download.pytorch.org/whl/cu128
