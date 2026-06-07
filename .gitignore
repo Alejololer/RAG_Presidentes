@@ -1,0 +1,34 @@
+# Python artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+venv/
+.env/
+.env
+
+# IDE/editor files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Data and model artifacts
+*.pkl
+*.bin
+*.npy
+*.npz
+*.db
+
+# Logs and runtime files
+*.log
+*.pid
+*.sock
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Local config
+*.local

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>RAG - Presidentes del Ecuador (FAISS)</title>
+  <style>
+    body { font-family: sans-serif; margin: 2rem; }
+    #chat { max-width: 800px; height: 400px; overflow-y: scroll; border: 1px solid #ccc; padding: 1rem; background: #f9f9f9; }
+    .user { font-weight: bold; margin-top: 1rem; }
+    .bot { color: #007acc; margin-bottom: 1rem; }
+  </style>
+</head>
+<body>
+  <h2>Sistema RAG (FAISS) - Presidentes del Ecuador 🇪🇨</h2>
+  <div id="chat"></div>
+  <textarea id="prompt" rows="3" cols="80" placeholder="Escribe tu pregunta..."></textarea><br>
+  <button onclick="sendPrompt()">Enviar</button>
+
+  <script>
+    async function sendPrompt() {
+      const input = document.getElementById("prompt");
+      const chat = document.getElementById("chat");
+      const prompt = input.value.trim();
+      if (!prompt) return;
+      const userMsg = document.createElement("div");
+      userMsg.className = "user";
+      userMsg.textContent = "🧑 " + prompt;
+      chat.appendChild(userMsg);
+
+      const res = await fetch("/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ prompt })
+      });
+
+      const data = await res.json();
+      const botMsg = document.createElement("div");
+      botMsg.className = "bot";
+      botMsg.textContent = "🤖 " + data.response;
+      chat.appendChild(botMsg);
+      chat.scrollTop = chat.scrollHeight;
+      input.value = "";
+    }
+  </script>
+</body>
+</html>
