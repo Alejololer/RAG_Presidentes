@@ -57,17 +57,25 @@ Pregunta del usuario
 detect_president()         ← identifica de qué presidente trata la pregunta
    │
    ▼
-retrieve(pregunta, presidente)
+retrieve(pregunta, presidente)              ← CAPA 1: dataset local
    │   ChromaDB: filtra where={presidente}  ANTES de la similitud semántica
    │   → elimina la mezcla de contexto entre presidentes
    ▼
-Contexto etiquetado [Presidente — Sección]
+¿Recuperación local débil?
+   │   NO → usar solo local
+   │   SÍ ↓
+research_for_chat(...)                       ← CAPA 2: Wikipedia ES (opcional)
+   │   Trigger conservador: 0 chunks, dist>0.5, sin presidente,
+   │   o disparador explícito ("según fuentes externas")
+   │   NO se menciona la fuente al usuario
+   ▼
+Contexto etiquetado [Presidente — Sección] + [Wikipedia - título]
    │
    ▼
 Ollama (qwen2.5:7b)        ← prompt impersonador + anti-alucinación, temp 0.35
    │
    ▼
-Respuesta en 1ª persona + fuentes
+Respuesta en 1ª persona + fuentes (locales + externas para trazabilidad)
 ```
 
 ### Stack
@@ -85,10 +93,12 @@ Respuesta en 1ª persona + fuentes
 ```
 app.py                    Endpoints FastAPI (/chat, /health, /)
 utils.py                  Núcleo RAG: carga, chunking, embeddings, retrieve
+research_tool.py          Capa 2: research con Wikipedia ES (trigger conservador)
 generate_embeddings.py    (Re)indexa el dataset en ChromaDB
 presidentes_ecuador.json  Dataset histórico (JSONL: 74 presidentes)
 templates/index.html      Interfaz web de demostración
 test_rag.py               Pruebas de carga, chunking, detección y aislamiento
+test_research.py          Pruebas de la capa 2 (research) con mocks
 test_chat.py              Prueba funcional end-to-end del flujo de chat
 chroma_db/                Índice vectorial persistente (regenerable)
 requirements.txt          Dependencias Python
@@ -148,8 +158,23 @@ uvicorn app:app --host 0.0.0.0 --port 8010
 
 ```powershell
 .\.venv\Scripts\python.exe test_rag.py     # aislamiento, detección, chunking
+.\.venv\Scripts\python.exe test_research.py # capa 2 (research) - mocks, sin red
 .\.venv\Scripts\python.exe test_chat.py    # flujo completo (requiere Ollama)
 ```
+
+### Capa 2: research con Wikipedia
+
+Cuando el retrieval local es débil (0 chunks relevantes, distancia promedio
+> 0.5, no se detecta presidente, o el usuario pide "según fuentes externas"),
+el sistema complementa el contexto con un extracto de Wikipedia ES.
+
+**Reglas de diseño**:
+- Trigger conservador: pocas requests, solo cuando el local es claramente insuficiente.
+- El extracto se etiqueta como `[Wikipedia - título]` en el contexto, pero el
+  LLM lo integra a la voz del presidente **sin mencionar la fuente al usuario**.
+- Si Wikipedia no responde (timeout, red caída, sin página), `research_for_chat()`
+  devuelve vacío y el chat sigue funcionando solo con el retrieval local.
+- Cache LRU en RAM (TTL 1h) para evitar requests repetidos en preguntas comunes.
 
 ### Compatibilidad con la arquitectura *Opción 2049*
 

@@ -19,6 +19,7 @@ página web.pdf`).
 
 # Pruebas
 .\.venv\Scripts\python.exe test_rag.py      # aislamiento/detección/chunking
+.\.venv\Scripts\python.exe test_research.py # capa 2 (research/Wikipedia)
 .\.venv\Scripts\python.exe test_chat.py     # flujo end-to-end (requiere Ollama)
 ```
 
@@ -32,7 +33,11 @@ Requiere **Ollama** corriendo con `qwen2.5:7b` (`ollama pull qwen2.5:7b`).
   - `embed_and_store()` — embeddings e5 + ChromaDB (colección `presidentes`, distancia coseno).
   - `detect_president()` — identifica el presidente de la pregunta (match de tokens normalizados).
   - `retrieve()` — **filtra por `where={presidente}` ANTES de la similitud** + umbral de distancia. Esto es lo que evita la mezcla de presidentes.
-- **`app.py`** — FastAPI. Endpoints: `POST /chat`, `GET /health`, `GET /` (demo HTML). Prompt impersonador + anti-alucinación. Config por env vars.
+- **`research_tool.py`** — **Capa 2 (research)**: complementa el retrieval local con extractos de Wikipedia ES cuando el dataset local es débil. Trigger conservador (pocas requests). NO se menciona la fuente al usuario (decisión de diseño). Cache LRU en RAM (TTL 1h) y timeout 5s para no degradar el chat si Wikipedia cae.
+  - `should_research()` — dispara solo si: (a) no se detecta presidente, (b) 0 chunks locales, (c) distancia promedio > 0.5, o (d) pregunta contiene disparador explícito ("según fuentes externas", etc.).
+  - `wikipedia_search()` — busca en `https://es.wikipedia.org/w/api.php` (action=query, list=search, prop=extracts con exintro).
+  - `_extract_relevant()` — filtra extractos que no mencionan al presidente (evita contaminar con info de otros mandatarios).
+- **`app.py`** — FastAPI. Endpoints: `POST /chat`, `GET /health`, `GET /` (demo HTML). Prompt impersonador + anti-alucinación. Config por env vars. Integra `research_for_chat()` después de `retrieve()` y devuelve `fuentes_externas` en la respuesta (trazabilidad interna, NO visible al usuario).
 - **`generate_embeddings.py`** — script de (re)indexado.
 
 ## Convenciones / decisiones (con su porqué)
@@ -52,6 +57,8 @@ Requiere **Ollama** corriendo con `qwen2.5:7b` (`ollama pull qwen2.5:7b`).
 - **`chroma_db/` es regenerable** — está en `.gitignore`. Si se corrompe, borrar y re-ejecutar `generate_embeddings.py`.
 - **Datos sucios conocidos**: 3 registros tenían el campo `Nombre` contaminado con texto desbordado de otra sección (Bucaram, Enríquez Gallo, Mancheno). `load_records()` los limpia cortando en el primer bloque de 2+ espacios o salto de línea. Si añades datos, revisa que `test_rag.py` siga en "DETECCIÓN: TODO OK".
 - **Tokenización en `detect_president`**: usar `re.findall(r"\w+", ...)`, no `.split()`, para que la puntuación pegada (p. ej. "Moreno,") no rompa el match con el token del nombre.
+- **Research tool degrada con gracia**: si Wikipedia ES no responde (timeout, red caída, sin página para el presidente), `research_for_chat()` devuelve `("", [])` y el chat sigue funcionando solo con el retrieval local. Verificado en `test_research.py::test_returns_empty_on_network_failure`.
+- **Tests con mocks**: `test_research.py` mockea `requests` con `unittest.mock.patch` para evitar dependencia de red real. Esto permite correr la suite completa offline, pero en CI conviene también un test "live" opcional contra Wikipedia (gated por una env var tipo `LIVE_WIKI=1`).
 
 ## Compatibilidad Opción 2049
 

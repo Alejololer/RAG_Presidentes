@@ -8,6 +8,7 @@ from pydantic import BaseModel
 import requests
 
 from utils import retrieve, detect_president, get_known_names, SECTION_LABELS
+from research_tool import research_for_chat
 
 # --- Configuración por entorno (compatible con arquitectura distribuida) ---
 # En el ecosistema "Opción 2049", Ollama corre en el Nodo de IA (GPU), no en
@@ -99,17 +100,39 @@ async def chat(data: Prompt):
     # 2. Recuperar contexto filtrado por ese presidente (evita mezcla).
     resultados = retrieve(data.prompt, president=presidente, top_k=RAG_TOP_K)
 
-    # 3. Construir prompt. Sin fallback al conocimiento del modelo:
-    #    si no hay contexto, el system prompt anti-alucinación lo maneja.
-    system_prompt = build_system_prompt(presidente, bool(resultados))
-    contexto = build_context(resultados) if resultados else "(No hay información disponible en el archivo para esta pregunta.)"
+    # 3. Capa 2 (research): si el retrieval local es debil/ausente, complementar
+    #    con Wikipedia ES. Trigger conservador (pocas requests). El usuario NO
+    #    ve la fuente (decision de diseno del equipo), pero queda registrada
+    #    internamente en 'fuentes_externas' para trazabilidad.
+    research_ctx, fuentes_externas = research_for_chat(
+        local_chunks=resultados,
+        question=data.prompt,
+        president=presidente,
+    )
+
+    # 4. Construir el bloque de contexto combinando local + research.
+    if resultados:
+        contexto_local = build_context(resultados)
+    else:
+        contexto_local = "(No hay información disponible en el archivo histórico para esta pregunta.)"
+
+    if research_ctx:
+        contexto = (
+            f"{contexto_local}\n\n"
+            f"--- Contexto complementario ---\n{research_ctx}"
+        )
+    else:
+        contexto = contexto_local
+
+    # 5. System prompt anti-alucinación (intacto, no se menciona la fuente al usuario).
+    system_prompt = build_system_prompt(presidente, bool(resultados) or bool(research_ctx))
     full_prompt = (
         f"{system_prompt}\n\n"
         f"CONTEXTO:\n{contexto}\n\n"
         f"Pregunta del usuario: {data.prompt}"
     )
 
-    # 4. Generar respuesta con Ollama (temperatura baja = menos invención).
+    # 6. Generar respuesta con Ollama (temperatura baja = menos invención).
     try:
         res = requests.post(OLLAMA_URL, json={
             "model": OLLAMA_MODEL,
@@ -121,7 +144,7 @@ async def chat(data: Prompt):
     except Exception as e:
         return {"response": f"⚠️ Error al contactar con Ollama: {str(e)}"}
 
-    # 5. Devolver respuesta + fuentes (trazabilidad).
+    # 7. Devolver respuesta + fuentes (trazabilidad interna).
     fuentes = [
         {"presidente": r["presidente"], "seccion": SECTION_LABELS.get(r["seccion"], r["seccion"])}
         for r in resultados
@@ -130,4 +153,5 @@ async def chat(data: Prompt):
         "response": respuesta,
         "presidente": presidente,
         "fuentes": fuentes,
+        "fuentes_externas": fuentes_externas,  # nuevo: para monitoreo interno
     }
