@@ -1,0 +1,649 @@
+#!/usr/bin/env bash
+# =============================================================================
+# RAG Presidentes Ecuador - Setup interactivo (macOS / Linux / Git Bash)
+#
+# Uso:
+#   ./setup.sh                    # Menu interactivo
+#   ./setup.sh setup              # Setup completo
+#   ./setup.sh build              # Build imagen
+#   ./setup.sh reindex            # Regenerar ChromaDB
+#   ./setup.sh start              # Iniciar servicio
+#   ./setup.sh stop               # Detener servicio
+#   ./setup.sh logs               # Ver logs
+#   ./setup.sh health             # Health check
+#   ./setup.sh update             # git pull + rebuild
+#   ./setup.sh config             # Editar .env
+#   ./setup.sh uninstall          # Desinstalar
+#
+# Flags:
+#   --auto                         # Modo no-interactivo (asume defaults)
+#   --gpu                          # Build con soporte GPU NVIDIA
+#   --platform <plat>              # Forzar plataforma (linux/amd64 | linux/arm64)
+#   --dry-run                      # Mostrar que haria sin ejecutar
+#   -h, --help                     # Ayuda
+# =============================================================================
+
+set -euo pipefail
+
+# =============================================================================
+# Configuracion global
+# =============================================================================
+
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+cd "$SCRIPT_DIR"
+
+LOG_FILE="$SCRIPT_DIR/setup.log"
+ENV_FILE="$SCRIPT_DIR/.env"
+ENV_EXAMPLE="$SCRIPT_DIR/.env.example"
+IMAGE_NAME="rag-presidentes"
+IMAGE_TAG="1.0.0"
+
+# Flags parseados
+AUTO_MODE=false
+GPU_BUILD=false
+FORCE_PLATFORM=""
+DRY_RUN=false
+COMMAND=""
+
+# Colores (deshabilitados si no es TTY)
+if [ -t 1 ]; then
+    C_CYAN='\033[0;36m'
+    C_GREEN='\033[0;32m'
+    C_YELLOW='\033[1;33m'
+    C_RED='\033[0;31m'
+    C_GRAY='\033[0;90m'
+    C_MAGENTA='\033[0;35m'
+    C_NC='\033[0m'
+else
+    C_CYAN=''; C_GREEN=''; C_YELLOW=''; C_RED=''; C_GRAY=''; C_MAGENTA=''; C_NC=''
+fi
+
+# =============================================================================
+# Parseo de argumentos
+# =============================================================================
+
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+        setup|build|reindex|start|stop|logs|health|update|config|uninstall)
+            COMMAND="$1"; shift ;;
+        --auto) AUTO_MODE=true; shift ;;
+        --gpu) GPU_BUILD=true; shift ;;
+        --platform) FORCE_PLATFORM="$2"; shift 2 ;;
+        --dry-run) DRY_RUN=true; shift ;;
+        -h|--help)
+            sed -n '2,25p' "$0"
+            exit 0 ;;
+        *) echo "Argumento desconocido: $1"; exit 1 ;;
+    esac
+done
+
+# =============================================================================
+# Funciones de output
+# =============================================================================
+
+log() {
+    local level="$1"; shift
+    local msg="$*"
+    local ts
+    ts="$(date '+%Y-%m-%d %H:%M:%S')"
+    echo "[$ts] [$level] $msg" >> "$LOG_FILE" 2>/dev/null || true
+}
+
+banner() {
+    echo ""
+    echo -e "${C_CYAN}========================================${C_NC}"
+    echo -e "${C_CYAN} RAG Presidentes Ecuador - Setup${C_NC}"
+    echo -e "${C_CYAN}========================================${C_NC}"
+    echo ""
+}
+
+step() { echo -e "${C_CYAN}[*]${C_NC} $*"; log "INFO" "$*"; }
+ok()   { echo -e "${C_GREEN}[OK]${C_NC} $*"; log "INFO" "$*"; }
+warn() { echo -e "${C_YELLOW}[WARN]${C_NC} $*"; log "WARN" "$*"; }
+fail() { echo -e "${C_RED}[FAIL]${C_NC} $*"; log "ERROR" "$*"; }
+info() { echo -e "${C_GRAY}[INFO]${C_NC} $*"; log "INFO" "$*"; }
+
+run_cmd() {
+    local desc="$1"; shift
+    local cmd="$*"
+    step "$desc"
+    if [ "$DRY_RUN" = true ]; then
+        echo -e "  ${C_MAGENTA}[DRY-RUN]${C_NC} $cmd"
+        return 0
+    fi
+    log "INFO" "Ejecutando: $cmd"
+    echo -e "  ${C_GRAY}>${C_NC} $cmd"
+    if ! eval "$cmd"; then
+        fail "Comando fallo: $cmd"
+        return 1
+    fi
+}
+
+# =============================================================================
+# Deteccion de entorno
+# =============================================================================
+
+detect_os() {
+    case "$OSTYPE" in
+        darwin*)  echo "macos" ;;
+        linux*)   echo "linux" ;;
+        msys*|cygwin*|win32*) echo "windows-gitbash" ;;
+        *)        echo "unknown" ;;
+    esac
+}
+
+detect_arch() {
+    local arch
+    arch="$(uname -m)"
+    case "$arch" in
+        x86_64|amd64) echo "amd64" ;;
+        aarch64|arm64) echo "arm64" ;;
+        *) echo "$arch" ;;
+    esac
+}
+
+check_docker() {
+    if ! command -v docker &>/dev/null; then
+        echo "not_installed"
+        return
+    fi
+    local version
+    version=$(docker --version 2>/dev/null | sed 's/Docker version //;s/,.*//')
+    local running=false
+    if docker info &>/dev/null; then
+        running=true
+    fi
+    echo "installed:$version:running:$running"
+}
+
+check_buildx() {
+    if ! command -v docker &>/dev/null; then
+        echo "no_docker"
+        return
+    fi
+    if docker buildx version &>/dev/null; then
+        echo "available"
+    else
+        echo "unavailable"
+    fi
+}
+
+check_ollama() {
+    local host="${1:-http://localhost:11434}"
+    local response
+    response=$(curl -s --max-time 3 "$host/api/tags" 2>/dev/null || echo "")
+    if [ -z "$response" ]; then
+        echo "unreachable"
+        return
+    fi
+    local has_qwen=false
+    if echo "$response" | grep -q '"qwen2.5:7b"'; then
+        has_qwen=true
+    fi
+    local count
+    count=$(echo "$response" | grep -o '"name"' | wc -l | tr -d ' ')
+    echo "reachable:$count:qwen:$has_qwen"
+}
+
+check_image() {
+    if docker image inspect "${IMAGE_NAME}:${IMAGE_TAG}" &>/dev/null; then
+        echo "exists"
+    else
+        echo "missing"
+    fi
+}
+
+check_service() {
+    if docker compose ps --services --filter "status=running" 2>/dev/null | grep -q "rag"; then
+        echo "running"
+    else
+        echo "stopped"
+    fi
+}
+
+show_status() {
+    banner
+    echo -e "Estado actual:${C_NC}"
+    echo ""
+
+    local docker_status
+    docker_status=$(check_docker)
+    if [ "$docker_status" = "not_installed" ]; then
+        fail "Docker no instalado (descargalo de https://www.docker.com/products/docker-desktop/)"
+    else
+        local ver running
+        IFS=':' read -r _ ver _ running <<< "$docker_status"
+        ok "Docker instalado: $ver"
+        if [ "$running" = "true" ]; then
+            ok "Docker corriendo"
+        else
+            warn "Docker no esta corriendo (abrir Docker Desktop)"
+        fi
+    fi
+
+    local buildx
+    buildx=$(check_buildx)
+    case "$buildx" in
+        available) ok "Docker buildx disponible (multi-arch OK)" ;;
+        unavailable) warn "Docker buildx no disponible (multi-arch limitado)" ;;
+        no_docker) ;;
+    esac
+
+    info "Arquitectura del host: $(detect_arch)"
+    info "OS detectado: $(detect_os)"
+
+    # En Linux, host.docker.internal no funciona: avisamos
+    if [ "$(detect_os)" = "linux" ]; then
+        info "Linux detectado: se usara USE_HOST_NETWORK=true automaticamente"
+    fi
+
+    local ollama
+    ollama=$(check_ollama)
+    if [[ "$ollama" == unreachable* ]]; then
+        warn "Ollama no accesible en http://localhost:11434"
+    else
+        IFS=':' read -r _ count _ has_qwen <<< "$ollama"
+        ok "Ollama accesible ($count modelos)"
+        if [ "$has_qwen" = "false" ]; then
+            warn "  Modelo qwen2.5:7b NO descargado. Ejecuta: ollama pull qwen2.5:7b"
+        fi
+    fi
+
+    local img
+    img=$(check_image)
+    if [ "$img" = "exists" ]; then
+        ok "Imagen ${IMAGE_NAME}:${IMAGE_TAG} construida"
+    else
+        warn "Imagen ${IMAGE_NAME}:${IMAGE_TAG} NO existe (requiere build)"
+    fi
+
+    local svc
+    svc=$(check_service)
+    if [ "$svc" = "running" ]; then
+        ok "Servicio RAG corriendo"
+    else
+        warn "Servicio RAG detenido"
+    fi
+
+    if [ -f "$ENV_FILE" ]; then
+        ok ".env configurado"
+    else
+        warn ".env no existe (usar opcion 9 para configurar)"
+    fi
+    echo ""
+}
+
+# =============================================================================
+# Funciones principales
+# =============================================================================
+
+init_env() {
+    if [ ! -f "$ENV_FILE" ]; then
+        if [ -f "$ENV_EXAMPLE" ]; then
+            cp "$ENV_EXAMPLE" "$ENV_FILE"
+            ok ".env creado desde .env.example"
+        else
+            fail ".env.example no encontrado"
+            return 1
+        fi
+    else
+        info ".env ya existe"
+    fi
+
+    # En Linux, host.docker.internal no funciona. Forzar USE_HOST_NETWORK=true.
+    if [ "$(detect_os)" = "linux" ]; then
+        if grep -q "^USE_HOST_NETWORK=" "$ENV_FILE"; then
+            sed -i 's/^USE_HOST_NETWORK=.*/USE_HOST_NETWORK=true/' "$ENV_FILE"
+            info "USE_HOST_NETWORK=true (Linux necesita red host para Ollama)"
+        fi
+    fi
+}
+
+install_docker() {
+    local status
+    status=$(check_docker)
+    if [ "$status" != "not_installed" ]; then return 0; fi
+
+    warn "Docker no esta instalado."
+    if [ "$AUTO_MODE" = false ]; then
+        read -p "Abrir pagina de descarga? (s/n) " resp
+        if [ "$resp" = "s" ] || [ "$resp" = "S" ]; then
+            if [ "$(detect_os)" = "macos" ]; then
+                open "https://www.docker.com/products/docker-desktop/"
+            else
+                xdg-open "https://www.docker.com/products/docker-desktop/" 2>/dev/null || \
+                    echo "Abre: https://www.docker.com/products/docker-desktop/"
+            fi
+        fi
+    fi
+    fail "Instala Docker y vuelve a correr este script."
+    exit 1
+}
+
+ensure_buildx() {
+    if [ "$(check_buildx)" = "available" ]; then return 0; fi
+
+    step "Creando builder buildx para multi-arch..."
+    if [ "$DRY_RUN" = true ]; then return 0; fi
+    if docker buildx create --name multiarch --use 2>/dev/null && \
+       docker buildx inspect --bootstrap 2>/dev/null; then
+        ok "Builder multiarch listo"
+    else
+        warn "No se pudo crear builder multiarch. Build limitado a plataforma local."
+    fi
+}
+
+build_image() {
+    step "Construyendo imagen Docker..."
+    info "Esto puede tardar 5-10 minutos la primera vez (descarga modelo + genera ChromaDB)."
+
+    ensure_buildx
+
+    local platform="${FORCE_PLATFORM:-linux/$(detect_arch)}"
+    info "Plataforma: $platform"
+
+    local gpu_args=""
+    if [ "$GPU_BUILD" = true ]; then
+        gpu_args="--build-arg INSTALL_GPU=true"
+    fi
+
+    if [ "$DRY_RUN" = true ]; then
+        echo -e "  ${C_MAGENTA}[DRY-RUN]${C_NC} docker buildx build --platform $platform -t ${IMAGE_NAME}:${IMAGE_TAG} ."
+        return 0
+    fi
+
+    if ! docker buildx build --platform "$platform" \
+        -t "${IMAGE_NAME}:${IMAGE_TAG}" \
+        -t "${IMAGE_NAME}:latest" \
+        $gpu_args \
+        --load .; then
+        fail "Build fallo. Revisa $LOG_FILE"
+        return 1
+    fi
+    ok "Imagen construida: ${IMAGE_NAME}:${IMAGE_TAG}"
+}
+
+reindex() {
+    step "Re-generando ChromaDB..."
+    info "Levanta un contenedor efimero para regenerar el indice."
+
+    if [ "$DRY_RUN" = true ]; then
+        echo -e "  ${C_MAGENTA}[DRY-RUN]${C_NC} docker compose run --rm rag python generate_embeddings.py"
+        return 0
+    fi
+
+    # Necesitamos el servicio corriendo para usar exec
+    if ! docker compose ps --services --filter "status=running" 2>/dev/null | grep -q "rag"; then
+        info "Servicio no esta corriendo, levantando temporalmente..."
+        docker compose up -d rag
+        sleep 3
+    fi
+
+    if docker compose exec rag python generate_embeddings.py; then
+        ok "ChromaDB regenerado"
+    else
+        fail "Reindex fallo"
+        return 1
+    fi
+}
+
+start_service() {
+    step "Iniciando servicio..."
+    if [ "$DRY_RUN" = true ]; then
+        echo -e "  ${C_MAGENTA}[DRY-RUN]${C_NC} docker compose up -d"
+        return 0
+    fi
+
+    if ! docker compose up -d; then
+        fail "No se pudo iniciar el servicio"
+        return 1
+    fi
+
+    info "Esperando healthcheck..."
+    local healthy=false
+    for i in {1..30}; do
+        sleep 2
+        local status
+        status=$(docker compose ps --format json 2>/dev/null | grep -o '"Health":"[^"]*"' | head -1 | cut -d'"' -f4 || echo "")
+        if [ "$status" = "healthy" ]; then
+            healthy=true
+            break
+        fi
+    done
+
+    if [ "$healthy" = true ]; then
+        ok "Servicio saludable"
+    else
+        warn "Servicio iniciado pero aun no responde. Revisa logs (opcion 6)."
+    fi
+}
+
+stop_service() {
+    step "Deteniendo servicio..."
+    if [ "$DRY_RUN" = true ]; then
+        echo -e "  ${C_MAGENTA}[DRY-RUN]${C_NC} docker compose down"
+        return 0
+    fi
+    docker compose down
+    ok "Servicio detenido (volume de chroma_db preservado)"
+}
+
+show_logs() {
+    step "Mostrando logs (Ctrl+C para salir)..."
+    if [ "$DRY_RUN" = true ]; then return 0; fi
+    docker compose logs -f --tail=100 rag
+}
+
+test_health() {
+    step "Health check..."
+    if [ "$DRY_RUN" = true ]; then return 0; fi
+
+    local port=8010
+    if [ -f "$ENV_FILE" ]; then
+        port=$(grep "^PUERTO=" "$ENV_FILE" | cut -d'=' -f2 | tr -d ' \r\n' || echo "8010")
+    fi
+    local base_url="http://localhost:${port}"
+    info "Endpoint: $base_url"
+
+    # Health endpoint
+    if response=$(curl -s --max-time 5 "$baseUrl/health" 2>/dev/null); then
+        ok "GET /health -> OK"
+        echo "$response"
+    else
+        fail "GET /health fallo"
+        return 1
+    fi
+    echo ""
+
+    # Smoke test /chat
+    step "Smoke test /chat..."
+    local prompt
+    if [ "$AUTO_MODE" = true ]; then
+        prompt="Eloy Alfaro, saludame en una oracion"
+    else
+        read -p "Prompt (Enter para default): " prompt
+        [ -z "$prompt" ] && prompt="Eloy Alfaro, saludame en una oracion"
+    fi
+
+    local body
+    body=$(printf '{"prompt": "%s"}' "$prompt")
+
+    if response=$(curl -s --max-time 30 -X POST -H "Content-Type: application/json" \
+        -d "$body" "$base_url/chat" 2>/dev/null); then
+        ok "POST /chat -> OK"
+        # Pretty print con python o jq si estan disponibles
+        if command -v python3 &>/dev/null; then
+            echo "$response" | python3 -c "
+import json, sys
+try:
+    d = json.load(sys.stdin)
+    print(f'Presidente: {d.get(\"presidente\")}')
+    print(f'Fuentes locales: {len(d.get(\"fuentes\", []))}')
+    print(f'Fuentes externas: {len(d.get(\"fuentes_externas\", []))}')
+    print('')
+    print('Respuesta:')
+    print(d.get('response', ''))
+except Exception as e:
+    print(sys.stdin.read())
+"
+        else
+            echo "$response"
+        fi
+    else
+        fail "POST /chat fallo"
+    fi
+}
+
+update_code() {
+    step "Actualizando codigo (git pull + rebuild)..."
+
+    if [ ! -d ".git" ]; then
+        warn "No es un repo git. No se puede hacer pull."
+        return 1
+    fi
+
+    if [ "$DRY_RUN" = true ]; then
+        echo -e "  ${C_MAGENTA}[DRY-RUN]${C_NC} git pull"
+        return 0
+    fi
+
+    if git pull; then
+        ok "Codigo actualizado"
+    else
+        fail "git pull fallo"
+        return 1
+    fi
+
+    info "Rebuilding imagen..."
+    build_image
+
+    info "Reiniciando servicio..."
+    stop_service
+    start_service
+}
+
+edit_config() {
+    if [ ! -f "$ENV_FILE" ]; then
+        init_env
+    fi
+
+    step "Configuracion actual:"
+    grep -E "^[A-Z]" "$ENV_FILE" | grep -v "^#" | while read -r line; do
+        echo -e "  ${C_GRAY}$line${C_NC}"
+    done
+    echo ""
+
+    if [ "$AUTO_MODE" = true ]; then return 0; fi
+
+    read -p "Abrir .env en el editor default? (s/n) " resp
+    if [ "$resp" = "s" ] || [ "$resp" = "S" ]; then
+        if [ "$(detect_os)" = "macos" ]; then
+            open "$ENV_FILE"
+        elif [ "$(detect_os)" = "windows-gitbash" ]; then
+            notepad "$ENV_FILE" &
+        else
+            ${EDITOR:-nano} "$ENV_FILE"
+        fi
+        warn "Despues de editar, reinicia el servicio (opcion 4)"
+    fi
+}
+
+uninstall_all() {
+    warn "Esto eliminara: contenedor, imagen, y opcionalmente volumes."
+    if [ "$AUTO_MODE" = false ]; then
+        read -p "Continuar? (s/n) " resp
+        [ "$resp" != "s" ] && [ "$resp" != "S" ] && return 0
+    fi
+
+    if [ "$DRY_RUN" = true ]; then
+        echo -e "  ${C_MAGENTA}[DRY-RUN]${C_NC} docker compose down -v"
+        echo -e "  ${C_MAGENTA}[DRY-RUN]${C_NC} docker rmi ${IMAGE_NAME}:${IMAGE_TAG}"
+        return 0
+    fi
+
+    docker compose down -v 2>/dev/null || true
+    docker rmi "${IMAGE_NAME}:${IMAGE_TAG}" 2>/dev/null || true
+    docker rmi "${IMAGE_NAME}:latest" 2>/dev/null || true
+    ok "Desinstalacion completa"
+}
+
+full_setup() {
+    banner
+    step "Setup completo de RAG Presidentes Ecuador"
+    echo ""
+
+    install_docker
+    init_env
+    build_image
+    start_service
+    test_health
+    echo ""
+    ok "Setup completo! Servicio corriendo en http://localhost:8010"
+}
+
+# =============================================================================
+# Menu interactivo
+# =============================================================================
+
+show_menu() {
+    show_status
+    echo "Selecciona una opcion:"
+    echo ""
+    echo "  1)  Setup completo           (verifica Docker, build, configura, levanta)"
+    echo "  2)  Build imagen             (rebuild con ultima version del codigo)"
+    echo "  3)  Re-indexar dataset       (regenera ChromaDB desde el JSONL)"
+    echo "  4)  Iniciar servicio         (docker compose up -d)"
+    echo "  5)  Detener servicio         (docker compose down)"
+    echo "  6)  Ver logs                 (docker compose logs -f)"
+    echo "  7)  Verificar salud          (curl /health + smoke test /chat)"
+    echo "  8)  Actualizar codigo        (git pull + rebuild + restart)"
+    echo "  9)  Reconfigurar             (editar .env)"
+    echo "  10) Desinstalar              (down -v + remove imagen)"
+    echo "  0)  Salir"
+    echo ""
+    read -p "Opcion: " opt
+    echo "$opt"
+}
+
+# =============================================================================
+# Main
+# =============================================================================
+
+case "$COMMAND" in
+    setup)     full_setup ;;
+    build)     init_env; build_image ;;
+    reindex)   reindex ;;
+    start)     init_env; start_service ;;
+    stop)      stop_service ;;
+    logs)      show_logs ;;
+    health)    test_health ;;
+    update)    update_code ;;
+    config)    edit_config ;;
+    uninstall) uninstall_all ;;
+    "")
+        # Modo interactivo
+        while true; do
+            clear 2>/dev/null || true
+            opt=$(show_menu)
+            case "$opt" in
+                1)  full_setup; [ "$AUTO_MODE" = false ] && read -p "Enter para continuar..." ;;
+                2)  init_env; build_image; [ "$AUTO_MODE" = false ] && read -p "Enter para continuar..." ;;
+                3)  reindex; [ "$AUTO_MODE" = false ] && read -p "Enter para continuar..." ;;
+                4)  init_env; start_service; [ "$AUTO_MODE" = false ] && read -p "Enter para continuar..." ;;
+                5)  stop_service; [ "$AUTO_MODE" = false ] && read -p "Enter para continuar..." ;;
+                6)  show_logs ;;
+                7)  test_health; [ "$AUTO_MODE" = false ] && read -p "Enter para continuar..." ;;
+                8)  update_code; [ "$AUTO_MODE" = false ] && read -p "Enter para continuar..." ;;
+                9)  edit_config; [ "$AUTO_MODE" = false ] && read -p "Enter para continuar..." ;;
+                10) uninstall_all; [ "$AUTO_MODE" = false ] && read -p "Enter para continuar..." ;;
+                0)  ok "Chau!"; exit 0 ;;
+                *)  warn "Opcion invalida"; sleep 1 ;;
+            esac
+        done
+        ;;
+    *)
+        fail "Comando desconocido: $COMMAND"
+        info "Comandos validos: setup, build, reindex, start, stop, logs, health, update, config, uninstall"
+        exit 1
+        ;;
+esac

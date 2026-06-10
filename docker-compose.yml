@@ -1,0 +1,39 @@
+# =============================================================================
+# RAG Presidentes Ecuador - Docker Compose
+# Lee configuracion de .env (copiar .env.example a .env y editar).
+# =============================================================================
+
+services:
+  rag:
+    image: rag-presidentes:1.0.0
+    container_name: rag-presidentes
+    build:
+      context: .
+      dockerfile: Dockerfile
+      # Multi-arch: construye para la plataforma del host.
+      # Para forzar una plataforma:  docker buildx build --platform linux/amd64 ...
+      args:
+        - BUILDPLATFORM=${BUILDPLATFORM:-}
+    ports:
+      - "${PUERTO:-8010}:8010"
+    environment:
+      - OLLAMA_HOST=${OLLAMA_HOST:-http://host.docker.internal:11434}
+      - OLLAMA_MODEL=${OLLAMA_MODEL:-qwen2.5:7b}
+      - RAG_TOP_K=${RAG_TOP_K:-5}
+      - CORS_ORIGINS=${CORS_ORIGINS:-*}
+    # chroma_db viene precomputado dentro de la imagen (decision: bake).
+    # Para regenerar en runtime, descomentar el volume de abajo.
+    # volumes:
+    #   - ./chroma_db:/app/chroma_db
+    restart: unless-stopped
+    # En Linux, host.docker.internal no funciona por defecto.
+    # El setup script detecta el OS y configura USE_HOST_NETWORK=true en Linux,
+    # lo cual hace que el contenedor use la red del host (Ollama accesible en localhost).
+    # En Windows/macOS (Docker Desktop) dejar en bridge (default).
+    network_mode: ${USE_HOST_NETWORK:-bridge}
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:8010/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 15s

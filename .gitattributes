@@ -1,0 +1,14 @@
+# Forzar LF en scripts shell y configs Docker (CRLF rompe entrypoint.sh en Linux)
+*.sh              text eol=lf
+Dockerfile        text eol=lf
+.dockerignore     text eol=lf
+docker-compose.yml text eol=lf
+.gitattributes    text eol=lf
+.gitignore        text eol=lf
+
+# Permitir CRLF en archivos de Windows (scripts PowerShell)
+*.ps1             text eol=crlf
+*.bat             text eol=crlf
+
+# Default para todo lo demas: dejar lo que el sistema prefiera
+*                text=auto

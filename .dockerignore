@@ -1,0 +1,56 @@
+# Git
+.git/
+.gitignore
+.gitattributes
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+ENV/
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+
+# IDE / Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Documentacion
+*.pdf
+*.md
+!README.md
+
+# Scripts de mantenimiento (NO son parte del runtime)
+audit_data.py
+fix_duplicates.py
+test_*.py
+
+# Reportes generados
+audit_report.json
+dedup_report.json
+
+# Dataset alternativo (solo va el original)
+presidentes_ecuador.dedup.jsonl
+
+# Logs y temporales
+*.log
+*.tmp
+.DS_Store
+
+# Build artifacts
+dist/
+build/
+*.egg-info/
+
+# NOTA: presidentes_ecuador.json SI va (necesario para fallback en entrypoint)
+# NOTA: templates/ SI va (necesario para la UI demo)
+# NOTA: chroma_db/ NO se excluye — es generado en build stage y copiado al runtime stage

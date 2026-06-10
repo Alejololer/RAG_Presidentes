@@ -7,6 +7,24 @@ página web.pdf`).
 
 ## Comandos
 
+### Opción A — Setup con Docker (recomendado para producción)
+```powershell
+# Windows (PowerShell)
+.\setup.ps1                    # Menu interactivo (10 opciones)
+.\setup.ps1 setup              # Setup completo (build + start + health)
+.\setup.ps1 start              # Solo iniciar
+.\setup.ps1 logs               # Ver logs
+.\setup.ps1 --help             # Mas opciones
+```
+
+```bash
+# macOS / Linux / Git Bash
+./setup.sh                     # Menu interactivo
+./setup.sh setup               # Setup completo
+./setup.sh --help              # Mas opciones
+```
+
+### Opción B — Desarrollo local sin Docker
 ```powershell
 # Entorno (venv obligatorio — NO instalar en Python global)
 .\.venv\Scripts\activate
@@ -74,3 +92,11 @@ Reescritura completa (jun 2026) que resolvió los bugs originales:
 - Fallback al conocimiento del modelo → anti-alucinación estricta.
 - Mismatch código↔datos (claves inexistentes) → carga JSONL robusta.
 - Artefactos obsoletos `faiss_index.bin` y `docs.pkl` eliminados.
+
+## Empaquetado y distribución
+
+- **`Dockerfile`** multi-stage: builder genera ChromaDB precomputado, runtime lo copia. Multi-arch (`linux/amd64` + `linux/arm64`).
+- **`docker-compose.yml`** lee de `.env` (creado desde `.env.example` por el setup script).
+- **`setup.ps1`** (Windows) y **`setup.sh`** (macOS/Linux): menu interactivo con 10 opciones + modo `--auto` + flag `--gpu` + `--platform` + `--dry-run`.
+- **Linux gotcha**: `host.docker.internal` no funciona en el bridge de Docker en Linux. El setup script configura `USE_HOST_NETWORK=true` automaticamente para que el contenedor use la red del host.
+- **HTTPS**: el contenedor expone HTTP plano. Para acceso desde internet usar Cloudflare Tunnel, Tailscale, o un reverse proxy externo. NO se incluye TLS en la imagen (agrega complejidad sin beneficio si ya hay proxy).

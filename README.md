@@ -32,17 +32,129 @@ Forma parte del ecosistema transmedia **Opción 2049**, donde actúa como el
 
 ### Cómo arrancarlo (Windows)
 
-1. Asegúrate de tener **[Ollama](https://ollama.com)** instalado y corriendo, con
-   el modelo descargado:
+#### Opción A — Setup interactivo con Docker (Recomendado para producción)
+
+1. Instala **[Docker Desktop](https://www.docker.com/products/docker-desktop/)**
+   y **[Ollama](https://ollama.com)** con el modelo:
    ```
    ollama pull qwen2.5:7b
    ```
-2. Doble clic en **`iniciar_rag.bat`** (o `lanzar_rag_desde_cmd.bat` si no usas
+2. Abre PowerShell en la carpeta del proyecto y ejecuta:
+   ```powershell
+   .\setup.ps1
+   ```
+3. Selecciona opción **1) Setup completo**. El script verifica Docker, builda
+   la imagen con el ChromaDB precomputado, y levanta el servicio.
+4. Verifica en **http://localhost:8010/health**
+
+Comandos útiles:
+```powershell
+.\setup.ps1 start     # Iniciar
+.\setup.ps1 stop      # Detener
+.\setup.ps1 logs      # Ver logs
+.\setup.ps1 health    # Smoke test
+.\setup.ps1 update    # git pull + rebuild
+.\setup.ps1 --help    # Mas opciones
+```
+
+#### Opción B — Sin Docker (desarrollo local, scripts legacy)
+
+1. Doble clic en **`iniciar_rag.bat`** (o `lanzar_rag_desde_cmd.bat` si no usas
    PowerShell). La primera vez creará el entorno e indexará los datos.
-3. Abre tu navegador en **http://localhost:8010**
+2. Abre tu navegador en **http://localhost:8010**
 
 > La primera ejecución descarga el modelo de embeddings (~1 GB) y genera el
 > índice. Las siguientes son inmediatas.
+
+---
+
+## 🐳 Despliegue con Docker (recomendado para producción)
+
+### ¿Por qué Docker?
+
+- **Reproducibilidad total**: misma imagen, mismo comportamiento, en cualquier PC.
+- **Cero "en mi máquina funciona"**: el entorno está empaquetado.
+- **ChromaDB precomputado**: la imagen ya incluye el índice generado. Arranque instantáneo.
+- **Multi-arquitectura**: `linux/amd64` y `linux/arm64` con un solo build.
+
+### Estructura de archivos Docker
+
+```
+proyecto/
+├── Dockerfile                  # Multi-stage, multi-arch, ChromaDB precomputado
+├── docker-compose.yml          # Servicio único, configurable via .env
+├── .dockerignore               # Exclusiones de build
+├── .env.example                # Plantilla de configuracion (copiar a .env)
+├── entrypoint.sh               # Arranque del contenedor (verifica ChromaDB + Ollama)
+├── setup.ps1                   # Setup interactivo Windows
+├── setup.sh                    # Setup interactivo macOS/Linux
+└── (código de la app)
+```
+
+### Setup en una PC nueva (Windows)
+
+```powershell
+# 1. Instalar prerequisitos
+#    - Docker Desktop: https://www.docker.com/products/docker-desktop/
+#    - Ollama: https://ollama.com
+#    - Modelo: ollama pull qwen2.5:7b
+
+# 2. Abrir PowerShell en la carpeta del proyecto y correr:
+.\setup.ps1                    # Menu interactivo
+# Seleccionar: 1) Setup completo
+```
+
+### Setup en una PC nueva (macOS / Linux)
+
+```bash
+./setup.sh                     # Menu interactivo
+# Seleccionar: 1) Setup completo
+```
+
+### Build multi-arquitectura
+
+```powershell
+# Construir para linux/amd64 (PC destino x86_64)
+.\setup.ps1 build --platform linux/amd64
+
+# Construir para ambas plataformas (tarda el doble)
+.\setup.ps1 build --platform "linux/amd64,linux/arm64"
+```
+
+### Configuración (.env)
+
+El archivo `.env` se crea automáticamente desde `.env.example`. Variables clave:
+
+| Variable | Default | Descripción |
+|----------|---------|-------------|
+| `PUERTO` | `8010` | Puerto del servicio |
+| `OLLAMA_HOST` | `http://host.docker.internal:11434` | URL de Ollama en el host |
+| `OLLAMA_MODEL` | `qwen2.5:7b` | Modelo a usar |
+| `RAG_TOP_K` | `5` | Chunks recuperados por consulta |
+| `CORS_ORIGINS` | `*` | Origenes CORS permitidos |
+
+**Nota sobre Linux**: en Linux, `host.docker.internal` no funciona por defecto.
+El setup script configura `USE_HOST_NETWORK=true` automáticamente.
+
+### HTTPS
+
+El contenedor expone HTTP plano en el puerto 8010. Para acceso desde internet:
+
+- **Cloudflare Tunnel** (recomendado, gratis): instala `cloudflared` en la PC destino,
+  crea un tunnel que apunta a `http://localhost:8010`, y obtén una URL HTTPS.
+- **Tailscale** (red privada): instala Tailscale y compartí el acceso a la PC.
+- **Nginx/Caddy como reverse proxy** con Let's Encrypt (más complejo).
+
+### Troubleshooting
+
+| Problema | Solución |
+|----------|----------|
+| `docker: command not found` | Instala Docker Desktop y reinicia |
+| `Cannot connect to Ollama` | Verifica que Ollama corre: `curl http://localhost:11434/api/tags` |
+| `qwen2.5:7b not found` | Ejecuta: `ollama pull qwen2.5:7b` |
+| Build muy lento | Limpia cache: `docker builder prune`. Usa `--platform` para build nativo. |
+| Imagen muy grande (~3.5 GB) | Normal: incluye Python + torch + modelo embeddings pre-cargado |
+| Contenedor reinicia en bucle | `.\setup.ps1 logs` para ver el error |
 
 ---
 
