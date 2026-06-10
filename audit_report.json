@@ -1,0 +1,4481 @@
+{
+  "totales": {
+    "registros_raw": 74,
+    "registros_limpios": 74,
+    "secciones_esperadas": 13
+  },
+  "nombres_sucios": [
+    {
+      "limpio": "Abdalá Bucaram Ortiz",
+      "crudo_preview": "Abdalá Bucaram Ortiz\n",
+      "crudo_len": 21,
+      "motivo": "salto de linea o espacios multiples"
+    },
+    {
+      "limpio": "Alberto Enríquez Gallo",
+      "crudo_preview": "Alberto Enríquez Gallo                                                          ...",
+      "crudo_len": 83,
+      "motivo": "salto de linea o espacios multiples"
+    },
+    {
+      "limpio": "Carlos Mancheno Cajas",
+      "crudo_preview": "Carlos Mancheno Cajas                                                     El gol...",
+      "crudo_len": 215,
+      "motivo": "salto de linea o espacios multiples"
+    }
+  ],
+  "claves_no_mapeadas": {},
+  "secciones_faltantes": {},
+  "chunks_con_cruce_de_presidentes": {
+    "Abdalá Bucaram Ortiz": [
+      {
+        "seccion": "periodos_politicos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Jaime Roldós Aguilera",
+          "Rodrigo Borja Cevallos"
+        ],
+        "cantidad_otros": 2,
+        "snippet": "Según el documento, Abdalá Bucaram participó en tres campañas presidenciales: 1988, 1992 y 1996, siendo esta última cuando ganó las elecciones. El texto fue pub"
+      },
+      {
+        "seccion": "capital_global",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Daniel Noboa Azín",
+          "Jaime Roldós Aguilera"
+        ],
+        "cantidad_otros": 2,
+        "snippet": "Familiar: Proviene de una familia política, siendo su tío Assad Bucaram una figura importante. Se menciona a su hermana Elsa y se refiere al apellido completo c"
+      },
+      {
+        "seccion": "redes_sociales",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Daniel Noboa Azín"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "El documento identifica sus principales aliados y financistas:  Empresarios: Alfredo Adum (invirtió 2-3 millones de dólares en su campaña), Eduardo Azar, los he"
+      },
+      {
+        "seccion": "fuentes",
+        "seccion_esperada": true,
+        "otros_mencionados": [
+          "Galo Plaza Lasso",
+          "Jamil Mahuad Witt",
+          "Javier Espinosa y Espinosa",
+          "José María Velasco Ibarra"
+        ],
+        "cantidad_otros": 4,
+        "snippet": "Torre Espinosa, C. (1996). Un solo toque: populismo y cultura política en el Ecuador. Centro Andino de Acción Popular.  Ecuador Debate. (1997). Conflictividad s"
+      }
+    ],
+    "Abelardo Montalvo Alvear": [
+      {
+        "seccion": "periodos_politicos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alberto Guerrero Martínez",
+          "José María Velasco Ibarra",
+          "Juan de Dios Martínez Mera"
+        ],
+        "cantidad_otros": 3,
+        "snippet": "Presidencia encargada (19 de octubre de 1933 – 1 de septiembre de 1934): Asumió tras la crisis política con el presidente Juan de Dios Martínez Mera, quien lo n"
+      },
+      {
+        "seccion": "redes_sociales",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "José María Velasco Ibarra"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "Aliados clave:  Eloy Alfaro: Como alcalde, honró su legado al renombrar la parroquia de Chimbacalle en su honor.  José Rafael Bustamante: Su ministro de Gobiern"
+      },
+      {
+        "seccion": "legislacion",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "José María Velasco Ibarra"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "Convocatoria a elecciones de 1933: Organizó los comicios que llevaron a Velasco Ibarra al poder.  Protocolo Ponce-Castro Oyanguren (1924): Retomó negociaciones "
+      }
+    ],
+    "Alberto Enríquez Gallo": [
+      {
+        "seccion": "periodos_politicos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Aurelio Mosquera Narváez",
+          "Camilo Ponce Enríquez",
+          "Federico Páez Chiriboga",
+          "Francisco Javier León Chiriboga",
+          "Galo Plaza Lasso"
+        ],
+        "cantidad_otros": 5,
+        "snippet": "Alberto Enríquez Gallo asumió el poder como Jefe Supremo de Ecuador el 23 de octubre de 1937, tras derrocar a Federico Páez mediante un golpe militar liderado p"
+      },
+      {
+        "seccion": "datos_demograficos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Camilo Ponce Enríquez"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "Nació en Tanicuchí, Latacunga, el 24 de julio de 1895.  Fue hijo de Luis Cornelio Enríquez Gallo y Carmen Amelia Gallo Almeida. Contrajo matrimonio dos veces y "
+      },
+      {
+        "seccion": "capital_global",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Camilo Ponce Enríquez"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "Alberto Enríquez Gallo tuvo una destacada carrera militar y política. Ocupó cargos como Ministro de Defensa, senador por Cotopaxi y candidato presidencial por e"
+      },
+      {
+        "seccion": "redes_sociales",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Camilo Ponce Enríquez"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "Contó con el respaldo total del ejército para asumir el poder tras derrocar a Páez.  Se rodeó de intelectuales y colaboradores destacados que impulsaron reforma"
+      },
+      {
+        "seccion": "legislacion",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Camilo Ponce Enríquez"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "Promulgó varias leyes trascendentales:  Código del Trabajo (5 de agosto de 1938): Reguló las relaciones obrero-patronales e incluyó derechos como la huelga.  Le"
+      },
+      {
+        "seccion": "obra_publica",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Camilo Ponce Enríquez"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "Fundó instituciones culturales como el Museo Nacional y el Archivo Nacional.  Creó la Escuela Militar de Carabineros para fortalecer la seguridad nacional.  Cul"
+      },
+      {
+        "seccion": "oratoria",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Camilo Ponce Enríquez"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "No se destacan características específicas sobre su estilo oratorio en el documento adjunto.    Según el académico Leonardo Barriga López, Enríquez Gallo supo r"
+      },
+      {
+        "seccion": "fuentes",
+        "seccion_esperada": true,
+        "otros_mencionados": [
+          "Abdalá Bucaram Ortiz",
+          "Camilo Ponce Enríquez",
+          "José Luis Tamayo Terán",
+          "Otto Arosemena Gómez"
+        ],
+        "cantidad_otros": 4,
+        "snippet": "Ulloa Enríquez, F. (2022). DISCURSO DE INCORPORACIÓN: INCIDENCIA HISTÓRICA DE ACTORES POLÍTICOS DE COTOPAXI EN EL EJERCICIO DEL PODER EN EL ECUADOR. Boletín Aca"
+      }
+    ],
+    "Alberto Guerrero Martínez": [
+      {
+        "seccion": "capital_global",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alfredo Palacio González",
+          "Manuel María Borrero y González"
+        ],
+        "cantidad_otros": 2,
+        "snippet": "Familia: Hijo de Rafael Guerrero González y Emma Martínez Izquieta; casado con María Elena Valenzuela Plaza, con varios hijos.  Académico: Doctor en Jurispruden"
+      },
+      {
+        "seccion": "redes_sociales",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Carlos Freile Larrea",
+          "José María Plácido Caamaño y Gómez Cornejo",
+          "Luis Larrea Alba",
+          "Osvaldo Hurtado Larrea"
+        ],
+        "cantidad_otros": 4,
+        "snippet": "Integró gabinetes con figuras destacadas como José Modesto Larrea, Cantón Cárdenas, Daniel Córdova Toral, Marcos Plaza Sotomayor, Leopoldo Izquieta Pérez y Fede"
+      }
+    ],
+    "Alfredo Baquerizo Moreno": [
+      {
+        "seccion": "periodos_politicos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Carlos Freile Larrea",
+          "Francisco Andrade Marín",
+          "Francisco Robles y García",
+          "Luis Larrea Alba",
+          "Osvaldo Hurtado Larrea"
+        ],
+        "cantidad_otros": 5,
+        "snippet": "Presidente Constitucional del Ecuador: 1 de septiembre de 1916 a 31 de agosto de 1920.  Presidente interino: 10 a 31 de agosto de 1912 (tras la renuncia de Andr"
+      },
+      {
+        "seccion": "capital_global",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Daniel Noboa Azín",
+          "Francisco Robles y García"
+        ],
+        "cantidad_otros": 2,
+        "snippet": "Familia: Hijo de José María Baquerizo Noboa (funcionario y ministro de Hacienda) y Rosario Moreno Ferruzola (propietaria de hacienda, prima de Gabriel García Mo"
+      },
+      {
+        "seccion": "redes_sociales",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Aurelio Mosquera Narváez",
+          "Francisco Robles y García",
+          "Isidro Ayora Cueva",
+          "Julio Enrique Moreno Peñaherrera"
+        ],
+        "cantidad_otros": 4,
+        "snippet": "Vinculado a la oligarquía guayaquileña y al Partido Liberal Radical Ecuatoriano.  Relación cercana con Leónidas Plaza (presidente y mentor político).  Interacci"
+      },
+      {
+        "seccion": "obra_publica",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Jerónimo Carrión Palacio"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "Carreteras: Milagro-Naranjito, caminos al Oriente.  Hospitales: Cayambe, Milagro, Zaruma, Hospital Militar en Quito.  Infraestructura: Luz eléctrica en Vinces, "
+      }
+    ],
+    "Alfredo Palacio González": [
+      {
+        "seccion": "periodos_politicos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Jerónimo Carrión Palacio",
+          "José María Urbina y Viteri",
+          "Leónidas Plaza y Gutiérrez"
+        ],
+        "cantidad_otros": 3,
+        "snippet": "Presidencia: Alfredo Palacio asumió la presidencia de Ecuador tras la destitución de Lucio Gutiérrez en abril de 2005. Su gobierno abarca el período entre abril"
+      },
+      {
+        "seccion": "datos_demograficos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Jerónimo Carrión Palacio"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "Edad, adscripción étnica, género, región, religión: El documento no proporciona datos demográficos específicos sobre Alfredo Palacio (edad, etnia, género, regió"
+      },
+      {
+        "seccion": "capital_global",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Jerónimo Carrión Palacio",
+          "Leónidas Plaza y Gutiérrez"
+        ],
+        "cantidad_otros": 2,
+        "snippet": "Académico y profesional: Se menciona que Palacio fue vicepresidente antes de asumir la presidencia. No se detallan estudios, trayectoria profesional previa ni v"
+      },
+      {
+        "seccion": "redes_sociales",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Federico Páez Chiriboga",
+          "Francisco Javier León Chiriboga",
+          "Jerónimo Carrión Palacio",
+          "José María Urbina y Viteri",
+          "Leónidas Plaza y Gutiérrez"
+        ],
+        "cantidad_otros": 5,
+        "snippet": "Colaboradores y asesores: Palacio trabajó con varios ministros de Gobierno (Mauricio Gándara, Osvaldo Molestina, Galo Chiriboga, Alfredo Castillo, Felipe Vega),"
+      },
+      {
+        "seccion": "legislacion",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Jerónimo Carrión Palacio",
+          "Leónidas Plaza y Gutiérrez"
+        ],
+        "cantidad_otros": 2,
+        "snippet": "Propuestas: Impulsó varias propuestas de reforma política, entre ellas:  Consulta popular para reformas institucionales.  Despolitización de la Corte Suprema de"
+      },
+      {
+        "seccion": "obra_publica",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Jerónimo Carrión Palacio"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "Tipo y ubicación: El documento no menciona específicamente obras públicas promovidas por Palacio ni su ubicación geográfica.  Sistema de aseguramiento universal"
+      },
+      {
+        "seccion": "bienes_comunes",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Jerónimo Carrión Palacio"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "Gestión: No se registran acciones o políticas específicas de Palacio relacionadas con el manejo de bienes comunes como agua o tierra.  El documento no menciona "
+      },
+      {
+        "seccion": "derechos_humanos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Jerónimo Carrión Palacio",
+          "Leónidas Plaza y Gutiérrez"
+        ],
+        "cantidad_otros": 2,
+        "snippet": "Individuo y sociedad: No se detallan políticas o posicionamientos explícitos sobre derechos humanos, diversidades étnicas, culturales o sexo-genéricas.  Violenc"
+      },
+      {
+        "seccion": "oratoria",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Jerónimo Carrión Palacio",
+          "Leónidas Plaza y Gutiérrez"
+        ],
+        "cantidad_otros": 2,
+        "snippet": "Comunicación y estilo: Se señala que Palacio utilizó la retórica de la “refundación” y la reforma política como principal capital político, aunque su discurso c"
+      }
+    ],
+    "Andrés Fernández de Córdova Nieto": [
+      {
+        "seccion": "periodos_politicos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Aurelio Mosquera Narváez",
+          "Carlos Arroyo del Río",
+          "Carlos Freile Larrea",
+          "Galo Plaza Lasso",
+          "José María Velasco Ibarra"
+        ],
+        "cantidad_otros": 7,
+        "snippet": "Andrés F. Córdova asumió la Presidencia Encargada de Ecuador el 17 de diciembre de 1939, tras la muerte del presidente Aurelio Mosquera Narváez y la renuncia de"
+      },
+      {
+        "seccion": "capital_global",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Rosalía Arteaga Serrano"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "Familiares: Hijo del Dr. Andrés Fernández de Córdova Cobos y Javiera Nieto Serrano.  Casado con Rosario Galarza Arízaga, con quien tuvo varios hijos.  Formación"
+      },
+      {
+        "seccion": "redes_sociales",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Carlos Arroyo del Río",
+          "Galo Plaza Lasso",
+          "José María Velasco Ibarra"
+        ],
+        "cantidad_otros": 3,
+        "snippet": "Miembro leal del Partido Liberal Radical durante toda su vida.  Colaboró con figuras políticas como Carlos Arroyo del Río y Galo Plaza Lasso.  Enfrentó oposició"
+      },
+      {
+        "seccion": "derechos_humanos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "José María Velasco Ibarra"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "Enfrentó tensiones políticas durante las elecciones presidenciales, pero no se mencionan acciones específicas relacionadas con derechos humanos.    Firmeza dura"
+      }
+    ],
+    "Antonio Borrero y Cortázar": [
+      {
+        "seccion": "periodos_politicos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alfredo Baquerizo Moreno",
+          "Francisco Robles y García",
+          "Gabriel García Moreno"
+        ],
+        "cantidad_otros": 3,
+        "snippet": "Vicepresidente de Ecuador (30 de agosto de 1863 – 6 de enero de 1864) bajo el gobierno de Gabriel García Moreno, aunque renunció por sospechas de intervención o"
+      },
+      {
+        "seccion": "capital_global",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alfredo Baquerizo Moreno",
+          "Andrés Fernández de Córdova Nieto",
+          "Francisco Robles y García",
+          "Gabriel García Moreno"
+        ],
+        "cantidad_otros": 4,
+        "snippet": "Familiares: Hijo de Manuel Borrero Seminario y Francisca Cortázar. Nieto de José María Borrero (político) y sobrino nieto del obispo José Ignacio Cortázar.  For"
+      },
+      {
+        "seccion": "redes_sociales",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alfredo Baquerizo Moreno",
+          "Francisco Robles y García",
+          "Gabriel García Moreno",
+          "Isidro Ayora Cueva"
+        ],
+        "cantidad_otros": 4,
+        "snippet": "Aliados: Colaboró con liberales católicos como Rafael Villagómez y Benigno Malo.  Rivales: García Moreno (quien lo llamó \"el más soberbio Lucifer\") y Veintemill"
+      },
+      {
+        "seccion": "posicionamiento_ideologico",
+        "seccion_esperada": true,
+        "otros_mencionados": [
+          "Alfredo Baquerizo Moreno",
+          "Francisco Robles y García",
+          "Gabriel García Moreno"
+        ],
+        "cantidad_otros": 3,
+        "snippet": "Partido: Liberal católico, luego fundador del Partido Progresista (Unión Republicana), que buscaba un equilibrio entre conservadores y liberales.  Filiaciones: "
+      }
+    ],
+    "Antonio Flores Jijón": [
+      {
+        "seccion": "periodos_politicos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alfredo Baquerizo Moreno",
+          "Francisco Robles y García",
+          "Gabriel García Moreno"
+        ],
+        "cantidad_otros": 3,
+        "snippet": "Presidencia (1888–1892): Electo con apoyo del presidente saliente José María Plácido Caamaño, gobernó bajo el Partido Progresista, un grupo liberal-conservador."
+      },
+      {
+        "seccion": "datos_demograficos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Jerónimo Carrión Palacio"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "Edad: Nació el 23 de octubre de 1833 en Quito; murió a los 81 años en Ginebra (1915).  Etnia/Género: Criollo blanco, perteneciente a la élite quiteña; género ma"
+      },
+      {
+        "seccion": "capital_global",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Carlos Freile Larrea",
+          "Federico Páez Chiriboga",
+          "Francisco Javier León Chiriboga",
+          "Guillermo Rodríguez Lara",
+          "Jerónimo Carrión Palacio"
+        ],
+        "cantidad_otros": 8,
+        "snippet": "Familiar: Hijo de Juan José Flores (primer presidente de Ecuador) y Mercedes Jijón, aristócrata quiteña.  Académico: Estudió en el Liceo Enrique IV (París), Uni"
+      },
+      {
+        "seccion": "redes_sociales",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Abdalá Bucaram Ortiz",
+          "Alfredo Baquerizo Moreno",
+          "Carlos Freile Larrea",
+          "Francisco Robles y García",
+          "Gabriel García Moreno"
+        ],
+        "cantidad_otros": 8,
+        "snippet": "Aliados clave: Gabriel García Moreno (mentor), José María Plácido Caamaño (promotor de su candidatura), élites guayaquileñas exportadoras de cacao.  Asesores: V"
+      }
+    ],
+    "Antonio Pons Campuzano": [
+      {
+        "seccion": "periodos_politicos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "José María Velasco Ibarra"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "Antonio Pons Campuzano fue encargado del Poder Ejecutivo de Ecuador entre el 21 de agosto y el 26 de septiembre de 1935, tras el derrocamiento del presidente Jo"
+      },
+      {
+        "seccion": "capital_global",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "José María Velasco Ibarra"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "Pons Campuzano fue médico de profesión y tuvo una destacada carrera pública antes de asumir el mando presidencial.  Fue alcalde de Guayaquil en 1933, gobernador"
+      },
+      {
+        "seccion": "redes_sociales",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "José María Velasco Ibarra"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "Su vínculo con José María Velasco Ibarra fue clave para su nombramiento como Ministro de Gobierno.  Mantuvo relaciones con las Fuerzas Armadas, que lo designaro"
+      },
+      {
+        "seccion": "legislacion",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "José María Velasco Ibarra"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "Durante su breve mandato, convocó a elecciones presidenciales para restaurar el orden democrático.  No se mencionan leyes específicas promovidas por él en el do"
+      },
+      {
+        "seccion": "derechos_humanos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "José María Velasco Ibarra"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "Su gobierno fue breve y no se mencionan acciones específicas relacionadas con derechos humanos en el documento.    Su rol como encargado del poder ejecutivo tra"
+      }
+    ],
+    "Aurelio Mosquera Narváez": [
+      {
+        "seccion": "redes_sociales",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Carlos Freile Larrea",
+          "Galo Plaza Lasso",
+          "Isidro Ayora Cueva",
+          "Luis Larrea Alba",
+          "Osvaldo Hurtado Larrea"
+        ],
+        "cantidad_otros": 5,
+        "snippet": "Fue apoyado por socialistas y liberales durante su elección presidencial, aunque más tarde enfrentó críticas por favorecer políticas conservadoras.  Contó con e"
+      },
+      {
+        "seccion": "legislacion",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alberto Enríquez Gallo",
+          "Camilo Ponce Enríquez"
+        ],
+        "cantidad_otros": 2,
+        "snippet": "Reformó los estatutos de la institución llamada \"Caja de Previsión\", hoy conocida como Instituto Ecuatoriano de Seguridad Social (IESS).  En febrero de 1939, el"
+      },
+      {
+        "seccion": "obra_publica",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Carlos Freile Larrea",
+          "Luis Larrea Alba",
+          "Osvaldo Hurtado Larrea"
+        ],
+        "cantidad_otros": 3,
+        "snippet": "No se mencionan proyectos específicos relacionados con obra pública durante su presidencia.    El documento no menciona obras públicas específicas realizadas du"
+      },
+      {
+        "seccion": "fuentes",
+        "seccion_esperada": true,
+        "otros_mencionados": [
+          "Alberto Guerrero Martínez",
+          "José Luis Tamayo Terán",
+          "Juan de Dios Martínez Mera",
+          "Otto Arosemena Gómez"
+        ],
+        "cantidad_otros": 4,
+        "snippet": "LA HORA. (2006). En menos de un año aportó. https://www.lahora.com.ec/noticias/en-menos-de-un-a-o-aport/  Gómez López, D. (2012). La Constitución perdida. Una a"
+      }
+    ],
+    "Camilo Ponce Enríquez": [
+      {
+        "seccion": "periodos_politicos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alfredo Baquerizo Moreno",
+          "Carlos Arroyo del Río",
+          "Federico Páez Chiriboga",
+          "Francisco Javier León Chiriboga",
+          "Gabriel García Moreno"
+        ],
+        "cantidad_otros": 8,
+        "snippet": "Presidencia: Camilo Ponce Enríquez fue presidente de Ecuador entre 1956 y 1960. Su mandato estuvo marcado por tensiones sociales y políticas, incluyendo la repr"
+      },
+      {
+        "seccion": "datos_demograficos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "José María Velasco Ibarra"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "Nacimiento: Nació el 31 de enero de 1912 en Quito, Ecuador.  Fallecimiento: Murió el 13 de septiembre de 1976 en Quito.  Género: Masculino.  Adscripción étnica:"
+      },
+      {
+        "seccion": "capital_global",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Abdalá Bucaram Ortiz",
+          "Antonio Flores Jijón",
+          "Jerónimo Carrión Palacio",
+          "José María Velasco Ibarra",
+          "Mariano Suárez Veintimilla"
+        ],
+        "cantidad_otros": 6,
+        "snippet": "Formación académica: Estudió jurisprudencia y realizó estudios superiores en el extranjero. Fue un político conservador con vínculos con sectores económicos y r"
+      },
+      {
+        "seccion": "redes_sociales",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alfredo Baquerizo Moreno",
+          "Gabriel García Moreno",
+          "José María Velasco Ibarra"
+        ],
+        "cantidad_otros": 3,
+        "snippet": "Colaboró con figuras como Sixto Durán Ballén para fundar el Movimiento Social Cristiano.  Mantuvo alianzas con sectores conservadores, la iglesia católica y gru"
+      },
+      {
+        "seccion": "obra_publica",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Jerónimo Carrión Palacio",
+          "José María Velasco Ibarra"
+        ],
+        "cantidad_otros": 2,
+        "snippet": "No se menciona específicamente obra pública en el documento adjunto.    Obras destacadas: Inicio de la construcción del Puerto Marítimo de Guayaquil. Implementa"
+      },
+      {
+        "seccion": "fuentes",
+        "seccion_esperada": true,
+        "otros_mencionados": [
+          "Alfredo Baquerizo Moreno",
+          "Gabriel García Moreno",
+          "Guillermo Rodríguez Lara",
+          "José María Velasco Ibarra",
+          "Vicente Ramón Roca Rodríguez"
+        ],
+        "cantidad_otros": 5,
+        "snippet": "León, N. C. (2018). Solo la sangre salva: represión cruenta y memoria política en Guayaquil bajo el mandato de Camilo Ponce (1959). Anuario Colombiano de Histor"
+      }
+    ],
+    "Carlos Arroyo del Río": [
+      {
+        "seccion": "capital_global",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Manuel de Ascázubi y Matheu"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "Familiares: No se mencionan detalles específicos sobre su familia.  Formación académica: No se detalla su formación en el documento adjunto.  Trayectoria profes"
+      },
+      {
+        "seccion": "redes_sociales",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Antonio Flores Jijón",
+          "Francisco Andrade Marín"
+        ],
+        "cantidad_otros": 2,
+        "snippet": "Contó con el respaldo del Partido Liberal Radical Ecuatoriano y sectores oligárquicos durante su gobierno.  Su administración enfrentó una fuerte oposición por "
+      },
+      {
+        "seccion": "derechos_humanos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Javier Espinosa y Espinosa"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "Su administración reprimió movimientos populares y huelgas estudiantiles, lo que incrementó el descontento social contra su régimen.    Represión: Su gobierno r"
+      },
+      {
+        "seccion": "fuentes",
+        "seccion_esperada": true,
+        "otros_mencionados": [
+          "Guillermo Rodríguez Lara",
+          "Mariano Suárez Veintimilla",
+          "Vicente Ramón Roca Rodríguez"
+        ],
+        "cantidad_otros": 3,
+        "snippet": "Ogaz, L. (1998). ¡Todo el Poder a Velasco! La insurreción del 28 de mayo 1944. Abya-Yala.  Ulloa, E. (1989). Autonomía, mito y crisis de la Casa de la Cultura. "
+      }
+    ],
+    "Carlos Freile Larrea": [
+      {
+        "seccion": "periodos_politicos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alfredo Baquerizo Moreno",
+          "Aurelio Mosquera Narváez",
+          "Carlos Arroyo del Río",
+          "Gabriel García Moreno"
+        ],
+        "cantidad_otros": 4,
+        "snippet": "Encargado del Poder Ejecutivo (28 de agosto – 1 de septiembre de 1932) durante la \"Guerra de los Cuatro Días\", un conflicto armado entre liberales y conservador"
+      },
+      {
+        "seccion": "datos_demograficos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Rosalía Arteaga Serrano"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "Nacimiento: 1876 en Riobamba (Sierra ecuatoriana).  Muerte: 23 de abril de 1942 en Riobamba, por accidente cerebrovascular.  Género: Hombre.  Adscripción étnica"
+      },
+      {
+        "seccion": "capital_global",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Federico Páez Chiriboga",
+          "Francisco Javier León Chiriboga"
+        ],
+        "cantidad_otros": 2,
+        "snippet": "Familiares: Hijo de José Belisario Freile Valdivieso y María Larrea Donoso. Casado con María Enriqueta Larrea Chiriboga, con seis hijos.  Formación académica: N"
+      },
+      {
+        "seccion": "redes_sociales",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alberto Guerrero Martínez",
+          "Alfredo Baquerizo Moreno",
+          "Gabriel García Moreno",
+          "Juan de Dios Martínez Mera"
+        ],
+        "cantidad_otros": 4,
+        "snippet": "Aliados políticos: Alfredo Baquerizo Moreno, Alberto Guerrero Martínez y Andrés F. Córdova.  Grupos de poder: Partido Liberal Radical, élites urbanas y terraten"
+      }
+    ],
+    "Carlos Freile Zaldumbide": [
+      {
+        "seccion": "periodos_politicos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Francisco Andrade Marín",
+          "Isidro Ayora Cueva"
+        ],
+        "cantidad_otros": 2,
+        "snippet": "Vicepresidencia (1899-1903): Bajo los gobiernos de Eloy Alfaro y Leónidas Plaza.  Presidencia interina:  Primer mandato (12 agosto - 1 septiembre 1911): Asume t"
+      },
+      {
+        "seccion": "datos_demograficos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Rosalía Arteaga Serrano"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "Nacimiento: 18 mayo 1856 en Quito.  Muerte: 28 agosto 1928 en París, por insuficiencia cardíaca.  Género/Etnicidad: Hombre, de familia aristocrática quiteña (or"
+      },
+      {
+        "seccion": "capital_global",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Carlos Freile Larrea",
+          "Federico Páez Chiriboga",
+          "Francisco Javier León Chiriboga",
+          "Luis Larrea Alba",
+          "Osvaldo Hurtado Larrea"
+        ],
+        "cantidad_otros": 5,
+        "snippet": "Familiar: Hijo de Juan Freile Chiriboga y Luz Zaldumbide Gangotena; casado con Rosa Elena Larrea, con cinco hijos, incluyendo a Carlos Freile Larrea (presidente"
+      }
+    ],
+    "Carlos Julio Arosemena Monroy": [
+      {
+        "seccion": "periodos_politicos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alfredo Baquerizo Moreno",
+          "Carlos Julio Arosemena Tola",
+          "Francisco Robles y García",
+          "Gabriel García Moreno",
+          "Jerónimo Carrión Palacio"
+        ],
+        "cantidad_otros": 6,
+        "snippet": "Presidencia: Carlos Julio Arosemena Monroy asumió la presidencia de Ecuador el 7 de noviembre de 1961, tras la destitución de José María Velasco Ibarra. Gobernó"
+      },
+      {
+        "seccion": "capital_global",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Andrés Fernández de Córdova Nieto",
+          "Carlos Julio Arosemena Tola",
+          "José María Velasco Ibarra"
+        ],
+        "cantidad_otros": 3,
+        "snippet": "Familiares: Hijo del expresidente Carlos Julio Arosemena Tola y Laura Monroy Garaycoa.  Formación académica: Estudió Derecho en la Universidad de Guayaquil, obt"
+      },
+      {
+        "seccion": "redes_sociales",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "José María Velasco Ibarra"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "Colaboró con José María Velasco Ibarra como vicepresidente antes de asumir la presidencia.  Fundador del Partido Nacionalista Revolucionario (PNR) y director na"
+      },
+      {
+        "seccion": "bienes_comunes",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Carlos Julio Arosemena Tola"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "Creó la Comisión Nacional de Reforma Agraria en 1961 para abordar problemas relacionados con la tierra.    Reforma agraria: Creó la Comisión Nacional de Reforma"
+      },
+      {
+        "seccion": "fuentes",
+        "seccion_esperada": true,
+        "otros_mencionados": [
+          "Alfredo Baquerizo Moreno",
+          "Carlos Julio Arosemena Tola",
+          "Gabriel García Moreno"
+        ],
+        "cantidad_otros": 3,
+        "snippet": "Baquerizo Arosemena, C. (2023). DISCURSO DE INCORPORACIÓN: TRASCENDENCIA DEL DR. ALFREDO BAQUERIZO MORENO Y DEL DR. CARLOS JULIO AROSEMENA MONROY EN LA HISTORIA"
+      }
+    ],
+    "Carlos Julio Arosemena Tola": [
+      {
+        "seccion": "periodos_politicos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Carlos Mancheno Cajas",
+          "Galo Plaza Lasso",
+          "José María Velasco Ibarra"
+        ],
+        "cantidad_otros": 3,
+        "snippet": "Carlos Julio Arosemena Tola fue elegido Presidente Constitucional de Ecuador en septiembre de 1947, en un contexto de crisis política y temor a una guerra civil"
+      },
+      {
+        "seccion": "capital_global",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alberto Guerrero Martínez",
+          "Carlos Julio Arosemena Monroy",
+          "Juan de Dios Martínez Mera"
+        ],
+        "cantidad_otros": 3,
+        "snippet": "Familiares: Hijo de Eduardo Arosemena Merino y Catalina Tola Merino. Casado con Laura Monroy Garaycoa en 1915; tuvo siete hijos: María Laura, María de Jesús, Ca"
+      },
+      {
+        "seccion": "redes_sociales",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Antonio Flores Jijón",
+          "Carlos Freile Larrea",
+          "Luis Larrea Alba",
+          "Osvaldo Hurtado Larrea"
+        ],
+        "cantidad_otros": 4,
+        "snippet": "Cercano a sectores empresariales y sociales guayaquileños debido a su papel como banquero y filántropo.  Colaboró con instituciones como la Junta de Beneficenci"
+      },
+      {
+        "seccion": "legislacion",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Galo Plaza Lasso"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "El documento no menciona leyes específicas promulgadas durante su mandato presidencial.    No se menciona específicamente en el documento información sobre legi"
+      }
+    ],
+    "Carlos Mancheno Cajas": [
+      {
+        "seccion": "periodos_politicos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "José María Velasco Ibarra",
+          "Mariano Suárez Veintimilla"
+        ],
+        "cantidad_otros": 2,
+        "snippet": "Carlos Mancheno Cajas asumió el poder el 23 de agosto de 1947, tras liderar un golpe de Estado conocido como el Manchenazo, que derrocó al presidente José María"
+      },
+      {
+        "seccion": "capital_global",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "José María Velasco Ibarra"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "Familiares y formación académica: No se mencionan detalles específicos en el documento.  Trayectoria profesional y política:  Fue Ministro de Defensa durante gr"
+      },
+      {
+        "seccion": "redes_sociales",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "José María Velasco Ibarra"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "Fue un colaborador cercano del presidente Velasco Ibarra, quien lo nombró Ministro de Defensa en varias ocasiones durante su gobierno.  Sin embargo, traicionó a"
+      },
+      {
+        "seccion": "derechos_humanos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "José María Velasco Ibarra"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "El golpe militar que lideró estuvo marcado por violencia, incluyendo disparos contra la Casa Presidencial y la detención forzada del presidente Velasco Ibarra. "
+      }
+    ],
+    "Clemente Yerovi Indaburu": [
+      {
+        "seccion": "periodos_politicos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Antonio Flores Jijón",
+          "Camilo Ponce Enríquez",
+          "Carlos Julio Arosemena Tola"
+        ],
+        "cantidad_otros": 3,
+        "snippet": "Presidencia: Clemente Yerovi fue proclamado Presidente Interino de la República el 29 de marzo de 1966, tras la crisis política y económica que llevó al colapso"
+      },
+      {
+        "seccion": "datos_demograficos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Carlos Arroyo del Río",
+          "Otto Arosemena Gómez"
+        ],
+        "cantidad_otros": 2,
+        "snippet": "Nacimiento: Nació en Barcelona, España, mientras sus padres ecuatorianos viajaban por Europa.  Edad: No se especifica su edad exacta en el documento.  Adscripci"
+      },
+      {
+        "seccion": "capital_global",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Carlos Arroyo del Río",
+          "Galo Plaza Lasso",
+          "Otto Arosemena Gómez"
+        ],
+        "cantidad_otros": 3,
+        "snippet": "Familiares: Hijo de Clemente Yerovi Matheus y María Indaburu Seminario. Estuvo casado con Victoria Gómez Icaza, quien lo acompañó como Primera Dama.  Formación "
+      },
+      {
+        "seccion": "redes_sociales",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Camilo Ponce Enríquez",
+          "Federico Páez Chiriboga",
+          "Francisco Javier León Chiriboga",
+          "Galo Plaza Lasso",
+          "Jerónimo Carrión Palacio"
+        ],
+        "cantidad_otros": 6,
+        "snippet": "Durante su presidencia formó un gabinete ministerial compuesto por hombres independientes, como:  Juan Emilio Murillo (Ministro de Gobierno).  Fausto Cordovez C"
+      },
+      {
+        "seccion": "obra_publica",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Carlos Julio Arosemena Tola",
+          "Guillermo Lasso Mendoza",
+          "José María Velasco Ibarra"
+        ],
+        "cantidad_otros": 3,
+        "snippet": "Impulsó acciones para la construcción del Puente de la Unidad Nacional, aunque no pudo firmar el contrato final debido al término de su mandato.    Impulsó acci"
+      }
+    ],
+    "Daniel Noboa Azín": [
+      {
+        "seccion": "periodos_politicos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alfredo Palacio González",
+          "Galo Plaza Lasso",
+          "Manuel María Borrero y González"
+        ],
+        "cantidad_otros": 3,
+        "snippet": "Daniel Noboa resultó ganador en la segunda vuelta de las elecciones presidenciales celebrada el 15 de octubre de 2023, con el 51,83% de los votos frente al 48,1"
+      },
+      {
+        "seccion": "capital_global",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Andrés Fernández de Córdova Nieto"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "Daniel Noboa pertenece al grupo empresarial más grande de Ecuador en el sector bananero. Es hijo de Álvaro Noboa, quien fue cinco veces candidato a las eleccion"
+      },
+      {
+        "seccion": "redes_sociales",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alfredo Baquerizo Moreno",
+          "Carlos Julio Arosemena Monroy",
+          "Carlos Julio Arosemena Tola",
+          "Gabriel García Moreno",
+          "Galo Plaza Lasso"
+        ],
+        "cantidad_otros": 6,
+        "snippet": "Noboa presentó su candidatura como líder de la alianza Acción Democrática Nacional (ADN), que incluye al Pueblo Igualdad Democracia (PID) -fundado por Arturo Mo"
+      },
+      {
+        "seccion": "oratoria",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Galo Plaza Lasso"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "Durante el debate electoral del 13 de agosto, Noboa, a diferencia de sus adversarios, se limitó a responder a las preguntas, no tendió a la confrontación y mant"
+      }
+    ],
+    "Diego Noboa y Arteta": [
+      {
+        "seccion": "periodos_politicos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alfredo Baquerizo Moreno",
+          "Daniel Noboa Azín",
+          "Francisco Robles y García",
+          "Gabriel García Moreno"
+        ],
+        "cantidad_otros": 4,
+        "snippet": "Revolución Marcista (1845): Lideró, junto a José Joaquín de Olmedo y Vicente Ramón Roca, el derrocamiento de Juan José Flores, marcando el fin del floreismo.  P"
+      },
+      {
+        "seccion": "datos_demograficos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Daniel Noboa Azín"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "Nacimiento y muerte: 15 de abril de 1789 en Guayaquil; falleció el 3 de noviembre de 1870 a los 81 años por neumonía.  Origen étnico y clase: Mestizo, perteneci"
+      },
+      {
+        "seccion": "capital_global",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Daniel Noboa Azín"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "Familia: Hijo de Ramón Ignacio Noboa y Ana Arteta. Descendientes notables incluyen a Gustavo Noboa (expresidente) y Daniel Noboa (actual presidente).  Formación"
+      },
+      {
+        "seccion": "redes_sociales",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Daniel Noboa Azín"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "Aliados clave: José Joaquín de Olmedo, Vicente Ramón Roca y sectores anti-floreanos durante la Revolución Marcista.  Rivales: Antonio Elizalde (militar liberal)"
+      },
+      {
+        "seccion": "legislacion",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Daniel Noboa Azín"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "Constitución de 1851: Quinta carta magna del Ecuador, redactada por Pedro Carbo, con enfoque centralista.  Creación de Cotopaxi: Estableció esta provincia en 18"
+      },
+      {
+        "seccion": "obra_publica",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Daniel Noboa Azín"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "Infraestructura administrativa: Mejoró la gestión fiscal con transparencia, aunque sin grandes proyectos físicos.  Vialidad: Inversiones en caminos en la Sierra"
+      }
+    ],
+    "Eloy Alfaro Delgado": [
+      {
+        "seccion": "periodos_politicos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alfredo Baquerizo Moreno",
+          "Francisco Robles y García",
+          "Gabriel García Moreno",
+          "Mariano Suárez Veintimilla"
+        ],
+        "cantidad_otros": 4,
+        "snippet": "Primer gobierno (1895-1901): Llegó al poder tras liderar la Revolución Liberal de 1895, que derrocó al gobierno interino de Vicente Lucio Salazar. Fue proclamad"
+      },
+      {
+        "seccion": "capital_global",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alfredo Palacio González",
+          "Carlos Julio Arosemena Tola",
+          "Manuel María Borrero y González"
+        ],
+        "cantidad_otros": 3,
+        "snippet": "Familia: Casado con Ana Paredes Arosemena (panameña), con nueve hijos. Tuvo un hijo ilegítimo, Rafael.  Formación académica: Autodidacta; educación básica en Mo"
+      },
+      {
+        "seccion": "redes_sociales",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alfredo Baquerizo Moreno",
+          "Alfredo Palacio González",
+          "Antonio Flores Jijón",
+          "Carlos Freile Larrea",
+          "Carlos Freile Zaldumbide"
+        ],
+        "cantidad_otros": 13,
+        "snippet": "Aliados:  Juan Montalvo: Apoyó su exilio y publicaciones.  José Martí: Colaboró en planes anticolonialistas para Cuba.  Leónidas Plaza: Inicialmente aliado, lue"
+      },
+      {
+        "seccion": "posicionamiento_ideologico",
+        "seccion_esperada": true,
+        "otros_mencionados": [
+          "Alfredo Baquerizo Moreno",
+          "Francisco Robles y García",
+          "Gabriel García Moreno"
+        ],
+        "cantidad_otros": 3,
+        "snippet": "Partido: Fundador del Partido Liberal Radical Ecuatoriano.  Ideología:  Anticlericalismo: Separó Iglesia-Estado, expulsó órdenes religiosas.  Liberalismo radica"
+      },
+      {
+        "seccion": "obra_publica",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "José María Velasco Ibarra"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "Ferrocarril Transandino: Concluyó la ruta Guayaquil-Quito (1908), obra emblemática de integración nacional.  Infraestructura educativa: Colegios Normales, Escue"
+      },
+      {
+        "seccion": "derechos_humanos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Rosalía Arteaga Serrano"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "Indígenas: Abolió tributos y trabajo forzado, pero mantuvo estructuras latifundistas.  Mujeres: Las incorporó al servicio público y educación, aunque sin derech"
+      }
+    ],
+    "Fabián Alarcón Rivera": [
+      {
+        "seccion": "periodos_politicos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Carlos Julio Arosemena Tola",
+          "Jamil Mahuad Witt"
+        ],
+        "cantidad_otros": 2,
+        "snippet": "Según el documento, Fabián Alarcón ejerció como presidente interino de Ecuador durante un período no especificado con fechas exactas. Su mandato se sitúa cronol"
+      },
+      {
+        "seccion": "datos_demograficos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Carlos Freile Larrea",
+          "Luis Larrea Alba",
+          "Osvaldo Hurtado Larrea"
+        ],
+        "cantidad_otros": 3,
+        "snippet": "Información no disponible en el documento  El documento no proporciona información específica sobre su edad, adscripción étnica, género, región de origen o reli"
+      },
+      {
+        "seccion": "capital_global",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Carlos Freile Larrea",
+          "Leónidas Plaza y Gutiérrez",
+          "Luis Larrea Alba",
+          "Osvaldo Hurtado Larrea"
+        ],
+        "cantidad_otros": 4,
+        "snippet": "Información no disponible en el documento  En términos de formación o trayectoria como estadista, el documento no detalla aspectos académicos, familiares, econó"
+      },
+      {
+        "seccion": "redes_sociales",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Galo Plaza Lasso"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "Durante el gobierno interino de Alarcón, la agenda de Estados Unidos para Ecuador no varió significativamente respecto a períodos anteriores. Se incrementó la p"
+      },
+      {
+        "seccion": "obra_publica",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Leónidas Plaza y Gutiérrez"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "Información no disponible en el documento  No se menciona la implementación de obras públicas significativas durante su gobierno.   Aspectos No Cubiertos por el"
+      }
+    ],
+    "Federico Páez Chiriboga": [
+      {
+        "seccion": "periodos_politicos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alberto Enríquez Gallo",
+          "Camilo Ponce Enríquez",
+          "José María Velasco Ibarra"
+        ],
+        "cantidad_otros": 3,
+        "snippet": "Federico Páez Chiriboga asumió el poder como Jefe Supremo del Ecuador el 26 de septiembre de 1935, tras el derrocamiento de José María Velasco Ibarra. Su mandat"
+      },
+      {
+        "seccion": "capital_global",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "José María Velasco Ibarra"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "Federico Páez era ingeniero y previamente había ocupado el cargo de Ministro de Obras Públicas.  Su formación técnica influyó en su enfoque hacia la infraestruc"
+      },
+      {
+        "seccion": "redes_sociales",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "José María Velasco Ibarra",
+          "Rosalía Arteaga Serrano"
+        ],
+        "cantidad_otros": 2,
+        "snippet": "Fue respaldado por una junta militar que lo designó como Jefe Supremo tras la crisis política generada por la destitución de José María Velasco Ibarra.  Su admi"
+      },
+      {
+        "seccion": "obra_publica",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "José María Velasco Ibarra"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "Impulsó proyectos relacionados con infraestructura hídrica y saneamiento del suelo, aunque no se mencionan obras específicas en el documento.    No se menciona "
+      }
+    ],
+    "Francisco Andrade Marín": [
+      {
+        "seccion": "periodos_politicos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Carlos Freile Zaldumbide"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "Francisco Andrade Marín ejerció como Presidente Encargado de Ecuador del 6 de marzo al 1 de agosto de 1912, tras el golpe que derrocó a Carlos Freile Zaldumbide"
+      },
+      {
+        "seccion": "datos_demograficos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "José María Velasco Ibarra"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "Nacimiento y muerte: Nació en 1841 en Ibarra y falleció en 1935 en Quito a los 94 años.  Adscripción étnica: Probablemente mestizo, dado su origen en la élite q"
+      },
+      {
+        "seccion": "redes_sociales",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Carlos Julio Arosemena Tola",
+          "Javier Espinosa y Espinosa",
+          "Leónidas Plaza y Gutiérrez",
+          "Otto Arosemena Gómez",
+          "Rodrigo Borja Cevallos"
+        ],
+        "cantidad_otros": 5,
+        "snippet": "Personajes clave: Aliado de Leonidas Plaza Gutiérrez (quien lo impulsó como presidente encargado), y vinculado a intelectuales como Pedro Moncayo y Pedro Fermín"
+      },
+      {
+        "seccion": "posicionamiento_ideologico",
+        "seccion_esperada": true,
+        "otros_mencionados": [
+          "Alfredo Baquerizo Moreno",
+          "Francisco Robles y García",
+          "Gabriel García Moreno"
+        ],
+        "cantidad_otros": 3,
+        "snippet": "Partido: Partido Liberal Radical Ecuatoriano, aunque con pragmatismo para negociar con conservadores.  Filiaciones: Apoyó a García Moreno en su juventud, pero l"
+      }
+    ],
+    "Francisco Javier León Chiriboga": [
+      {
+        "seccion": "periodos_politicos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alfredo Baquerizo Moreno",
+          "Francisco Robles y García",
+          "Gabriel García Moreno"
+        ],
+        "cantidad_otros": 3,
+        "snippet": "Presidencia interina (1875): Asumió como Encargado del Poder Ejecutivo tras el asesinato de Gabriel García Moreno, gobernando del 6 de agosto al 9 de diciembre "
+      },
+      {
+        "seccion": "datos_demograficos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alfredo Baquerizo Moreno",
+          "Francisco Robles y García",
+          "Gabriel García Moreno"
+        ],
+        "cantidad_otros": 3,
+        "snippet": "Nacimiento: 13 de octubre de 1839 en Quito (según fuentes más precisas), aunque otras fuentes mencionan 1832.  Muerte: 10 de agosto de 1880 en Quito, tras lanza"
+      },
+      {
+        "seccion": "capital_global",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alfredo Baquerizo Moreno",
+          "Carlos Freile Larrea",
+          "Francisco Robles y García",
+          "Gabriel García Moreno",
+          "Luis Larrea Alba"
+        ],
+        "cantidad_otros": 6,
+        "snippet": "Familia: Hijo de Espiridión León Aguirre y Carmen Chiriboga Larrea, familia de alcurnia quiteña.  Formación académica: Abogado graduado en la Universidad de Qui"
+      },
+      {
+        "seccion": "redes_sociales",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alfredo Baquerizo Moreno",
+          "Francisco Robles y García",
+          "Gabriel García Moreno"
+        ],
+        "cantidad_otros": 3,
+        "snippet": "Aliados clave:  Gabriel García Moreno: Su principal mentor político, bajo cuyo mandato ejerció como ministro.  Manuel de Ascásubi: Colaboró en el Ministerio de "
+      },
+      {
+        "seccion": "posicionamiento_ideologico",
+        "seccion_esperada": true,
+        "otros_mencionados": [
+          "Alfredo Baquerizo Moreno",
+          "Francisco Robles y García",
+          "Gabriel García Moreno"
+        ],
+        "cantidad_otros": 3,
+        "snippet": "Partido: Partido Conservador Ecuatoriano, aliado incondicional del proyecto ultramontano de García Moreno.  Filiaciones: Defensor del Estado clerical, el orden "
+      },
+      {
+        "seccion": "legislacion",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alfredo Baquerizo Moreno",
+          "Francisco Robles y García",
+          "Gabriel García Moreno"
+        ],
+        "cantidad_otros": 3,
+        "snippet": "Acciones destacadas:  Ordenó el fusilamiento del coronel Gregorio Campusano, anulando un fallo absueltorio del Consejo de Guerra.  Promovió medidas represivas c"
+      },
+      {
+        "seccion": "bienes_comunes",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alfredo Baquerizo Moreno",
+          "Francisco Robles y García",
+          "Gabriel García Moreno"
+        ],
+        "cantidad_otros": 3,
+        "snippet": "Tierra y agua: No hay registros específicos, pero como parte del régimen conservador, mantuvo el statu quo de la propiedad terrateniente y los privilegios ecles"
+      },
+      {
+        "seccion": "derechos_humanos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alfredo Baquerizo Moreno",
+          "Francisco Robles y García",
+          "Gabriel García Moreno"
+        ],
+        "cantidad_otros": 3,
+        "snippet": "Represión: Autoritario, con ejecuciones extrajudiciales (ej. Campusano) y manejo coercitivo de protestas.  Diversidades: Sin registros de políticas inclusivas; "
+      },
+      {
+        "seccion": "relaciones_internacionales",
+        "seccion_esperada": true,
+        "otros_mencionados": [
+          "Alfredo Baquerizo Moreno",
+          "Francisco Robles y García",
+          "Gabriel García Moreno"
+        ],
+        "cantidad_otros": 3,
+        "snippet": "Regional: Sin alianzas internacionales destacadas; su gobierno se centró en controlar la crisis interna post-García Moreno.  Admiración: Modeló su liderazgo en "
+      },
+      {
+        "seccion": "oratoria",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alfredo Baquerizo Moreno",
+          "Francisco Robles y García",
+          "Gabriel García Moreno"
+        ],
+        "cantidad_otros": 3,
+        "snippet": "Estilo: Discursos enfocados en el orden y la legitimidad del poder, aunque su crisis mental final opacó su imagen pública.  Comunicación: Usó proclamas y mensaj"
+      },
+      {
+        "seccion": "imaginarios",
+        "seccion_esperada": true,
+        "otros_mencionados": [
+          "Alfredo Baquerizo Moreno",
+          "Francisco Robles y García",
+          "Gabriel García Moreno"
+        ],
+        "cantidad_otros": 3,
+        "snippet": "Visualidad: Representado como figura austera, vinculada a la solemnidad del régimen garciano.  Comportamientos: Percibido como leal pero rígido; su suicidio y d"
+      }
+    ],
+    "Francisco Robles y García": [
+      {
+        "seccion": "periodos_politicos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alfredo Baquerizo Moreno",
+          "Gabriel García Moreno"
+        ],
+        "cantidad_otros": 2,
+        "snippet": "Presidencia (16 de octubre de 1856 – 31 de agosto de 1859): Elegido en las primeras elecciones indirectas del Ecuador, su gobierno enfrentó la crisis nacional d"
+      },
+      {
+        "seccion": "redes_sociales",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alfredo Baquerizo Moreno",
+          "Gabriel García Moreno"
+        ],
+        "cantidad_otros": 2,
+        "snippet": "Aliados clave: José María Urbina (mentor), Ignacio de Veintemilla (revolución de 1876) y Guillermo Franco (jefe militar en Guayaquil).  Opositores: Gabriel Garc"
+      },
+      {
+        "seccion": "oratoria",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alfredo Baquerizo Moreno",
+          "Gabriel García Moreno"
+        ],
+        "cantidad_otros": 2,
+        "snippet": "Estilo: Directo y pragmático, sin retórica elaborada. Usó discursos para justificar medidas anticlericales y nacionalistas.  Comunicación: Destacó en arengas mi"
+      },
+      {
+        "seccion": "fuentes",
+        "seccion_esperada": true,
+        "otros_mencionados": [
+          "Alfredo Palacio González",
+          "Manuel María Borrero y González",
+          "Mariano Suárez Veintimilla"
+        ],
+        "cantidad_otros": 3,
+        "snippet": "Páginas de internet varias académicas y no académicas.  RESUMEN DE HISTORIA DEL ECUADOR - Enrique Ayala Mora Tercera edición actualizada CORPORACIÓN EDITORA NAC"
+      }
+    ],
+    "Gabriel García Moreno": [
+      {
+        "seccion": "periodos_politicos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Francisco Robles y García",
+          "Javier Espinosa y Espinosa",
+          "Jerónimo Carrión Palacio"
+        ],
+        "cantidad_otros": 3,
+        "snippet": "Presidencias:  Primer mandato (1861-1865): Unificó el país tras la crisis de 1859, enfrentó invasiones peruanas y estableció un régimen centralista.  Segundo ma"
+      },
+      {
+        "seccion": "datos_demograficos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Francisco Robles y García",
+          "Otto Arosemena Gómez"
+        ],
+        "cantidad_otros": 2,
+        "snippet": "Edad: Nació el 24 de diciembre de 1821 en Guayaquil y murió asesinado el 6 de agosto de 1875 en Quito (53 años).  Etnia: Hijo de un español (Gabriel García Góme"
+      },
+      {
+        "seccion": "capital_global",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Francisco Robles y García",
+          "Otto Arosemena Gómez"
+        ],
+        "cantidad_otros": 2,
+        "snippet": "Familiar: Perteneció a una familia aristocrática en decadencia. Se casó con Rosa Ascásubi (elite quiteña) y luego con Mariana del Alcázar.  Académico: Doctor en"
+      },
+      {
+        "seccion": "redes_sociales",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Francisco Robles y García",
+          "José Javier Eguiguren y Riofrío"
+        ],
+        "cantidad_otros": 2,
+        "snippet": "Aliados:  La Iglesia católica, especialmente jesuitas y órdenes europeas.  Terratenientes serranos y la oligarquía conservadora.  Figuras como Juan José Flores "
+      },
+      {
+        "seccion": "legislacion",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Francisco Robles y García"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "Constitución de 1869: Estableció el catolicismo como requisito para la ciudadanía, amplió el poder ejecutivo y permitió la reelección.  Concordato con el Vatica"
+      },
+      {
+        "seccion": "obra_publica",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Francisco Robles y García",
+          "José María Velasco Ibarra"
+        ],
+        "cantidad_otros": 2,
+        "snippet": "Infraestructura vial: Construyó la Carretera Nacional para conectar Costa y Sierra.  Ferrocarril: Inició el Ferrocarril de Yaguachi (base del futuro Ferrocarril"
+      },
+      {
+        "seccion": "bienes_comunes",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Francisco Robles y García"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "Tierra: Favoreció a la Iglesia y terratenientes; no impulsó reformas agrarias.  Agua: Promovió obras de riego en la Sierra como parte de la modernización agríco"
+      },
+      {
+        "seccion": "derechos_humanos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Francisco Robles y García"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "Represión: Fusilamientos, censura de prensa y persecución política.  Indígenas: Abolió el tributo indígena en 1857, pero mantuvo estructuras de explotación.  Mu"
+      },
+      {
+        "seccion": "oratoria",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Francisco Robles y García"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "Retórica: Discursos emotivos, con referencias religiosas y apelaciones a la moral.  Medios: Fundó periódicos como El Vengador y La Nación para difundir sus idea"
+      },
+      {
+        "seccion": "fuentes",
+        "seccion_esperada": true,
+        "otros_mencionados": [
+          "Francisco Robles y García",
+          "José María Urbina y Viteri",
+          "Mariano Suárez Veintimilla"
+        ],
+        "cantidad_otros": 3,
+        "snippet": "Páginas de internet varias académicas y no académicas.  Ana Buriano, el “evento” y la historiografía ecuatoriana -  Juan Maiguashca   El aggiornamento conservad"
+      }
+    ],
+    "Galo Plaza Lasso": [
+      {
+        "seccion": "periodos_politicos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alberto Enríquez Gallo",
+          "Camilo Ponce Enríquez",
+          "Carlos Julio Arosemena Tola"
+        ],
+        "cantidad_otros": 3,
+        "snippet": "Galo Plaza Lasso fue Presidente Constitucional de Ecuador desde 1948 hasta 1952. Su mandato se destacó por ser un período de estabilidad política y económica en"
+      },
+      {
+        "seccion": "datos_demograficos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Leónidas Plaza y Gutiérrez"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "Nacimiento: 17 de febrero de 1906, en Nueva York, Estados Unidos.  Fallecimiento: 28 de enero de 1987, a los 81 años.  Género: Hombre.  Región: Quito, Ecuador ("
+      },
+      {
+        "seccion": "capital_global",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Carlos Freile Zaldumbide",
+          "Leónidas Plaza y Gutiérrez",
+          "Neptalí Bonifaz Ascázubi"
+        ],
+        "cantidad_otros": 3,
+        "snippet": "Familiares: Hijo del expresidente Leonidas Plaza Gutiérrez y Avelina Lasso Ascázubi. Casado con Rosario Pallares Zaldumbide; tuvo varios hijos. Formación académ"
+      },
+      {
+        "seccion": "redes_sociales",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alfredo Baquerizo Moreno",
+          "Clemente Yerovi Indaburu",
+          "Gabriel García Moreno",
+          "Isidro Ayora Cueva",
+          "Lenín Moreno Garcés"
+        ],
+        "cantidad_otros": 5,
+        "snippet": "Colaboró con líderes políticos nacionales e internacionales como Nelson Rockefeller y figuras destacadas en América Latina.  Fue un defensor del trabajo colecti"
+      },
+      {
+        "seccion": "legislacion",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Carlos Julio Arosemena Tola"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "No se mencionan leyes específicas promulgadas durante su presidencia en el documento adjunto.    Logros legislativos destacados: Promovió la Ley de Escalafón y "
+      },
+      {
+        "seccion": "obra_publica",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "José María Velasco Ibarra"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "Promovió obras relacionadas con la modernización agrícola y la infraestructura vial en Ecuador.  Apoyó iniciativas culturales y educativas, como la fundación de"
+      },
+      {
+        "seccion": "fuentes",
+        "seccion_esperada": true,
+        "otros_mencionados": [
+          "Alfredo Palacio González",
+          "Francisco Robles y García",
+          "José María Velasco Ibarra",
+          "Manuel María Borrero y González"
+        ],
+        "cantidad_otros": 4,
+        "snippet": "Albornoz, M. (1988). GALO PLAZA ECUATORIANO UNIVERSAL. Casa de la Cultura Ecuatoriana Benjamín Carrión  CNE (Consejo Nacional Electoral). (2017). ELECCIONES PRE"
+      }
+    ],
+    "Gonzalo Córdova y Rivera": [
+      {
+        "seccion": "periodos_politicos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alfredo Baquerizo Moreno",
+          "Antonio Flores Jijón",
+          "Gabriel García Moreno"
+        ],
+        "cantidad_otros": 3,
+        "snippet": "Presidencia constitucional: Gobernó del 1 de septiembre de 1924 al 9 de julio de 1925, tras ganar las elecciones contra Jacinto Jijón y Caamaño. Su mandato term"
+      },
+      {
+        "seccion": "capital_global",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alfredo Palacio González",
+          "Antonio Borrero y Cortázar",
+          "Manuel María Borrero y González"
+        ],
+        "cantidad_otros": 3,
+        "snippet": "Familiar: Hijo de Joaquín Fernández de Córdova y Cobos y María Teresa de Rivera y Cortázar, familia vinculada a la política y la cultura antigarciana.  Académic"
+      },
+      {
+        "seccion": "redes_sociales",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alberto Guerrero Martínez",
+          "Antonio Flores Jijón",
+          "Juan de Dios Martínez Mera"
+        ],
+        "cantidad_otros": 3,
+        "snippet": "Aliados clave:  Eloy Alfaro: Fiel seguidor durante la Revolución Liberal, aunque luego tuvo desencuentros.  Alberto Guerrero Martínez: Presidente del Congreso q"
+      },
+      {
+        "seccion": "obra_publica",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "José María Velasco Ibarra"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "Infraestructura:  Reparación de 7 km de vías férreas destruidas por el desborde del río Chanchán.  Construcción de la carretera Loja-Portoviejo y provisión de a"
+      },
+      {
+        "seccion": "bienes_comunes",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "José María Velasco Ibarra"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "Tierra: No impulsó reformas agrarias; su gobierno mantuvo el statu quo latifundista.  Agua: Priorizó obras de abastecimiento urbano (ej. Ibarra), pero sin enfoq"
+      }
+    ],
+    "Guillermo Lasso Mendoza": [
+      {
+        "seccion": "periodos_politicos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alfredo Baquerizo Moreno",
+          "Daniel Noboa Azín",
+          "Gabriel García Moreno",
+          "Galo Plaza Lasso",
+          "Jamil Mahuad Witt"
+        ],
+        "cantidad_otros": 5,
+        "snippet": "La actuación política de Guillermo Lasso Mendoza se inscribe en un ciclo de reconfiguración del poder en Ecuador, caracterizado por el tránsito de un modelo neo"
+      },
+      {
+        "seccion": "datos_demograficos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Galo Plaza Lasso"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "El documento proporciona información relevante sobre el perfil sociológico y demográfico de Guillermo Lasso Mendoza, aunque algunos datos específicos, como la e"
+      },
+      {
+        "seccion": "capital_global",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Galo Plaza Lasso"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "La acumulación de capital global por parte de Guillermo Lasso Mendoza se manifiesta en varias dimensiones: familiar, académica, económica y cultural, que config"
+      },
+      {
+        "seccion": "redes_sociales",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Galo Plaza Lasso"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "Las redes y vinculaciones sociales de Guillermo Lasso Mendoza se articulan en torno a su pertenencia a la élite empresarial, su liderazgo en el Movimiento Crean"
+      },
+      {
+        "seccion": "posicionamiento_ideologico",
+        "seccion_esperada": true,
+        "otros_mencionados": [
+          "Alfredo Baquerizo Moreno",
+          "Gabriel García Moreno",
+          "Galo Plaza Lasso"
+        ],
+        "cantidad_otros": 3,
+        "snippet": "El posicionamiento político-ideológico de Guillermo Lasso Mendoza se define por su adscripción al liberalismo conservador y su liderazgo en el movimiento CREO, "
+      },
+      {
+        "seccion": "legislacion",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alfredo Baquerizo Moreno",
+          "Gabriel García Moreno",
+          "Galo Plaza Lasso"
+        ],
+        "cantidad_otros": 3,
+        "snippet": "Durante su mandato, Guillermo Lasso Mendoza impulsó y promovió una serie de reformas y leyes orientadas a consolidar la agenda neoliberal y responder a las dema"
+      },
+      {
+        "seccion": "obra_publica",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Galo Plaza Lasso"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "El documento señala que durante el gobierno de Guillermo Lasso se produjo un proceso de desmantelamiento y debilitamiento de la infraestructura pública, como re"
+      },
+      {
+        "seccion": "bienes_comunes",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alfredo Baquerizo Moreno",
+          "Gabriel García Moreno",
+          "Galo Plaza Lasso"
+        ],
+        "cantidad_otros": 3,
+        "snippet": "El manejo de los bienes comunes, como el agua y la tierra, bajo el gobierno de Guillermo Lasso Mendoza, se inscribe en la lógica de reducción de la presencia es"
+      },
+      {
+        "seccion": "derechos_humanos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Galo Plaza Lasso"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "El posicionamiento de Guillermo Lasso Mendoza en relación con los derechos humanos se define por una orientación restrictiva y conservadora, especialmente en lo"
+      },
+      {
+        "seccion": "relaciones_internacionales",
+        "seccion_esperada": true,
+        "otros_mencionados": [
+          "Alberto Guerrero Martínez",
+          "Alfredo Baquerizo Moreno",
+          "Gabriel García Moreno",
+          "Galo Plaza Lasso",
+          "Juan de Dios Martínez Mera"
+        ],
+        "cantidad_otros": 5,
+        "snippet": "La política exterior de Guillermo Lasso Mendoza se ha caracterizado por una orientación pragmática y alineada con los intereses de financiamiento y apertura com"
+      },
+      {
+        "seccion": "oratoria",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Galo Plaza Lasso"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "La comunicación y el discurso de Guillermo Lasso Mendoza se distinguen por un estilo tecnocrático, orientado a la gestión y la eficiencia, y por el uso de un ve"
+      },
+      {
+        "seccion": "fuentes",
+        "seccion_esperada": true,
+        "otros_mencionados": [
+          "Alfredo Baquerizo Moreno",
+          "Camilo Ponce Enríquez",
+          "Daniel Noboa Azín",
+          "Francisco Robles y García",
+          "Gabriel García Moreno"
+        ],
+        "cantidad_otros": 7,
+        "snippet": "García-Mayoral, G. (2023). AGOTAMIENTO DEL MODELO NEOLIBERAL EN ECUADOR: LA CAÍDA DE GUILLERMO LASSO. Análisis Carolina. https://doi.org/10.33960/AC_10.2023  Si"
+      }
+    ],
+    "Guillermo Rodríguez Lara": [
+      {
+        "seccion": "periodos_politicos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Abelardo Montalvo Alvear",
+          "Alfredo Palacio González",
+          "José María Velasco Ibarra",
+          "Manuel María Borrero y González"
+        ],
+        "cantidad_otros": 4,
+        "snippet": "Presidencia: Guillermo Rodríguez Lara fue presidente de la República del Ecuador tras el derrocamiento de José María Velasco Ibarra, liderando el Gobierno Milit"
+      },
+      {
+        "seccion": "redes_sociales",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Abelardo Montalvo Alvear",
+          "Alfredo Palacio González",
+          "Manuel María Borrero y González"
+        ],
+        "cantidad_otros": 3,
+        "snippet": "Familia: Vínculos estrechos con su familia y descendencia.  Militares: Relación con altos mandos militares, oficiales y subalternos; formador de generaciones de"
+      }
+    ],
+    "Gustavo Noboa Bejarano": [
+      {
+        "seccion": "periodos_politicos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Carlos Freile Larrea",
+          "Daniel Noboa Azín",
+          "Jamil Mahuad Witt",
+          "Jerónimo Carrión Palacio",
+          "Leónidas Plaza y Gutiérrez"
+        ],
+        "cantidad_otros": 7,
+        "snippet": "La carrera política de Gustavo Noboa Bejarano puede dividirse en varios períodos significativos: Inicios en la política regional Marzo 1983 - Agosto 1984: Desem"
+      },
+      {
+        "seccion": "datos_demograficos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Daniel Noboa Azín"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "El documento proporciona limitada información demográfica sobre Noboa:  Origen: Guayaquileño, recibió toda su formación en su Guayaquil natal.  Género: Masculin"
+      },
+      {
+        "seccion": "capital_global",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Daniel Noboa Azín",
+          "Diego Noboa y Arteta",
+          "Jamil Mahuad Witt"
+        ],
+        "cantidad_otros": 3,
+        "snippet": "Antecedentes familiares Segundo de nueve hermanos de una familia de clase media. Entre sus antepasados figura Diego Noboa Arteta (1850-1851), uno de los efímero"
+      },
+      {
+        "seccion": "redes_sociales",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Daniel Noboa Azín",
+          "Jaime Roldós Aguilera",
+          "Jamil Mahuad Witt",
+          "Leónidas Plaza y Gutiérrez"
+        ],
+        "cantidad_otros": 4,
+        "snippet": "Relaciones políticas nacionales En 1979 respaldó la candidatura presidencial de Jaime Roldós Aguilera. Fue representante del presidente Sixto Durán-Ballén (1995"
+      },
+      {
+        "seccion": "legislacion",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Daniel Noboa Azín",
+          "Jamil Mahuad Witt"
+        ],
+        "cantidad_otros": 2,
+        "snippet": "Principales leyes Ley para la Transformación Económica del Ecuador (Trole I): Aprobada el 24 de febrero de 2000 y promulgada el 13 de marzo. Brindó el marco jur"
+      },
+      {
+        "seccion": "obra_publica",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Jamil Mahuad Witt"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "Reconstrucción post-desastre: Como vicepresidente, Mahuad le encomendó la reconstrucción de infraestructuras públicas destrozadas por el fenómeno climático de E"
+      },
+      {
+        "seccion": "derechos_humanos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Daniel Noboa Azín"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "Reconocimiento internacional: Recibió el 19 de septiembre de 2002 en Washington el Premio Internacional F.D. Roosevelt de Discapacidad, en reconocimiento de la "
+      },
+      {
+        "seccion": "fuentes",
+        "seccion_esperada": true,
+        "otros_mencionados": [
+          "Alberto Guerrero Martínez",
+          "Daniel Noboa Azín",
+          "Eloy Alfaro Delgado",
+          "Jamil Mahuad Witt",
+          "Juan de Dios Martínez Mera"
+        ],
+        "cantidad_otros": 8,
+        "snippet": "Zárate Arce, R. O. (2003). Gustavo Noboa Bejarano. CIDOB. https://www.cidob.org/lider-politico/gustavo-noboa-bejarano  Martínez Hinojosa, R. M., Orellana Intria"
+      }
+    ],
+    "Ignacio de Veintemilla y Villacís": [
+      {
+        "seccion": "periodos_politicos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alfredo Baquerizo Moreno",
+          "Francisco Robles y García",
+          "Gabriel García Moreno"
+        ],
+        "cantidad_otros": 3,
+        "snippet": "Jefatura Suprema (1876-1878): Tras liderar la Revolución de Veintemilla el 8 de septiembre de 1876, derrocó al presidente Antonio Borrero y se autoproclamó Jefe"
+      },
+      {
+        "seccion": "datos_demograficos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Javier Espinosa y Espinosa"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "Edad: Nació el 31 de julio de 1828 en Quito y murió el 19 de julio de 1908 a los 79 años.  Adscripción étnica: Criollo, hijo de Ignacio de Veintemilla Espinosa "
+      },
+      {
+        "seccion": "capital_global",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Neptalí Bonifaz Ascázubi"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "Familiares: Sobrino de Manuel de Ascázubi (prócer independentista) y tío de Marietta de Veintemilla, quien actuó como primera dama y figura política clave.  For"
+      }
+    ],
+    "Isidro Ayora Cueva": [
+      {
+        "seccion": "periodos_politicos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Carlos Freile Larrea",
+          "Luis Larrea Alba",
+          "Osvaldo Hurtado Larrea"
+        ],
+        "cantidad_otros": 3,
+        "snippet": "Presidencia provisional (1 de abril de 1926 – 17 de abril de 1929): Designado por la Junta Militar tras la Revolución Juliana (1925), un movimiento cívico-milit"
+      },
+      {
+        "seccion": "datos_demograficos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Rosalía Arteaga Serrano"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "Edad: Nació el 31 de agosto de 1879 en Loja y murió a los 98 años en Los Ángeles (1978).  Adscripción étnica: Mestizo, de familia criolla lojana.  Género: Hombr"
+      },
+      {
+        "seccion": "redes_sociales",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alfredo Baquerizo Moreno",
+          "Antonio Flores Jijón",
+          "Carlos Freile Larrea",
+          "Gabriel García Moreno",
+          "José Luis Tamayo Terán"
+        ],
+        "cantidad_otros": 9,
+        "snippet": "Aliados: La Junta Militar de la Revolución Juliana, tecnócratas como Edwin Kemmerer (asesor económico estadounidense) y sectores modernizadores del Ejército.  O"
+      },
+      {
+        "seccion": "obra_publica",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "José María Velasco Ibarra"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "Infraestructura sanitaria: Alcantarillado de Guayaquil y Quito, electrificación de Portoviejo y Machala.  Educación: Construcción de escuelas rurales y el Coleg"
+      }
+    ],
+    "Jaime Roldós Aguilera": [
+      {
+        "seccion": "redes_sociales",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Lizardo García Sorroza"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "Las conexiones políticas y personales mencionadas incluyen:  Assad Bucaram: Su tío político y líder de Concentración de Fuerzas Populares (CFP). Bucaram no pudo"
+      },
+      {
+        "seccion": "fuentes",
+        "seccion_esperada": true,
+        "otros_mencionados": [
+          "Abdalá Bucaram Ortiz",
+          "Carlos Julio Arosemena Monroy",
+          "Carlos Julio Arosemena Tola",
+          "Rodrigo Borja Cevallos"
+        ],
+        "cantidad_otros": 4,
+        "snippet": "CNE (Consejo Nacional Electoral). (2017). ELECCIONES PRESIDENCIALES 1978, Jaime Roldós Aguilera. Instituto de la Democrcia.   Rodas Chaves, G. (2000). La Izquie"
+      }
+    ],
+    "Jamil Mahuad Witt": [
+      {
+        "seccion": "periodos_politicos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Daniel Noboa Azín",
+          "Jerónimo Carrión Palacio"
+        ],
+        "cantidad_otros": 2,
+        "snippet": "Según el documento, Jamil Mahuad ejercía como Presidente del Ecuador durante 1998-1999. El artículo, fechado en marzo de 1999, indica que Mahuad llevaba siete m"
+      },
+      {
+        "seccion": "datos_demograficos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Francisco Robles y García"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "El documento no proporciona información específica sobre la edad, adscripción étnica, género, religión u otros datos demográficos de Jamil Mahuad.    El documen"
+      },
+      {
+        "seccion": "capital_global",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Francisco Robles y García"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "No hay información en el documento sobre la formación académica, antecedentes familiares o capital cultural de Mahuad.    Académico: No se menciona su formación"
+      },
+      {
+        "seccion": "redes_sociales",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Galo Plaza Lasso"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "Mahuad mantenía una alianza política con el Partido Social Cristiano (PSC), descrita por el autor como un \"pacto\" que le sometió a \"infidelidad y chantaje\". El "
+      },
+      {
+        "seccion": "fuentes",
+        "seccion_esperada": true,
+        "otros_mencionados": [
+          "Alberto Guerrero Martínez",
+          "Daniel Noboa Azín",
+          "José María Plácido Caamaño y Gómez Cornejo",
+          "Juan de Dios Martínez Mera"
+        ],
+        "cantidad_otros": 4,
+        "snippet": "Borja Cornejo, D. (1999). La economía sin rumbo. Ecuador Debate, (No. 7), pp. 18-26.  Burbano de Lara, F. (1999). Los siete primeros meses de Mahuad: del fracas"
+      }
+    ],
+    "Javier Espinosa y Espinosa": [
+      {
+        "seccion": "periodos_politicos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alfredo Baquerizo Moreno",
+          "Diego Noboa y Arteta",
+          "Francisco Robles y García",
+          "Gabriel García Moreno",
+          "José María Velasco Ibarra"
+        ],
+        "cantidad_otros": 5,
+        "snippet": "Javier Espinosa y Espinosa fue presidente constitucional del Ecuador del 20 de enero de 1868 al 16 de enero de 1869, asumiendo el cargo tras la renuncia de Jeró"
+      },
+      {
+        "seccion": "redes_sociales",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alfredo Baquerizo Moreno",
+          "Diego Noboa y Arteta",
+          "Francisco Robles y García",
+          "Gabriel García Moreno"
+        ],
+        "cantidad_otros": 4,
+        "snippet": "Aliados: Inicialmente impulsado por Gabriel García Moreno, aunque gobernó con independencia.  Asesores: Colaboraron en su gabinete figuras como los doctores Cam"
+      },
+      {
+        "seccion": "posicionamiento_ideologico",
+        "seccion_esperada": true,
+        "otros_mencionados": [
+          "Alfredo Baquerizo Moreno",
+          "Francisco Robles y García",
+          "Gabriel García Moreno"
+        ],
+        "cantidad_otros": 3,
+        "snippet": "Partido: Conservador ecuatoriano.  Filiaciones: Cercano al conservadurismo, pero con tendencia conciliadora y moderada.  Distanciamientos: Se distanció de la lí"
+      },
+      {
+        "seccion": "obra_publica",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alfredo Baquerizo Moreno",
+          "Francisco Robles y García",
+          "Gabriel García Moreno",
+          "José María Velasco Ibarra"
+        ],
+        "cantidad_otros": 4,
+        "snippet": "Su gestión de obra pública fue limitada debido al terremoto de Ibarra, priorizando la reconstrucción de la ciudad y la atención humanitaria.  Delegó a García Mo"
+      },
+      {
+        "seccion": "relaciones_internacionales",
+        "seccion_esperada": true,
+        "otros_mencionados": [
+          "Alfredo Baquerizo Moreno",
+          "Francisco Robles y García",
+          "Gabriel García Moreno"
+        ],
+        "cantidad_otros": 3,
+        "snippet": "Actuó principalmente en el ámbito nacional, sin grandes proyecciones internacionales.  Su relación con García Moreno fue compleja: lo admiró como gestor de cris"
+      }
+    ],
+    "Jerónimo Carrión Palacio": [
+      {
+        "seccion": "periodos_politicos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alfredo Baquerizo Moreno",
+          "Diego Noboa y Arteta",
+          "Federico Páez Chiriboga",
+          "Francisco Javier León Chiriboga",
+          "Francisco Robles y García"
+        ],
+        "cantidad_otros": 6,
+        "snippet": "Presidencia de Ecuador (7 de septiembre de 1865 – 6 de noviembre de 1867): Sucesor de Gabriel García Moreno, elegido con amplio respaldo electoral (73% de los v"
+      },
+      {
+        "seccion": "capital_global",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alfredo Baquerizo Moreno",
+          "Francisco Robles y García",
+          "Gabriel García Moreno"
+        ],
+        "cantidad_otros": 3,
+        "snippet": "Familia: Hijo de José Benigno Carrión y María Josefa Palacio. Casado con su sobrina María Antonia Andrade (sin descendencia).  Formación académica: Doctor en Ju"
+      },
+      {
+        "seccion": "redes_sociales",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alfredo Baquerizo Moreno",
+          "Antonio Flores Jijón",
+          "Francisco Robles y García",
+          "Gabriel García Moreno"
+        ],
+        "cantidad_otros": 4,
+        "snippet": "Aliados clave: Gabriel García Moreno (inicialmente), Manuel Bustamante (ministro de Gobierno), Ignacio de Veintemilla (ministro de Guerra).  Grupos de poder: Pa"
+      },
+      {
+        "seccion": "posicionamiento_ideologico",
+        "seccion_esperada": true,
+        "otros_mencionados": [
+          "Alfredo Baquerizo Moreno",
+          "Francisco Robles y García",
+          "Gabriel García Moreno"
+        ],
+        "cantidad_otros": 3,
+        "snippet": "Partido: Conservador, aunque promovió cierta tolerancia (ej: permitió el retorno de logias masónicas).  Filiaciones: Inicialmente alineado con García Moreno, pe"
+      },
+      {
+        "seccion": "legislacion",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alfredo Baquerizo Moreno",
+          "Francisco Robles y García",
+          "Gabriel García Moreno"
+        ],
+        "cantidad_otros": 3,
+        "snippet": "Educación y cultura: Decretó el Himno Nacional (letra de Juan León Mera, música de Antonio Neumane).  Concordato: Intentó suspenderlo para reducir el poder ecle"
+      },
+      {
+        "seccion": "obra_publica",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alfredo Baquerizo Moreno",
+          "Francisco Robles y García",
+          "Gabriel García Moreno"
+        ],
+        "cantidad_otros": 3,
+        "snippet": "Educación: Fundó el Colegio Pedro Vicente Maldonado (Riobamba), Pedro Carbo (Guaranda) y el Conservatorio de Música de Guayaquil.  Salud: Hospital San Vicente d"
+      },
+      {
+        "seccion": "relaciones_internacionales",
+        "seccion_esperada": true,
+        "otros_mencionados": [
+          "Alfredo Baquerizo Moreno",
+          "Francisco Robles y García",
+          "Gabriel García Moreno"
+        ],
+        "cantidad_otros": 3,
+        "snippet": "Guerra contra España (1866): Aliado con Perú y Chile en la Guerra Hispano-Sudamericana; declaró la guerra a España y defendió Guayaquil.  Diplomacia: Envió a Ga"
+      },
+      {
+        "seccion": "oratoria",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alfredo Baquerizo Moreno",
+          "Francisco Robles y García",
+          "Gabriel García Moreno"
+        ],
+        "cantidad_otros": 3,
+        "snippet": "Estilo: Legalista y conciliador, sin discursos emotivos. Destacó en debates parlamentarios durante la Convención de 1845.  Comunicación: Priorizó la institucion"
+      },
+      {
+        "seccion": "imaginarios",
+        "seccion_esperada": true,
+        "otros_mencionados": [
+          "Alfredo Baquerizo Moreno",
+          "Francisco Robles y García",
+          "Gabriel García Moreno"
+        ],
+        "cantidad_otros": 3,
+        "snippet": "Visualidad: Retratado como hombre serio, de rostro austero y vestimenta formal (ver archivo en).  Percepción histórica: Considerado un presidente \"débil\" pero h"
+      }
+    ],
+    "José Javier Eguiguren y Riofrío": [
+      {
+        "seccion": "periodos_politicos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alfredo Baquerizo Moreno",
+          "Daniel Noboa Azín",
+          "Francisco Robles y García",
+          "Gabriel García Moreno"
+        ],
+        "cantidad_otros": 4,
+        "snippet": "Encargado del Poder Ejecutivo (6 de octubre al 9 de diciembre de 1875): Asumió tras la muerte de García Moreno y la incapacidad de Francisco León Franco.  Minis"
+      },
+      {
+        "seccion": "datos_demograficos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alfredo Baquerizo Moreno",
+          "Francisco Robles y García",
+          "Gabriel García Moreno"
+        ],
+        "cantidad_otros": 3,
+        "snippet": "Edad: Nació el 3 de diciembre de 1815 en Loja; falleció a finales de 1884 (69 años).  Etnia y género: Criollo, de ascendencia vasca por su abuelo Dionisio de Eg"
+      },
+      {
+        "seccion": "capital_global",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alfredo Baquerizo Moreno",
+          "Francisco Robles y García",
+          "Gabriel García Moreno"
+        ],
+        "cantidad_otros": 3,
+        "snippet": "Familia: Hijo de José Gonzalo de Eguiguren (funcionario colonial) y Francisca Riofrío. Casado con Isabel Valdivieso y Carcelén, vinculada a la nobleza quiteña ("
+      },
+      {
+        "seccion": "redes_sociales",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alfredo Baquerizo Moreno",
+          "Francisco Robles y García",
+          "Gabriel García Moreno"
+        ],
+        "cantidad_otros": 3,
+        "snippet": "Aliados clave: Gabriel García Moreno (como ministro), Antonio Borrero (sucesor) y Rafael Pólit (presidente del Senado).  Grupos de poder: Partido Conservador, c"
+      },
+      {
+        "seccion": "posicionamiento_ideologico",
+        "seccion_esperada": true,
+        "otros_mencionados": [
+          "Alfredo Baquerizo Moreno",
+          "Francisco Robles y García",
+          "Gabriel García Moreno"
+        ],
+        "cantidad_otros": 3,
+        "snippet": "Partido: Miembro del Partido Conservador, defensor del centralismo y el catolicismo de Estado.  Filiaciones: Admirador del modelo autoritario y teocrático de Ga"
+      },
+      {
+        "seccion": "legislacion",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alfredo Baquerizo Moreno",
+          "Francisco Robles y García",
+          "Gabriel García Moreno"
+        ],
+        "cantidad_otros": 3,
+        "snippet": "Decreto a García Moreno (1875): Lo declaró \"Regenerador de la Patria y Mártir de la Civilización Católica\".  Reformas fiscales: Gestionó políticas tributarias d"
+      }
+    ],
+    "José Luis Tamayo Terán": [
+      {
+        "seccion": "redes_sociales",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alfredo Baquerizo Moreno",
+          "Carlos Arroyo del Río",
+          "Gabriel García Moreno"
+        ],
+        "cantidad_otros": 3,
+        "snippet": "Aliados políticos: Leonidas Plaza (líder liberal), Alfredo Baquerizo Moreno (predecesor) y Carlos A. Arroyo del Río (asesor clave).  Redes familiares: Protegió "
+      }
+    ],
+    "José María Plácido Caamaño y Gómez Cornejo": [
+      {
+        "seccion": "datos_demograficos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Andrés Fernández de Córdova Nieto"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "Nacimiento: 5 de octubre de 1837 en Guayaquil.  Fallecimiento: 31 de diciembre de 1900 en Sevilla (España), por infarto agudo de miocardio.  Etnicidad: Criollo "
+      },
+      {
+        "seccion": "capital_global",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Andrés Fernández de Córdova Nieto",
+          "Diego Noboa y Arteta",
+          "Otto Arosemena Gómez"
+        ],
+        "cantidad_otros": 3,
+        "snippet": "Familiar: Hijo de José María Caamaño (político) y Dolores Gómez Cornejo. Familia vinculada a la élite agroexportadora.  Académico: Bachiller en Filosofía y Letr"
+      },
+      {
+        "seccion": "redes_sociales",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alberto Guerrero Martínez",
+          "Antonio Flores Jijón",
+          "Carlos Freile Zaldumbide",
+          "Javier Espinosa y Espinosa",
+          "Juan de Dios Martínez Mera"
+        ],
+        "cantidad_otros": 6,
+        "snippet": "Aliados iniciales: Liberales y conservadores centristas durante la restauración contra Veintemilla.  Asesores: José Modesto Espinosa (ministro), Vicente Lucio S"
+      },
+      {
+        "seccion": "obra_publica",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "José María Velasco Ibarra"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "Educación: 50,000 alumnos en escuelas primarias y 29 colegios secundarios hacia 1888.  Ciencia y cultura: Creó el Archivo Nacional, el Instituto de Ciencias y e"
+      }
+    ],
+    "José María Urbina y Viteri": [
+      {
+        "seccion": "periodos_politicos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alfredo Baquerizo Moreno",
+          "Daniel Noboa Azín",
+          "Francisco Robles y García",
+          "Gabriel García Moreno"
+        ],
+        "cantidad_otros": 4,
+        "snippet": "Jefatura Suprema (1851–1852): Lideró un golpe de Estado contra Diego Noboa el 17 de julio de 1851, proclamándose Jefe Supremo.  Presidencia Constitucional (1852"
+      },
+      {
+        "seccion": "redes_sociales",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alfredo Baquerizo Moreno",
+          "Francisco Robles y García",
+          "Gabriel García Moreno"
+        ],
+        "cantidad_otros": 3,
+        "snippet": "Aliados clave:  Juan José Flores (inicialmente), Vicente Rocafuerte, Francisco Robles (sucesor).  Ignacio de Veintemilla (durante su revolución en 1876).  Grupo"
+      },
+      {
+        "seccion": "posicionamiento_ideologico",
+        "seccion_esperada": true,
+        "otros_mencionados": [
+          "Alfredo Baquerizo Moreno",
+          "Francisco Robles y García",
+          "Gabriel García Moreno"
+        ],
+        "cantidad_otros": 3,
+        "snippet": "Partido: Partido Liberal Radical Ecuatoriano, líder del ala militarista.  Filiaciones:  Liberalismo radical: Abolición de la esclavitud, secularización, educaci"
+      },
+      {
+        "seccion": "derechos_humanos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alfredo Baquerizo Moreno",
+          "Francisco Robles y García",
+          "Gabriel García Moreno"
+        ],
+        "cantidad_otros": 3,
+        "snippet": "Avances:  Abolición de la esclavitud (1.052 libertos).  Igualdad jurídica para indígenas.  Contradicciones:  Represión a periodistas (destierro de Gabriel Garcí"
+      }
+    ],
+    "José María Velasco Ibarra": [
+      {
+        "seccion": "periodos_politicos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alberto Guerrero Martínez",
+          "Carlos Arroyo del Río",
+          "Carlos Julio Arosemena Monroy",
+          "Carlos Julio Arosemena Tola",
+          "Juan de Dios Martínez Mera"
+        ],
+        "cantidad_otros": 5,
+        "snippet": "Velasco Ibarra fue una figura clave en la insurrección del 28 de mayo de 1944, conocida como \"La Gloriosa\". Este evento marcó un momento revolucionario en Ecuad"
+      },
+      {
+        "seccion": "capital_global",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alfredo Baquerizo Moreno",
+          "Francisco Robles y García",
+          "Gabriel García Moreno"
+        ],
+        "cantidad_otros": 3,
+        "snippet": "Velasco Ibarra fue una figura carismática que logró movilizar al pueblo ecuatoriano en torno a su liderazgo. Su capital cultural y político se construyó sobre s"
+      },
+      {
+        "seccion": "redes_sociales",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alfredo Baquerizo Moreno",
+          "Camilo Ponce Enríquez",
+          "Carlos Arroyo del Río",
+          "Carlos Freile Larrea",
+          "Federico Páez Chiriboga"
+        ],
+        "cantidad_otros": 10,
+        "snippet": "Durante \"La Gloriosa\", Velasco Ibarra interactuó con sindicatos, estudiantes armados y comités velasquistas que lo respaldaron como líder popular. También contó"
+      },
+      {
+        "seccion": "legislacion",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Carlos Arroyo del Río"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "No se menciona legislación específica promovida por Velasco Ibarra en el documento adjunto.    Durante su gobierno se instauró la Constitución de 1945, consider"
+      },
+      {
+        "seccion": "fuentes",
+        "seccion_esperada": true,
+        "otros_mencionados": [
+          "Javier Espinosa y Espinosa",
+          "José Luis Tamayo Terán",
+          "Rodrigo Borja Cevallos"
+        ],
+        "cantidad_otros": 3,
+        "snippet": "Ogaz, L. (1998). ¡Todo el Poder a Velasco! La insurreción del 28 de mayo 1944. Abya-Yala.  CNE (Consejo Nacional Electoral). (2017). ELECCIONES PRESIDENCIALES 1"
+      }
+    ],
+    "Juan José Flores y Aramburu": [
+      {
+        "seccion": "periodos_politicos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alfredo Baquerizo Moreno",
+          "Francisco Robles y García",
+          "Gabriel García Moreno"
+        ],
+        "cantidad_otros": 3,
+        "snippet": "Tres presidencias:  1830-1834: Primer mandato tras la separación de la Gran Colombia, marcado por conflictos internos y guerras con Colombia.  1839-1843: Segund"
+      },
+      {
+        "seccion": "datos_demograficos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Antonio Flores Jijón"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "– Nacimiento: 19 de julio de 1800 en Puerto Cabello, Venezuela. – Origen étnico: Hijo de Juan José Aramburu (español) y Rita Flores (venezolana). – Género: Homb"
+      },
+      {
+        "seccion": "capital_global",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Antonio Flores Jijón"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "– Militar: Ascendió a general a los 29 años bajo Bolívar; participó en batallas como Pichincha (1822) y Tarqui (1829). – Familiar: Matrimonio con Mercedes Jijón"
+      },
+      {
+        "seccion": "redes_sociales",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alfredo Baquerizo Moreno",
+          "Carlos Freile Larrea",
+          "Carlos Freile Zaldumbide",
+          "Francisco Robles y García",
+          "Gabriel García Moreno"
+        ],
+        "cantidad_otros": 8,
+        "snippet": "– Aliados clave:  Simón Bolívar: Su mentor y referente ideológico.  Gabriel García Moreno: Aunque antes rivales, colaboró con él en 1860 para derrotar a Guiller"
+      },
+      {
+        "seccion": "fuentes",
+        "seccion_esperada": true,
+        "otros_mencionados": [
+          "Alfredo Palacio González",
+          "Manuel María Borrero y González",
+          "Mariano Suárez Veintimilla"
+        ],
+        "cantidad_otros": 3,
+        "snippet": "Páginas de internet varias académicas y no académicas.  Debates sobre la república en El Quiteño Libre.  Cultura política e impresos (1833-1834)  Roger Castro L"
+      }
+    ],
+    "Juan de Dios Martínez Mera": [
+      {
+        "seccion": "periodos_politicos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alfredo Baquerizo Moreno",
+          "Gabriel García Moreno",
+          "José María Velasco Ibarra"
+        ],
+        "cantidad_otros": 3,
+        "snippet": "Presidencia: Gobernó del 5 de diciembre de 1932 al 19 de octubre de 1933, cuando fue destituido por el Congreso tras un juicio político liderado por José María "
+      },
+      {
+        "seccion": "redes_sociales",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "José María Velasco Ibarra"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "Aliados políticos: Miembro del Partido Liberal Radical, cercano a figuras como Alberto Guerrero Martínez y Antonio Quevedo (canciller).  Opositores: Enfrentó a "
+      }
+    ],
+    "Julio Enrique Moreno Peñaherrera": [
+      {
+        "seccion": "periodos_politicos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alfredo Baquerizo Moreno",
+          "Aurelio Mosquera Narváez",
+          "Gabriel García Moreno",
+          "José María Urbina y Viteri",
+          "Otto Arosemena Gómez"
+        ],
+        "cantidad_otros": 5,
+        "snippet": "Julio Enrique Moreno ocupó el cargo de Presidente Encargado de Ecuador desde el 10 hasta el 31 de agosto de 1940, en su calidad de Presidente del Senado, luego "
+      },
+      {
+        "seccion": "capital_global",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alfredo Baquerizo Moreno",
+          "Gabriel García Moreno",
+          "Javier Espinosa y Espinosa"
+        ],
+        "cantidad_otros": 3,
+        "snippet": "Familiares:  Hijo de Daniel Moreno Coronel y Mercedes Peñaherrera Sierra.  Casado con Victoria Espinosa de los Monteros Panblan; tuvo tres hijos: Julio, Miguel "
+      }
+    ],
+    "Lenín Moreno Garcés": [
+      {
+        "seccion": "periodos_politicos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alfredo Baquerizo Moreno",
+          "Gabriel García Moreno",
+          "Galo Plaza Lasso"
+        ],
+        "cantidad_otros": 3,
+        "snippet": "Según el documento analizado, Lenín Moreno tuvo los siguientes períodos de actuación política:  Vicepresidente de Rafael Correa entre 2007 y 2013  Posteriorment"
+      },
+      {
+        "seccion": "datos_demograficos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alfredo Baquerizo Moreno",
+          "Gabriel García Moreno"
+        ],
+        "cantidad_otros": 2,
+        "snippet": "El documento proporciona muy escasa información demográfica sobre Lenín Moreno:  Género: masculino (evidente por las referencias con pronombres masculinos)  No "
+      },
+      {
+        "seccion": "capital_global",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alberto Guerrero Martínez",
+          "Alfredo Baquerizo Moreno",
+          "Alfredo Palacio González",
+          "Gabriel García Moreno",
+          "Juan de Dios Martínez Mera"
+        ],
+        "cantidad_otros": 6,
+        "snippet": "El documento no aporta información específica sobre:  Formación académica  Capital económico  Familiares  Capital cultural  Únicamente se puede inferir su posic"
+      },
+      {
+        "seccion": "redes_sociales",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alberto Guerrero Martínez",
+          "Alfredo Baquerizo Moreno",
+          "Daniel Noboa Azín",
+          "Francisco Robles y García",
+          "Gabriel García Moreno"
+        ],
+        "cantidad_otros": 9,
+        "snippet": "El documento identifica algunas de sus relaciones políticas y colaboradores:  Eduardo Mangas: Secretario de la Administración y la Presidencia (hasta su renunci"
+      },
+      {
+        "seccion": "legislacion",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alfredo Baquerizo Moreno",
+          "Gabriel García Moreno"
+        ],
+        "cantidad_otros": 2,
+        "snippet": "Según el documento, Moreno impulsó:  Una consulta popular en febrero de 2018 que incluía:  Supresión de la reelección indefinida  Creación de un Consejo de Part"
+      },
+      {
+        "seccion": "obra_publica",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alfredo Baquerizo Moreno",
+          "Gabriel García Moreno"
+        ],
+        "cantidad_otros": 2,
+        "snippet": "El documento no proporciona información específica sobre obras públicas realizadas durante el gobierno de Moreno. Solo contiene referencias críticas a obras del"
+      },
+      {
+        "seccion": "bienes_comunes",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alfredo Baquerizo Moreno",
+          "Gabriel García Moreno"
+        ],
+        "cantidad_otros": 2,
+        "snippet": "No hay información específica en el documento sobre el manejo de bienes comunes como agua o tierra durante el gobierno de Moreno, aunque se menciona que la cons"
+      },
+      {
+        "seccion": "derechos_humanos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alfredo Baquerizo Moreno",
+          "Gabriel García Moreno"
+        ],
+        "cantidad_otros": 2,
+        "snippet": "El documento sugiere que Moreno:  Promovió una \"apertura o más propiamente una distensión\" política  Buscaba \"reconformar el tejido social, incluyendo la lucha "
+      },
+      {
+        "seccion": "oratoria",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alfredo Baquerizo Moreno",
+          "Gabriel García Moreno"
+        ],
+        "cantidad_otros": 2,
+        "snippet": "El documento no proporciona información sobre el estilo oratorio o comunicacional de Lenín Moreno.  Se menciona que Moreno utilizó una estrategia comunicacional"
+      },
+      {
+        "seccion": "fuentes",
+        "seccion_esperada": true,
+        "otros_mencionados": [
+          "Alfredo Baquerizo Moreno",
+          "Aurelio Mosquera Narváez",
+          "Gabriel García Moreno",
+          "Galo Plaza Lasso",
+          "Ignacio de Veintemilla y Villacís"
+        ],
+        "cantidad_otros": 5,
+        "snippet": "Verdesoto Custode, L. (2018). ¿Hacia dónde vamos?. Ecuador Debate, (No. 103), pp. 7-30.  Burbano de Lara, F. (2017). Parricidas, leales y traidores. La dramátic"
+      }
+    ],
+    "León Febres-Cordero Ribadeneyra": [
+      {
+        "seccion": "fuentes",
+        "seccion_esperada": true,
+        "otros_mencionados": [
+          "Alberto Guerrero Martínez",
+          "Eloy Alfaro Delgado",
+          "Guillermo Rodríguez Lara",
+          "José Luis Tamayo Terán",
+          "Juan de Dios Martínez Mera"
+        ],
+        "cantidad_otros": 7,
+        "snippet": "Terán, J. F. (2006). !Alfaro vive carajo! y la lucha por el olvido. Ecuador Debate, (No. 67), pp. 61-76.   Verdesoto Custode, L. (1986). El autoritarismo estata"
+      }
+    ],
+    "Leónidas Plaza y Gutiérrez": [
+      {
+        "seccion": "periodos_politicos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Carlos Freile Zaldumbide",
+          "Rosalía Arteaga Serrano"
+        ],
+        "cantidad_otros": 2,
+        "snippet": "Presidencias:  Primer período: 1 de septiembre de 1901 – 31 de agosto de 1905.  Segundo período: 1 de septiembre de 1912 – 31 de agosto de 1916.  Conflictos rel"
+      },
+      {
+        "seccion": "datos_demograficos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Galo Plaza Lasso",
+          "Neptalí Bonifaz Ascázubi"
+        ],
+        "cantidad_otros": 2,
+        "snippet": "Nacimiento: 18 de abril de 1865 en Charapotó, Manabí.  Muerte: 17 de noviembre de 1933 en Huigra, Chimborazo, por infarto.  Adscripción étnica: Criollo, de fami"
+      },
+      {
+        "seccion": "capital_global",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Galo Plaza Lasso",
+          "Neptalí Bonifaz Ascázubi"
+        ],
+        "cantidad_otros": 2,
+        "snippet": "Familia: Hijo de José Buenaventura Plaza Centeno (político y periodista) y Alegría Gutiérrez Sevillano. Casado con Avelina Lasso Ascázubi, miembro de la élite t"
+      },
+      {
+        "seccion": "redes_sociales",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alfredo Baquerizo Moreno",
+          "Francisco Robles y García",
+          "Gabriel García Moreno",
+          "Julio Enrique Moreno Peñaherrera",
+          "Rosalía Arteaga Serrano"
+        ],
+        "cantidad_otros": 5,
+        "snippet": "Aliados clave:  Juan Francisco Navarro (Ministro de Guerra) y Alfredo Baquerizo Moreno (vicepresidente y sucesor).  Oligarcas costeños (Banco Comercial y Agríco"
+      },
+      {
+        "seccion": "bienes_comunes",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Rosalía Arteaga Serrano"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "Tierra: Favoreció a latifundistas mediante alianzas, sin reformas agrarias.  Agua: Priorizó obras urbanas (ej. canalización de Quito), pero sin políticas rurale"
+      }
+    ],
+    "Lizardo García Sorroza": [
+      {
+        "seccion": "periodos_politicos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Francisco Robles y García",
+          "José Luis Tamayo Terán"
+        ],
+        "cantidad_otros": 2,
+        "snippet": "Presidencia constitucional (1905–1906): Elegido con 74,369 votos, su mandato duró solo 4 meses y 15 días, interrumpido por un golpe de Estado liderado por Eloy "
+      },
+      {
+        "seccion": "capital_global",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Francisco Robles y García"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "Familiar: Hijo de Manuel García Estrada (carpintero) y Catalina Sorroza. Casado con Carmen Coello Álvarez (matrimonio de 66 años).  Académico: Estudios básicos "
+      },
+      {
+        "seccion": "redes_sociales",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Carlos Freile Larrea",
+          "Luis Larrea Alba",
+          "Osvaldo Hurtado Larrea"
+        ],
+        "cantidad_otros": 3,
+        "snippet": "Personajes clave: Aliado de Leónidas Plaza (presidente 1901–1905), rival de Eloy Alfaro. Ministros como Gonzalo Córdova (Interior) y Tomás Larrea (Guerra).  Gru"
+      },
+      {
+        "seccion": "legislacion",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Francisco Robles y García"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "Ley de Bancos y Ley de Moneda: Impulsadas como senador en 1898–1899 para regular el sistema financiero.  Reorganización de la Hacienda Nacional: Priorizó orden "
+      },
+      {
+        "seccion": "derechos_humanos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Francisco Robles y García"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "Violencia política: Su gobierno reprimió la revuelta alfarista, con cientos de muertos en Chasqui y Guayaquil.  Diversidades: No hay registros de políticas haci"
+      },
+      {
+        "seccion": "oratoria",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Francisco Robles y García"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "Estilo sobrio: Destacó por discursos técnicos en finanzas, sin carisma populista. Alfaro lo criticó por su \"verbo frío\".  Comunicación escrita: Usó folletos com"
+      }
+    ],
+    "Lucio Gutiérrez Borbúa": [
+      {
+        "seccion": "periodos_politicos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Daniel Noboa Azín",
+          "Jamil Mahuad Witt",
+          "Jerónimo Carrión Palacio",
+          "Leónidas Plaza y Gutiérrez"
+        ],
+        "cantidad_otros": 4,
+        "snippet": "Inicios en el Ámbito Político En 1996, Gutiérrez fue designado edecán del presidente Abdalá Bucaram. Posteriormente, continuó en este cargo con el presidente in"
+      },
+      {
+        "seccion": "datos_demograficos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Leónidas Plaza y Gutiérrez"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "Información Personal Fecha de nacimiento: 23 de marzo de 1957  Lugar de nacimiento: Quito, Ecuador  Edad al momento de su elección: 45 años  Género: Masculino  "
+      },
+      {
+        "seccion": "capital_global",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Jamil Mahuad Witt",
+          "Leónidas Plaza y Gutiérrez"
+        ],
+        "cantidad_otros": 2,
+        "snippet": "Formación Académica Gutiérrez tuvo una sólida formación académica y militar: A los 15 años ingresó en el Colegio Militar Eloy Alfaro de Quito Estudió en la Escu"
+      },
+      {
+        "seccion": "redes_sociales",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Daniel Noboa Azín",
+          "Jamil Mahuad Witt",
+          "Jerónimo Carrión Palacio",
+          "Leónidas Plaza y Gutiérrez"
+        ],
+        "cantidad_otros": 4,
+        "snippet": "Alianzas Políticas La información disponible sobre sus redes y alianzas es limitada, pero el documento destaca:  Se alió con movimientos indígenas para la toma "
+      },
+      {
+        "seccion": "legislacion",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Leónidas Plaza y Gutiérrez"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "El documento no proporciona información específica sobre legislación expedida o fomentada durante su gobierno.    Durante su gobierno, firmó la carta de intenci"
+      },
+      {
+        "seccion": "oratoria",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Leónidas Plaza y Gutiérrez"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "El documento no proporciona información sobre su estilo oratorio o comunicacional.    No se detalla información sobre su estilo de oratoria o comunicación en el"
+      },
+      {
+        "seccion": "fuentes",
+        "seccion_esperada": true,
+        "otros_mencionados": [
+          "Alberto Guerrero Martínez",
+          "Daniel Noboa Azín",
+          "Eloy Alfaro Delgado",
+          "Fabián Alarcón Rivera",
+          "Federico Páez Chiriboga"
+        ],
+        "cantidad_otros": 12,
+        "snippet": "CNE (Consejo Nacional Electoral). (2002). ELECCIONES PRESIDENCIALES 1948, Lucio Gutiérrez Borbúa. Instituto de la Democrcia.   Centro Andino de Acción Popular. "
+      }
+    ],
+    "Luis Cordero Crespo": [
+      {
+        "seccion": "periodos_politicos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Abdalá Bucaram Ortiz"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "Presidencias:  1883: Miembro del Pentavirato (Gobierno de la Restauración) tras derrocar a Ignacio de Veintemilla. Presidente interino del 14 de febrero al 9 de"
+      },
+      {
+        "seccion": "capital_global",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Javier Espinosa y Espinosa"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "Familia: Hijo de Gregorio Cordero Carrión (comerciante) y Josefa Crespo. Casado con Jesús Dávila (10 hijos) y Josefina Espinosa (2 hijos).  Académico: Abogado p"
+      },
+      {
+        "seccion": "redes_sociales",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Antonio Flores Jijón",
+          "Carlos Freile Larrea",
+          "Francisco Andrade Marín",
+          "Javier Espinosa y Espinosa",
+          "Luis Larrea Alba"
+        ],
+        "cantidad_otros": 6,
+        "snippet": "Aliados políticos:  Partido Progresista: Figuras como Antonio Flores Jijón y Pablo Herrera.  Eloy Alfaro: Aunque luego se distanciaron, colaboraron contra Veint"
+      },
+      {
+        "seccion": "posicionamiento_ideologico",
+        "seccion_esperada": true,
+        "otros_mencionados": [
+          "Alfredo Baquerizo Moreno",
+          "Francisco Robles y García",
+          "Gabriel García Moreno"
+        ],
+        "cantidad_otros": 3,
+        "snippet": "Partido: Partido Progresista, de tendencia conservadora-modernizante, con base católica.  Filiaciones: Defendió un estado centralista, alianza Iglesia-Estado y "
+      }
+    ],
+    "Luis Larrea Alba": [
+      {
+        "seccion": "periodos_politicos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alfredo Baquerizo Moreno",
+          "Carlos Arroyo del Río",
+          "Gabriel García Moreno"
+        ],
+        "cantidad_otros": 3,
+        "snippet": "Presidencia provisional (24 de agosto – 15 de octubre de 1931): Asumió tras la renuncia de Isidro Ayora, pero su gobierno duró solo 53 días debido a su intento "
+      },
+      {
+        "seccion": "redes_sociales",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Antonio Flores Jijón",
+          "Carlos Arroyo del Río"
+        ],
+        "cantidad_otros": 2,
+        "snippet": "Grupos clave:  Militar: Miembro de la Sociedad Geográfica y de instituciones castrenses.  Político: Aliado de Andrés F. Córdova y Modesto Larrea Jijón durante s"
+      }
+    ],
+    "Manuel María Borrero y González": [
+      {
+        "seccion": "periodos_politicos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alberto Enríquez Gallo",
+          "Camilo Ponce Enríquez"
+        ],
+        "cantidad_otros": 2,
+        "snippet": "Fue designado Presidente Constitucional Interino de Ecuador el 20 de agosto de 1938 por la Asamblea Nacional Constituyente, tras la renuncia del General Alberto"
+      },
+      {
+        "seccion": "redes_sociales",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alberto Enríquez Gallo",
+          "Camilo Ponce Enríquez",
+          "Francisco Robles y García"
+        ],
+        "cantidad_otros": 3,
+        "snippet": "Apoyó al presidente Lizardo García desde 1904, lo que le valió persecuciones políticas por parte del General Eloy Alfaro tras el derrocamiento de García en 1906"
+      }
+    ],
+    "Manuel de Ascázubi y Matheu": [
+      {
+        "seccion": "periodos_politicos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alfredo Baquerizo Moreno",
+          "Daniel Noboa Azín",
+          "Francisco Robles y García",
+          "Gabriel García Moreno",
+          "Javier Espinosa y Espinosa"
+        ],
+        "cantidad_otros": 6,
+        "snippet": "Vicepresidencia (1847-1849): Asumió como vicepresidente durante el gobierno de Vicente Ramón Roca, y tras un empate electoral en 1849, el Congreso lo designó pr"
+      },
+      {
+        "seccion": "datos_demograficos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Neptalí Bonifaz Ascázubi"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "Nacimiento y muerte: 30 de diciembre de 1804 en Quito; falleció el 25 de diciembre de 1876 por un infarto.  Etnicidad y género: Hombre mestizo, vinculado a la a"
+      },
+      {
+        "seccion": "capital_global",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alfredo Baquerizo Moreno",
+          "Francisco Robles y García",
+          "Gabriel García Moreno",
+          "Neptalí Bonifaz Ascázubi"
+        ],
+        "cantidad_otros": 4,
+        "snippet": "Familia: Hijo de José Javier de Ascázubi (prócer independentista) y Mariana Matheu. Cuñado de Gabriel García Moreno.  Formación: Autodidacta debido a la persecu"
+      },
+      {
+        "seccion": "redes_sociales",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alfredo Baquerizo Moreno",
+          "Francisco Robles y García",
+          "Gabriel García Moreno",
+          "Neptalí Bonifaz Ascázubi"
+        ],
+        "cantidad_otros": 4,
+        "snippet": "Aliados clave: Benigno Malo (ministro de Gobierno) y José Félix Valdivieso (ministro de Hacienda), pilares de su administración.  Grupos de poder: Aristocracia "
+      },
+      {
+        "seccion": "legislacion",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alfredo Baquerizo Moreno",
+          "Francisco Robles y García",
+          "Gabriel García Moreno",
+          "Neptalí Bonifaz Ascázubi"
+        ],
+        "cantidad_otros": 4,
+        "snippet": "Reformas educativas: Creó escuelas dominicanas, la Escuela de Obstetricia en Cuenca y restableció la Academia Náutica de Guayaquil.  Fiscalidad: Implementó tran"
+      },
+      {
+        "seccion": "obra_publica",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Neptalí Bonifaz Ascázubi"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "Guayaquil: Dique de arena para controlar inundaciones y puente sobre el río Jubones.  Quito: Tubería de agua desde San Roque hasta baños municipales.  Vialidad:"
+      },
+      {
+        "seccion": "bienes_comunes",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Neptalí Bonifaz Ascázubi"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "Agua: Priorizó su acceso en Quito con obras de alcantarillado.  Tierra: Enfrentó invasiones de terrenos municipales por indígenas y terratenientes durante su al"
+      },
+      {
+        "seccion": "derechos_humanos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Neptalí Bonifaz Ascázubi"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "Enfoque moral: Reformas educativas y hospitalarias, pero sin avances en derechos étnicos o de género.  Violencia política: Sufrió golpes de Estado (1850) y enfr"
+      },
+      {
+        "seccion": "oratoria",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Neptalí Bonifaz Ascázubi"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "Estilo: Austero y directo, enfocado en patriotismo y eficiencia administrativa.  Persuasión: Logró apoyo legislativo para sus reformas pese a gobiernos breves. "
+      },
+      {
+        "seccion": "imaginarios",
+        "seccion_esperada": true,
+        "otros_mencionados": [
+          "Alfredo Baquerizo Moreno",
+          "Francisco Robles y García",
+          "Gabriel García Moreno",
+          "Neptalí Bonifaz Ascázubi"
+        ],
+        "cantidad_otros": 4,
+        "snippet": "Visualidad: Retratado como figura seria, vinculada a la elite tradicional quiteña.  Reputación: Reconocido por honradez y austeridad, pero criticado por su alia"
+      }
+    ],
+    "Mariano Suárez Veintimilla": [
+      {
+        "seccion": "periodos_politicos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alberto Enríquez Gallo",
+          "Camilo Ponce Enríquez",
+          "Carlos Arroyo del Río",
+          "Carlos Mancheno Cajas",
+          "Jerónimo Carrión Palacio"
+        ],
+        "cantidad_otros": 6,
+        "snippet": "Mariano Suárez Veintimilla asumió la Presidencia Encargada de Ecuador el 3 de septiembre de 1947, tras el derrocamiento del coronel Carlos Mancheno Cajas.  Su m"
+      },
+      {
+        "seccion": "capital_global",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alberto Enríquez Gallo",
+          "Camilo Ponce Enríquez",
+          "Francisco Robles y García",
+          "José María Velasco Ibarra",
+          "Otto Arosemena Gómez"
+        ],
+        "cantidad_otros": 5,
+        "snippet": "Familiares: Hijo de Rafael Suárez España y Matilde Veintimilla García.  Casado con Blanca Pasquel Alarcón; tuvo varios hijos, entre ellos Alejandro, Lucía y Fra"
+      },
+      {
+        "seccion": "redes_sociales",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Antonio Flores Jijón",
+          "Carlos Arroyo del Río",
+          "José María Velasco Ibarra"
+        ],
+        "cantidad_otros": 3,
+        "snippet": "Miembro destacado del Partido Conservador Ecuatoriano; ocupó roles como Subdirector, Secretario General y Director General del partido.  Colaboró con José María"
+      },
+      {
+        "seccion": "derechos_humanos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alberto Enríquez Gallo",
+          "Camilo Ponce Enríquez",
+          "Carlos Mancheno Cajas"
+        ],
+        "cantidad_otros": 3,
+        "snippet": "Su gestión estuvo marcada por su compromiso con evitar una guerra civil tras el golpe militar liderado por Carlos Mancheno Cajas.    Compromiso con la estabilid"
+      }
+    ],
+    "Neptalí Bonifaz Ascázubi": [
+      {
+        "seccion": "periodos_politicos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alberto Guerrero Martínez",
+          "Juan de Dios Martínez Mera"
+        ],
+        "cantidad_otros": 2,
+        "snippet": "Presidente del Banco Central del Ecuador (1927-1928 y 1939-1940): Designado por Isidro Ayora durante la Revolución Juliana, impulsó políticas monetarias para es"
+      },
+      {
+        "seccion": "datos_demograficos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Rosalía Arteaga Serrano"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "Edad: Nació el 29 de diciembre de 1870 en Quito; murió el 23 de agosto de 1953 (82 años).  Etnia/Género: Mestizo, hijo de padre peruano (Neptalí Bonifaz y Zanab"
+      },
+      {
+        "seccion": "capital_global",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Andrés Fernández de Córdova Nieto",
+          "Antonio Flores Jijón",
+          "Galo Plaza Lasso"
+        ],
+        "cantidad_otros": 3,
+        "snippet": "Familiares: Nieto del expresidente Manuel Ascázubi; primo de Juan Manuel Lasso Ascásubi. Casado con Antonia Jijón, de la élite terrateniente.  Académicos: Estud"
+      },
+      {
+        "seccion": "redes_sociales",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alberto Guerrero Martínez",
+          "Carlos Freile Larrea",
+          "Juan de Dios Martínez Mera",
+          "Luis Larrea Alba",
+          "Osvaldo Hurtado Larrea"
+        ],
+        "cantidad_otros": 5,
+        "snippet": "Partido Conservador: Apoyado por la oligarquía serrana y la Iglesia católica.  Compactación Obrera Nacional (CON): Organización obrera católica que movilizó cam"
+      },
+      {
+        "seccion": "bienes_comunes",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Rosalía Arteaga Serrano"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "Haciendas: Administró tierras en la Sierra con sistemas tradicionales de arrendamiento; no se mencionan políticas redistributivas.  Agua: Sin registros de gesti"
+      },
+      {
+        "seccion": "relaciones_internacionales",
+        "seccion_esperada": true,
+        "otros_mencionados": [
+          "Carlos Freile Larrea",
+          "Luis Larrea Alba",
+          "Osvaldo Hurtado Larrea"
+        ],
+        "cantidad_otros": 3,
+        "snippet": "Formación europea: Influencia de modelos económicos suizos y franceses, pero sin alianzas internacionales explícitas.  Rechazos: Liberales como Modesto Larrea l"
+      }
+    ],
+    "Osvaldo Hurtado Larrea": [
+      {
+        "seccion": "periodos_politicos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Guillermo Rodríguez Lara",
+          "Jaime Roldós Aguilera",
+          "Vicente Ramón Roca Rodríguez"
+        ],
+        "cantidad_otros": 3,
+        "snippet": "Osvaldo Hurtado Larrea ejerció como Presidente Constitucional de Ecuador desde el 24 de mayo de 1981 hasta el 10 de agosto de 1984, tras asumir el cargo tras la"
+      },
+      {
+        "seccion": "capital_global",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Jaime Roldós Aguilera"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "Formación académica: El documento lo describe como un economista técnico con enfoque en políticas neoliberales, aunque no detalla su trayectoria universitaria. "
+      },
+      {
+        "seccion": "redes_sociales",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Guillermo Rodríguez Lara",
+          "Vicente Ramón Roca Rodríguez"
+        ],
+        "cantidad_otros": 2,
+        "snippet": "Alianzas internacionales: Coordinó estrechamente con el FMI, firmando la primera carta de intención en 1983 para acceder a créditos de ajuste.  Relaciones domés"
+      },
+      {
+        "seccion": "obra_publica",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Jaime Roldós Aguilera"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "Infraestructura económica: Priorizó la estabilización macroeconómica sobre proyectos físicos. El documento no detalla obras específicas, pero menciona la creaci"
+      }
+    ],
+    "Otto Arosemena Gómez": [
+      {
+        "seccion": "periodos_politicos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Carlos Julio Arosemena Tola",
+          "Clemente Yerovi Indaburu"
+        ],
+        "cantidad_otros": 2,
+        "snippet": "Presidencia: Otto Arosemena Gómez fue elegido Presidente Constitucional de Ecuador el 16 de noviembre de 1966 por la Asamblea Constituyente convocada por el pre"
+      },
+      {
+        "seccion": "datos_demograficos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Carlos Julio Arosemena Tola"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "Nacimiento: Nació el 19 de julio de 1925 en Guayaquil, Ecuador.  Fallecimiento: Murió el 20 de abril de 1984 en Salinas, Ecuador, a los 58 años.  Adscripción ét"
+      },
+      {
+        "seccion": "capital_global",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Carlos Julio Arosemena Monroy",
+          "Carlos Julio Arosemena Tola"
+        ],
+        "cantidad_otros": 2,
+        "snippet": "Familiares: Hijo del Dr. Luis Alberto Arosemena Tola y Mercedes Gómez Santistevan. Primo hermano del expresidente Carlos Julio Arosemena Monroy.  Formación acad"
+      },
+      {
+        "seccion": "redes_sociales",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Carlos Julio Arosemena Monroy",
+          "Carlos Julio Arosemena Tola",
+          "José Luis Tamayo Terán"
+        ],
+        "cantidad_otros": 3,
+        "snippet": "Partido político: Fundador del CID, partido que promovía la institucionalidad democrática.  Relaciones internacionales: Participó activamente en reuniones inter"
+      },
+      {
+        "seccion": "obra_publica",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Guillermo Lasso Mendoza"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "Creación del Ministerio de Salud Pública.  Construcción del Puente de la Unidad Nacional (hoy Rafael Mendoza Avilés).  Electrificación en Manabí y Santa Elena. "
+      }
+    ],
+    "Pedro José de Arteta y Calisto": [
+      {
+        "seccion": "periodos_politicos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alfredo Baquerizo Moreno",
+          "Diego Noboa y Arteta",
+          "Francisco Robles y García",
+          "Gabriel García Moreno",
+          "Javier Espinosa y Espinosa"
+        ],
+        "cantidad_otros": 5,
+        "snippet": "Vicepresidente de Ecuador (1867–1869) bajo Jerónimo Carrión y Javier Espinosa.  Presidente encargado (6 de noviembre de 1867–20 de enero de 1868) tras la renunc"
+      },
+      {
+        "seccion": "datos_demograficos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Diego Noboa y Arteta"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "Nacimiento: 1797 en Quito.  Fallecimiento: 5 de mayo de 1873 (76 años) por infarto agudo.  Etnicidad: Criollo de ascendencia vasca.  Género: Hombre.  Región: Na"
+      },
+      {
+        "seccion": "capital_global",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Antonio Flores Jijón",
+          "Diego Noboa y Arteta"
+        ],
+        "cantidad_otros": 2,
+        "snippet": "Familia: Hijo de Joaquín de Arteta (comerciante guayaquileño) y Leonor Calisto. Matrimonios con miembros de élites como Josefa Jijón y Juana de Arteta.  Académi"
+      },
+      {
+        "seccion": "redes_sociales",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alfredo Baquerizo Moreno",
+          "Diego Noboa y Arteta",
+          "Francisco Robles y García",
+          "Gabriel García Moreno",
+          "Javier Espinosa y Espinosa"
+        ],
+        "cantidad_otros": 5,
+        "snippet": "Aliados políticos: Juan José Flores (primer presidente de Ecuador), Javier Espinosa.  Grupos de poder: Partido Conservador, élites terratenientes y eclesiástica"
+      },
+      {
+        "seccion": "legislacion",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Diego Noboa y Arteta"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "Convocó elecciones presidenciales en 1867 para completar el período de Carrión.  Reglamentó el empedrado de calles y uniformización de fachadas en Quito (1825)."
+      },
+      {
+        "seccion": "obra_publica",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Diego Noboa y Arteta"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "Urbanismo: Empedrado de calles, instalación de faroles y reparación de puentes en Quito.  Espacios públicos: Mejoras en el parque La Alameda y monumento a la Ba"
+      },
+      {
+        "seccion": "bienes_comunes",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Diego Noboa y Arteta"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "No se registran políticas directas sobre agua o tierra. Su enfoque conservador sugiere apoyo al statu quo de la propiedad privada y latifundios.  La información"
+      },
+      {
+        "seccion": "oratoria",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Diego Noboa y Arteta"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "Estilo: Parco, estructurado y conciso.  Comunicación: Priorizó discursos técnicos en lugar de apelaciones emocionales.  Los registros históricos disponibles no "
+      }
+    ],
+    "Rafael Correa Delgado": [
+      {
+        "seccion": "periodos_politicos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alfredo Baquerizo Moreno",
+          "Daniel Noboa Azín",
+          "Gabriel García Moreno",
+          "Jerónimo Carrión Palacio",
+          "Leónidas Plaza y Gutiérrez"
+        ],
+        "cantidad_otros": 5,
+        "snippet": "ríodos de actuación política central (períodos presidenciales, revueltas…)  Rafael Correa fue presidente de Ecuador durante ocho años, abarcando desde 2007 hast"
+      },
+      {
+        "seccion": "capital_global",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Jerónimo Carrión Palacio"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "El texto caracteriza a Correa como un modernizador y estadista, impulsor de un proyecto político denominado “revolución ciudadana”. Se destaca su papel en la fo"
+      },
+      {
+        "seccion": "redes_sociales",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alfredo Baquerizo Moreno",
+          "Alfredo Palacio González",
+          "Gabriel García Moreno",
+          "Manuel María Borrero y González"
+        ],
+        "cantidad_otros": 4,
+        "snippet": "Correa contó con el apoyo de Alianza País y, en momentos clave, del movimiento AVANZA, aunque este último se distanció tras la aprobación de la “Ley de Justicia"
+      },
+      {
+        "seccion": "fuentes",
+        "seccion_esperada": true,
+        "otros_mencionados": [
+          "Daniel Noboa Azín",
+          "Guillermo Rodríguez Lara",
+          "Gustavo Noboa Bejarano",
+          "José Luis Tamayo Terán",
+          "Leónidas Plaza y Gutiérrez"
+        ],
+        "cantidad_otros": 8,
+        "snippet": "Ospina Peralta, P. E. (2015). Crisis y tendencias económicas en el Ecuador de Rafael Correa: informe de coyuntura. CEP  Vega Ugalde, S. (2014). “El orden del di"
+      }
+    ],
+    "Rodrigo Borja Cevallos": [
+      {
+        "seccion": "periodos_politicos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Abdalá Bucaram Ortiz",
+          "Jaime Roldós Aguilera"
+        ],
+        "cantidad_otros": 2,
+        "snippet": "Rodrigo Borja Cevallos tuvo una extensa carrera política que incluyó varios períodos significativos: 1962-1963: Diputado al Congreso Nacional por la Provincia d"
+      },
+      {
+        "seccion": "datos_demograficos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Rosalía Arteaga Serrano"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "El perfil demográfico de Borja Cevallos presenta los siguientes elementos:  Lugar y fecha de nacimiento: Quito, 19 de junio de 1935.  Edad: 52 años al momento d"
+      },
+      {
+        "seccion": "capital_global",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "José María Velasco Ibarra"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "Rodrigo Borja acumuló un importante capital académico, profesional y simbólico a lo largo de su vida: Formación académica: Cursó la carrera de Ciencias Política"
+      },
+      {
+        "seccion": "redes_sociales",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Francisco Robles y García",
+          "Sixto Durán-Ballén Cordovez"
+        ],
+        "cantidad_otros": 2,
+        "snippet": "El documento no proporciona información detallada sobre sus asesores, grupos de apoyo o redes sociales específicas. La única referencia es su vinculación con:  "
+      },
+      {
+        "seccion": "fuentes",
+        "seccion_esperada": true,
+        "otros_mencionados": [
+          "Francisco Robles y García",
+          "Guillermo Rodríguez Lara",
+          "Javier Espinosa y Espinosa",
+          "Vicente Ramón Roca Rodríguez"
+        ],
+        "cantidad_otros": 4,
+        "snippet": "CNE (Consejo Nacional Electoral). (2017). ELECCIONES PRESIDENCIALES 1988, Rodrigo Borja Cevallos. Instituto de la Democrcia.   Acosta Espinosa, A. (1990). Dos a"
+      }
+    ],
+    "Rosalía Arteaga Serrano": [
+      {
+        "seccion": "periodos_politicos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Fabián Alarcón Rivera",
+          "Gonzalo Córdova y Rivera",
+          "Leónidas Plaza y Gutiérrez"
+        ],
+        "cantidad_otros": 3,
+        "snippet": "Según el documento, Rosalía Arteaga participó como candidata a la Vicepresidencia de Ecuador junto a Abdalá Bucaram durante la segunda vuelta electoral de 1996."
+      },
+      {
+        "seccion": "redes_sociales",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Fabián Alarcón Rivera",
+          "Gonzalo Córdova y Rivera"
+        ],
+        "cantidad_otros": 2,
+        "snippet": "El documento solo evidencia su vinculación con Abdalá Bucaram y el Partido Roldosista Ecuatoriano (PRE) durante la campaña electoral de 1996. Se la muestra inte"
+      },
+      {
+        "seccion": "fuentes",
+        "seccion_esperada": true,
+        "otros_mencionados": [
+          "Alberto Guerrero Martínez",
+          "Javier Espinosa y Espinosa",
+          "Juan de Dios Martínez Mera"
+        ],
+        "cantidad_otros": 3,
+        "snippet": "Torre Espinosa, C. (1996). Un solo toque: populismo y cultura política en el Ecuador. Centro Andino de Acción Popular.  Martillo Pazmiño, I. O., Carrera López, "
+      }
+    ],
+    "Sixto Durán-Ballén Cordovez": [
+      {
+        "seccion": "periodos_politicos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Camilo Ponce Enríquez"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "Presidencia (1992-1996) Durán-Ballén gobernó en un contexto de inestabilidad legislativa. Su mandato se dividió en dos etapas:  Primer bienio (1992-1994): Contó"
+      },
+      {
+        "seccion": "capital_global",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Camilo Ponce Enríquez",
+          "Mariano Suárez Veintimilla"
+        ],
+        "cantidad_otros": 2,
+        "snippet": "Formación y Trayectoria Aunque el texto no detalla su educación, se le identifica como arquitecto de formación, vinculado a élites económicas. Su capital políti"
+      },
+      {
+        "seccion": "redes_sociales",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Camilo Ponce Enríquez"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "Aliados Clave Alberto Dahik: Arquitecto de las reformas económicas y figura central hasta su caída en 1995.  Partido Social Cristiano (PSC): Socio inicial en el"
+      }
+    ],
+    "Vicente Lucio Salazar y Cabal": [
+      {
+        "seccion": "periodos_politicos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alfredo Baquerizo Moreno",
+          "Francisco Robles y García",
+          "Gabriel García Moreno",
+          "Luis Cordero Crespo"
+        ],
+        "cantidad_otros": 4,
+        "snippet": "Presidente encargado del Ecuador: 16 de abril de 1895 al 23 de agosto de 1895, en medio de la crisis por el escándalo de la “Venta de la Bandera” y la Revolució"
+      },
+      {
+        "seccion": "redes_sociales",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alberto Guerrero Martínez",
+          "Alfredo Baquerizo Moreno",
+          "Francisco Robles y García",
+          "Gabriel García Moreno",
+          "José Luis Tamayo Terán"
+        ],
+        "cantidad_otros": 7,
+        "snippet": "Colaboró con presidentes como Gabriel García Moreno, José María Plácido Caamaño y Luis Cordero Crespo.  Integró gabinetes ministeriales y presidió cámaras legis"
+      }
+    ],
+    "Vicente Ramón Roca Rodríguez": [
+      {
+        "seccion": "periodos_politicos",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Daniel Noboa Azín"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "Presidencia constitucional (8 de diciembre de 1845 – 15 de octubre de 1849): Primer presidente de la Época Marcista, tras derrocar a Juan José Flores.  Revoluci"
+      },
+      {
+        "seccion": "redes_sociales",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Daniel Noboa Azín"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "Aliados clave: José Joaquín de Olmedo, Diego Noboa, Vicente Rocafuerte y el general Antonio Elizalde.  Enemigos políticos: Juan José Flores (por su autoritarism"
+      },
+      {
+        "seccion": "legislacion",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Carlos Freile Larrea",
+          "Luis Larrea Alba",
+          "Osvaldo Hurtado Larrea"
+        ],
+        "cantidad_otros": 3,
+        "snippet": "Constitución de 1845: Abolió la esclavitud, estableció juicios por jurados y limitó el poder ejecutivo.  Tratado de Santa Rosa y Protocolo Larrea-De Martín (184"
+      },
+      {
+        "seccion": "obra_publica",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Jerónimo Carrión Palacio"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "Infraestructura:  Palacio de Gobierno en Quito.  Casa de la Gobernación en Cuenca.  Centros de fundición y producción mecánica en Guayaquil.  Educación: Promovi"
+      }
+    ],
+    "Vicente Rocafuerte y Bejarano": [
+      {
+        "seccion": "capital_global",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Guillermo Rodríguez Lara",
+          "Vicente Ramón Roca Rodríguez"
+        ],
+        "cantidad_otros": 2,
+        "snippet": "Familiar: Hijo de Juan Antonio Rocafuerte (español, exalguacil de la Inquisición) y María Josefa Rodríguez de Bejarano (aristócrata guayaquileña). Heredó hacien"
+      },
+      {
+        "seccion": "redes_sociales",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "Alfredo Palacio González",
+          "Guillermo Rodríguez Lara",
+          "Manuel María Borrero y González",
+          "Vicente Ramón Roca Rodríguez"
+        ],
+        "cantidad_otros": 4,
+        "snippet": "Aliados clave:  Juan José Flores (tras pacto político).  Isaac Wheelwright (educador cuáquero).  Vicente Ramón Roca (Revolución Marcista).  Grupos de apoyo: Eli"
+      },
+      {
+        "seccion": "obra_publica",
+        "seccion_esperada": false,
+        "otros_mencionados": [
+          "José María Velasco Ibarra"
+        ],
+        "cantidad_otros": 1,
+        "snippet": "Educación: Creación del Colegio Nacional Vicente Rocafuerte (Guayaquil) y escuelas para mujeres.  Infraestructura: Construcción de muelles en Guayaquil, moderni"
+      },
+      {
+        "seccion": "fuentes",
+        "seccion_esperada": true,
+        "otros_mencionados": [
+          "Guillermo Rodríguez Lara",
+          "Mariano Suárez Veintimilla",
+          "Vicente Ramón Roca Rodríguez"
+        ],
+        "cantidad_otros": 3,
+        "snippet": "El pensamiento religioso de Vicente Rocafuerte - Mariano Fazio Fernández Pontificia Universidad de la Santa Cruz. Roma  Páginas de internet varias académicas y "
+      }
+    ]
+  },
+  "contradicciones_fechas": {
+    "Alfredo Baquerizo Moreno": [
+      {
+        "tipo": "rango_invertido",
+        "y1": 1931,
+        "y2": 1928,
+        "match": "1931 a 28"
+      },
+      {
+        "tipo": "rango_invertido",
+        "y1": 1931,
+        "y2": 1927,
+        "match": "1931 al 27"
+      }
+    ],
+    "Antonio Borrero y Cortázar": [
+      {
+        "tipo": "rango_invertido",
+        "y1": 1875,
+        "y2": 1818,
+        "match": "1875 al 18"
+      }
+    ],
+    "Antonio Flores Jijón": [
+      {
+        "tipo": "rango_invertido",
+        "y1": 1888,
+        "y2": 1830,
+        "match": "1888 al 30"
+      },
+      {
+        "tipo": "rango_invertido",
+        "y1": 1888,
+        "y2": 1830,
+        "match": "1888 al 30"
+      }
+    ],
+    "Camilo Ponce Enríquez": [
+      {
+        "tipo": "rango_invertido",
+        "y1": 1956,
+        "y2": 1931,
+        "match": "1956 al 31"
+      }
+    ],
+    "Carlos Julio Arosemena Tola": [
+      {
+        "tipo": "rango_invertido",
+        "y1": 1947,
+        "y2": 1931,
+        "match": "1947 - 31"
+      },
+      {
+        "tipo": "rango_invertido",
+        "y1": 1947,
+        "y2": 1931,
+        "match": "1947 - 31"
+      }
+    ],
+    "Consejo Supremo de Gobierno": [
+      {
+        "tipo": "rango_invertido",
+        "y1": 1976,
+        "y2": 1910,
+        "match": "1976 al 10"
+      },
+      {
+        "tipo": "rango_invertido",
+        "y1": 1976,
+        "y2": 1910,
+        "match": "1976 al 10"
+      },
+      {
+        "tipo": "rango_invertido",
+        "y1": 1976,
+        "y2": 1910,
+        "match": "1976 al 10"
+      }
+    ],
+    "Diego Noboa y Arteta": [
+      {
+        "tipo": "rango_invertido",
+        "y1": 1850,
+        "y2": 1825,
+        "match": "1850 - 25"
+      }
+    ],
+    "Eloy Alfaro Delgado": [
+      {
+        "tipo": "rango_invertido",
+        "y1": 1895,
+        "y2": 1828,
+        "match": "1895 al 28"
+      },
+      {
+        "tipo": "rango_invertido",
+        "y1": 1897,
+        "y2": 1831,
+        "match": "1897 - 31"
+      }
+    ],
+    "Guillermo Lasso Mendoza": [
+      {
+        "tipo": "rango_invertido",
+        "y1": 2021,
+        "y2": 36,
+        "match": "2021-0036"
+      },
+      {
+        "tipo": "anio_fin_invalido",
+        "y1": 2021,
+        "y2": 36,
+        "match": "2021-0036"
+      }
+    ],
+    "Ignacio de Veintemilla y Villacís": [
+      {
+        "tipo": "rango_invertido",
+        "y1": 1876,
+        "y2": 1826,
+        "match": "1876 - 26"
+      },
+      {
+        "tipo": "rango_invertido",
+        "y1": 1878,
+        "y2": 1826,
+        "match": "1878 - 26"
+      },
+      {
+        "tipo": "rango_invertido",
+        "y1": 1882,
+        "y2": 1810,
+        "match": "1882 - 10"
+      },
+      {
+        "tipo": "rango_invertido",
+        "y1": 1876,
+        "y2": 1826,
+        "match": "1876 - 26"
+      },
+      {
+        "tipo": "rango_invertido",
+        "y1": 1878,
+        "y2": 1826,
+        "match": "1878 - 26"
+      },
+      {
+        "tipo": "rango_invertido",
+        "y1": 1882,
+        "y2": 1810,
+        "match": "1882 - 10"
+      }
+    ],
+    "Jaime Roldós Aguilera": [
+      {
+        "tipo": "rango_invertido",
+        "y1": 1979,
+        "y2": 1924,
+        "match": "1979 - 24"
+      }
+    ],
+    "Javier Espinosa y Espinosa": [
+      {
+        "tipo": "rango_invertido",
+        "y1": 1868,
+        "y2": 1816,
+        "match": "1868 al 16"
+      },
+      {
+        "tipo": "rango_invertido",
+        "y1": 1868,
+        "y2": 1819,
+        "match": "1868 al 19"
+      }
+    ],
+    "Jerónimo Carrión Palacio": [
+      {
+        "tipo": "rango_invertido",
+        "y1": 1869,
+        "y2": 1810,
+        "match": "1869 al 10"
+      },
+      {
+        "tipo": "rango_invertido",
+        "y1": 1859,
+        "y2": 1810,
+        "match": "1859 al 10"
+      }
+    ],
+    "José Javier Eguiguren y Riofrío": [
+      {
+        "tipo": "rango_invertido",
+        "y1": 1931,
+        "y2": 1927,
+        "match": "1931 al 27"
+      }
+    ],
+    "José María Plácido Caamaño y Gómez Cornejo": [
+      {
+        "tipo": "rango_invertido",
+        "y1": 1883,
+        "y2": 1810,
+        "match": "1883 - 10"
+      },
+      {
+        "tipo": "rango_invertido",
+        "y1": 1884,
+        "y2": 1830,
+        "match": "1884 - 30"
+      },
+      {
+        "tipo": "rango_invertido",
+        "y1": 1883,
+        "y2": 1810,
+        "match": "1883 - 10"
+      },
+      {
+        "tipo": "rango_invertido",
+        "y1": 1884,
+        "y2": 1830,
+        "match": "1884 - 30"
+      }
+    ],
+    "José María Urbina y Viteri": [
+      {
+        "tipo": "rango_invertido",
+        "y1": 1851,
+        "y2": 1817,
+        "match": "1851 - 17"
+      },
+      {
+        "tipo": "rango_invertido",
+        "y1": 1852,
+        "y2": 1815,
+        "match": "1852 - 15"
+      },
+      {
+        "tipo": "rango_invertido",
+        "y1": 1851,
+        "y2": 1817,
+        "match": "1851 - 17"
+      },
+      {
+        "tipo": "rango_invertido",
+        "y1": 1852,
+        "y2": 1815,
+        "match": "1852 - 15"
+      }
+    ],
+    "Juan José Flores y Aramburu": [
+      {
+        "tipo": "rango_invertido",
+        "y1": 1837,
+        "y2": 1827,
+        "match": "1837-27"
+      }
+    ],
+    "Juan de Dios Martínez Mera": [
+      {
+        "tipo": "rango_invertido",
+        "y1": 1932,
+        "y2": 1919,
+        "match": "1932 al 19"
+      },
+      {
+        "tipo": "rango_invertido",
+        "y1": 1932,
+        "y2": 1919,
+        "match": "1932 al 19"
+      }
+    ],
+    "Lenín Moreno Garcés": [
+      {
+        "tipo": "rango_invertido",
+        "y1": 2018,
+        "y2": 134,
+        "match": "2018-0134"
+      },
+      {
+        "tipo": "anio_fin_invalido",
+        "y1": 2018,
+        "y2": 134,
+        "match": "2018-0134"
+      },
+      {
+        "tipo": "rango_invertido",
+        "y1": 2018,
+        "y2": 134,
+        "match": "2018-0134"
+      },
+      {
+        "tipo": "anio_fin_invalido",
+        "y1": 2018,
+        "y2": 134,
+        "match": "2018-0134"
+      }
+    ],
+    "Osvaldo Hurtado Larrea": [
+      {
+        "tipo": "rango_invertido",
+        "y1": 1979,
+        "y2": 1924,
+        "match": "1979 - 24"
+      },
+      {
+        "tipo": "rango_invertido",
+        "y1": 1981,
+        "y2": 1910,
+        "match": "1981 - 10"
+      },
+      {
+        "tipo": "rango_invertido",
+        "y1": 1979,
+        "y2": 1924,
+        "match": "1979 - 24"
+      },
+      {
+        "tipo": "rango_invertido",
+        "y1": 1981,
+        "y2": 1910,
+        "match": "1981 - 10"
+      },
+      {
+        "tipo": "rango_invertido",
+        "y1": 1979,
+        "y2": 1924,
+        "match": "1979 - 24"
+      },
+      {
+        "tipo": "rango_invertido",
+        "y1": 1981,
+        "y2": 1910,
+        "match": "1981 - 10"
+      },
+      {
+        "tipo": "rango_invertido",
+        "y1": 1979,
+        "y2": 1924,
+        "match": "1979 - 24"
+      },
+      {
+        "tipo": "rango_invertido",
+        "y1": 1981,
+        "y2": 1910,
+        "match": "1981 - 10"
+      },
+      {
+        "tipo": "rango_invertido",
+        "y1": 1979,
+        "y2": 1924,
+        "match": "1979 - 24"
+      },
+      {
+        "tipo": "rango_invertido",
+        "y1": 1981,
+        "y2": 1910,
+        "match": "1981 - 10"
+      },
+      {
+        "tipo": "rango_invertido",
+        "y1": 1979,
+        "y2": 1924,
+        "match": "1979 - 24"
+      },
+      {
+        "tipo": "rango_invertido",
+        "y1": 1981,
+        "y2": 1910,
+        "match": "1981 - 10"
+      },
+      {
+        "tipo": "rango_invertido",
+        "y1": 1980,
+        "y2": 1968,
+        "match": "1980 a 68"
+      },
+      {
+        "tipo": "rango_invertido",
+        "y1": 1980,
+        "y2": 1968,
+        "match": "1980 a 68"
+      }
+    ],
+    "Otto Arosemena Gómez": [
+      {
+        "tipo": "rango_invertido",
+        "y1": 1966,
+        "y2": 1925,
+        "match": "1966 a 25"
+      },
+      {
+        "tipo": "rango_invertido",
+        "y1": 1967,
+        "y2": 1931,
+        "match": "1967 a 31"
+      }
+    ],
+    "Revolución Juliana 1925": [
+      {
+        "tipo": "rango_invertido",
+        "y1": 1928,
+        "y2": 1916,
+        "match": "1928 - 16"
+      },
+      {
+        "tipo": "rango_invertido",
+        "y1": 1929,
+        "y2": 1924,
+        "match": "1929 - 24"
+      },
+      {
+        "tipo": "rango_invertido",
+        "y1": 1925,
+        "y2": 1921,
+        "match": "1925-1921"
+      }
+    ],
+    "Rodrigo Borja Cevallos": [
+      {
+        "tipo": "rango_invertido",
+        "y1": 1988,
+        "y2": 1910,
+        "match": "1988 al 10"
+      }
+    ],
+    "Sixto Durán-Ballén Cordovez": [
+      {
+        "tipo": "rango_invertido",
+        "y1": 1992,
+        "y2": 1910,
+        "match": "1992 al 10"
+      },
+      {
+        "tipo": "rango_invertido",
+        "y1": 1992,
+        "y2": 1923,
+        "match": "1992 al 23"
+      }
+    ],
+    "Vicente Lucio Salazar y Cabal": [
+      {
+        "tipo": "rango_invertido",
+        "y1": 1895,
+        "y2": 1823,
+        "match": "1895 al 23"
+      },
+      {
+        "tipo": "rango_invertido",
+        "y1": 1894,
+        "y2": 1823,
+        "match": "1894 al 23"
+      }
+    ],
+    "Vicente Ramón Roca Rodríguez": [
+      {
+        "tipo": "rango_invertido",
+        "y1": 1845,
+        "y2": 1815,
+        "match": "1845 al 15"
+      }
+    ],
+    "Vicente Rocafuerte y Bejarano": [
+      {
+        "tipo": "rango_invertido",
+        "y1": 1833,
+        "y2": 1824,
+        "match": "1833 - 24"
+      },
+      {
+        "tipo": "rango_invertido",
+        "y1": 1834,
+        "y2": 1816,
+        "match": "1834 - 16"
+      },
+      {
+        "tipo": "rango_invertido",
+        "y1": 1835,
+        "y2": 1831,
+        "match": "1835 - 31"
+      },
+      {
+        "tipo": "rango_invertido",
+        "y1": 1837,
+        "y2": 1827,
+        "match": "1837-27"
+      }
+    ]
+  },
+  "anomalias_longitud": {
+    "muy_cortas": [
+      {
+        "presidente": "Andrés Fernández de Córdova Nieto",
+        "seccion": "fuentes",
+        "palabras": 18
+      },
+      {
+        "presidente": "Carlos Mancheno Cajas",
+        "seccion": "fuentes",
+        "palabras": 9
+      },
+      {
+        "presidente": "Julio Enrique Moreno Peñaherrera",
+        "seccion": "fuentes",
+        "palabras": 17
+      },
+      {
+        "presidente": "Supremo Gobierno Provisional 1883",
+        "seccion": "fuentes",
+        "palabras": 17
+      }
+    ],
+    "muy_largas": [
+      {
+        "presidente": "Abdalá Bucaram Ortiz",
+        "seccion": "periodos_politicos",
+        "palabras": 2325
+      },
+      {
+        "presidente": "Abdalá Bucaram Ortiz",
+        "seccion": "capital_global",
+        "palabras": 1878
+      },
+      {
+        "presidente": "Alfredo Palacio González",
+        "seccion": "periodos_politicos",
+        "palabras": 1617
+      },
+      {
+        "presidente": "Camilo Ponce Enríquez",
+        "seccion": "periodos_politicos",
+        "palabras": 1642
+      },
+      {
+        "presidente": "Carlos Arroyo del Río",
+        "seccion": "periodos_politicos",
+        "palabras": 1819
+      },
+      {
+        "presidente": "Consejo Supremo de Gobierno",
+        "seccion": "periodos_politicos",
+        "palabras": 2430
+      },
+      {
+        "presidente": "Eloy Alfaro Delgado",
+        "seccion": "periodos_politicos",
+        "palabras": 1821
+      },
+      {
+        "presidente": "Fabián Alarcón Rivera",
+        "seccion": "periodos_politicos",
+        "palabras": 1810
+      },
+      {
+        "presidente": "Gabriel García Moreno",
+        "seccion": "periodos_politicos",
+        "palabras": 2375
+      },
+      {
+        "presidente": "Gabriel García Moreno",
+        "seccion": "capital_global",
+        "palabras": 1695
+      },
+      {
+        "presidente": "Gabriel García Moreno",
+        "seccion": "redes_sociales",
+        "palabras": 1583
+      },
+      {
+        "presidente": "Gabriel García Moreno",
+        "seccion": "imaginarios",
+        "palabras": 1808
+      },
+      {
+        "presidente": "Galo Plaza Lasso",
+        "seccion": "periodos_politicos",
+        "palabras": 1929
+      },
+      {
+        "presidente": "Galo Plaza Lasso",
+        "seccion": "capital_global",
+        "palabras": 1875
+      },
+      {
+        "presidente": "Guillermo Lasso Mendoza",
+        "seccion": "periodos_politicos",
+        "palabras": 2515
+      },
+      {
+        "presidente": "Guillermo Lasso Mendoza",
+        "seccion": "capital_global",
+        "palabras": 1696
+      },
+      {
+        "presidente": "Guillermo Lasso Mendoza",
+        "seccion": "redes_sociales",
+        "palabras": 1623
+      },
+      {
+        "presidente": "Guillermo Lasso Mendoza",
+        "seccion": "legislacion",
+        "palabras": 1613
+      },
+      {
+        "presidente": "Guillermo Rodríguez Lara",
+        "seccion": "periodos_politicos",
+        "palabras": 2342
+      },
+      {
+        "presidente": "Guillermo Rodríguez Lara",
+        "seccion": "capital_global",
+        "palabras": 1786
+      },
+      {
+        "presidente": "Gustavo Noboa Bejarano",
+        "seccion": "periodos_politicos",
+        "palabras": 1906
+      },
+      {
+        "presidente": "Gustavo Noboa Bejarano",
+        "seccion": "capital_global",
+        "palabras": 1553
+      },
+      {
+        "presidente": "Jaime Roldós Aguilera",
+        "seccion": "periodos_politicos",
+        "palabras": 2455
+      },
+      {
+        "presidente": "Jaime Roldós Aguilera",
+        "seccion": "capital_global",
+        "palabras": 1788
+      },
+      {
+        "presidente": "Jamil Mahuad Witt",
+        "seccion": "periodos_politicos",
+        "palabras": 2629
+      },
+      {
+        "presidente": "Jamil Mahuad Witt",
+        "seccion": "redes_sociales",
+        "palabras": 1779
+      },
+      {
+        "presidente": "José María Velasco Ibarra",
+        "seccion": "periodos_politicos",
+        "palabras": 4855
+      },
+      {
+        "presidente": "José María Velasco Ibarra",
+        "seccion": "datos_demograficos",
+        "palabras": 1849
+      },
+      {
+        "presidente": "José María Velasco Ibarra",
+        "seccion": "capital_global",
+        "palabras": 3295
+      },
+      {
+        "presidente": "José María Velasco Ibarra",
+        "seccion": "redes_sociales",
+        "palabras": 2807
+      },
+      {
+        "presidente": "José María Velasco Ibarra",
+        "seccion": "posicionamiento_ideologico",
+        "palabras": 2354
+      },
+      {
+        "presidente": "José María Velasco Ibarra",
+        "seccion": "legislacion",
+        "palabras": 1747
+      },
+      {
+        "presidente": "José María Velasco Ibarra",
+        "seccion": "derechos_humanos",
+        "palabras": 1771
+      },
+      {
+        "presidente": "José María Velasco Ibarra",
+        "seccion": "relaciones_internacionales",
+        "palabras": 1560
+      },
+      {
+        "presidente": "José María Velasco Ibarra",
+        "seccion": "oratoria",
+        "palabras": 1839
+      },
+      {
+        "presidente": "José María Velasco Ibarra",
+        "seccion": "imaginarios",
+        "palabras": 1711
+      },
+      {
+        "presidente": "Junta Militar de Gobierno",
+        "seccion": "periodos_politicos",
+        "palabras": 3379
+      },
+      {
+        "presidente": "Junta Militar de Gobierno",
+        "seccion": "capital_global",
+        "palabras": 1866
+      },
+      {
+        "presidente": "Junta Militar de Gobierno",
+        "seccion": "redes_sociales",
+        "palabras": 1527
+      },
+      {
+        "presidente": "Junta de Salvación Nacional",
+        "seccion": "periodos_politicos",
+        "palabras": 2068
+      },
+      {
+        "presidente": "Lenín Moreno Garcés",
+        "seccion": "periodos_politicos",
+        "palabras": 2536
+      },
+      {
+        "presidente": "Lenín Moreno Garcés",
+        "seccion": "capital_global",
+        "palabras": 1736
+      },
+      {
+        "presidente": "Lenín Moreno Garcés",
+        "seccion": "redes_sociales",
+        "palabras": 1613
+      },
+      {
+        "presidente": "León Febres-Cordero Ribadeneyra",
+        "seccion": "periodos_politicos",
+        "palabras": 2537
+      },
+      {
+        "presidente": "Lucio Gutiérrez Borbúa",
+        "seccion": "periodos_politicos",
+        "palabras": 2622
+      },
+      {
+        "presidente": "Lucio Gutiérrez Borbúa",
+        "seccion": "capital_global",
+        "palabras": 1767
+      },
+      {
+        "presidente": "Lucio Gutiérrez Borbúa",
+        "seccion": "redes_sociales",
+        "palabras": 1745
+      },
+      {
+        "presidente": "Osvaldo Hurtado Larrea",
+        "seccion": "periodos_politicos",
+        "palabras": 1750
+      },
+      {
+        "presidente": "Osvaldo Hurtado Larrea",
+        "seccion": "capital_global",
+        "palabras": 1725
+      },
+      {
+        "presidente": "Rafael Correa Delgado",
+        "seccion": "periodos_politicos",
+        "palabras": 3832
+      },
+      {
+        "presidente": "Rafael Correa Delgado",
+        "seccion": "datos_demograficos",
+        "palabras": 1669
+      },
+      {
+        "presidente": "Rafael Correa Delgado",
+        "seccion": "capital_global",
+        "palabras": 2842
+      },
+      {
+        "presidente": "Rafael Correa Delgado",
+        "seccion": "redes_sociales",
+        "palabras": 2471
+      },
+      {
+        "presidente": "Rafael Correa Delgado",
+        "seccion": "posicionamiento_ideologico",
+        "palabras": 2051
+      },
+      {
+        "presidente": "Rafael Correa Delgado",
+        "seccion": "legislacion",
+        "palabras": 2066
+      },
+      {
+        "presidente": "Rafael Correa Delgado",
+        "seccion": "derechos_humanos",
+        "palabras": 1922
+      },
+      {
+        "presidente": "Rafael Correa Delgado",
+        "seccion": "relaciones_internacionales",
+        "palabras": 1979
+      },
+      {
+        "presidente": "Rafael Correa Delgado",
+        "seccion": "oratoria",
+        "palabras": 1524
+      },
+      {
+        "presidente": "Rodrigo Borja Cevallos",
+        "seccion": "periodos_politicos",
+        "palabras": 2100
+      },
+      {
+        "presidente": "Rodrigo Borja Cevallos",
+        "seccion": "capital_global",
+        "palabras": 1599
+      },
+      {
+        "presidente": "Rosalía Arteaga Serrano",
+        "seccion": "periodos_politicos",
+        "palabras": 1746
+      },
+      {
+        "presidente": "Sixto Durán-Ballén Cordovez",
+        "seccion": "periodos_politicos",
+        "palabras": 2471
+      },
+      {
+        "presidente": "Sixto Durán-Ballén Cordovez",
+        "seccion": "capital_global",
+        "palabras": 1597
+      },
+      {
+        "presidente": "Sixto Durán-Ballén Cordovez",
+        "seccion": "redes_sociales",
+        "palabras": 1550
+      }
+    ]
+  }
+}
