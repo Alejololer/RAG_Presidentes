@@ -230,17 +230,43 @@ def _get_collection(create=False):
     return client.get_collection(COLLECTION_NAME)
 
 
-def embed_and_store(chunks, batch_size=64):
-    """Embebe los chunks y los guarda en ChromaDB con metadata por presidente."""
+def embed_and_store(chunks, batch_size=32, progress=True):
+    """
+    Embebe los chunks y los guarda en ChromaDB con metadata por presidente.
+
+    Args:
+        chunks: lista de dicts {id, text, presidente, seccion, chunk_index}.
+        batch_size: chunks por lote. Default 32 (mas chico que antes para
+            dar mejor feedback y menor pico de RAM).
+        progress: si True, imprime progreso por batch con flush (importante
+            para que el output sea visible en Docker build, donde el
+            buffering de Python puede ocultar prints durante minutos).
+
+    Returns:
+        Cantidad de chunks indexados.
+    """
+    import sys
+    import time
+
     model = get_model()
     collection = _get_collection(create=True)
+    total = len(chunks)
+    n_batches = (total + batch_size - 1) // batch_size
+    start_time = time.time()
 
-    for start in range(0, len(chunks), batch_size):
+    if progress:
+        print(f"  Embedding + indexado: {total} chunks en {n_batches} batches...", flush=True)
+
+    for i, start in enumerate(range(0, total, batch_size)):
         batch = chunks[start:start + batch_size]
         texts = [c["text"] for c in batch]
-        embeddings = model.encode(
+        # encode() retorna numpy array en CPU; lo convertimos una sola vez
+        # al final (en vez de iterar Python con tolist() por elemento).
+        emb_array = model.encode(
             texts, show_progress_bar=False, normalize_embeddings=True
-        ).tolist()
+        )
+        # .tolist() sobre el array completo es mucho mas rapido que iterar.
+        embeddings = emb_array.tolist()
         collection.add(
             ids=[c["id"] for c in batch],
             documents=texts,
@@ -254,6 +280,23 @@ def embed_and_store(chunks, batch_size=64):
                 for c in batch
             ],
         )
+        if progress:
+            elapsed = time.time() - start_time
+            done = min(start + batch_size, total)
+            pct = 100 * done / total
+            # Estimar tiempo restante
+            if done > 0:
+                rate = done / elapsed
+                remaining = (total - done) / rate if rate > 0 else 0
+                eta = f", ETA ~{remaining:.0f}s" if remaining > 1 else ""
+            else:
+                eta = ""
+            print(
+                f"  [{i + 1}/{n_batches}] {done}/{total} chunks ({pct:.0f}%) "
+                f"- {elapsed:.1f}s elapsed{eta}",
+                flush=True,
+            )
+
     return collection.count()
 
 

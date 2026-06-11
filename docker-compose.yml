@@ -26,10 +26,14 @@ services:
     # volumes:
     #   - ./chroma_db:/app/chroma_db
     restart: unless-stopped
-    # En Linux, host.docker.internal no funciona por defecto.
-    # El setup script detecta el OS y configura USE_HOST_NETWORK=true en Linux,
-    # lo cual hace que el contenedor use la red del host (Ollama accesible en localhost).
-    # En Windows/macOS (Docker Desktop) dejar en bridge (default).
+    # Modo de red del contenedor.
+    # - "host" : el contenedor usa la red del host. Necesario en Linux
+    #            (porque host.docker.internal no funciona en el bridge de Docker
+    #            en Linux). OLLAMA queda accesible en http://localhost:11434.
+    # - "bridge" (default): red bridge. Funciona en Windows/macOS con Docker
+    #            Desktop, donde OLLAMA queda accesible via host.docker.internal.
+    # El setup script detecta el OS y setea USE_HOST_NETWORK=host en Linux.
+    # Valor default: "bridge".
     network_mode: ${USE_HOST_NETWORK:-bridge}
     healthcheck:
       test: ["CMD", "curl", "-fsS", "http://localhost:8010/health"]

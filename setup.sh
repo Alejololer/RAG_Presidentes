@@ -234,7 +234,7 @@ show_status() {
 
     # En Linux, host.docker.internal no funciona: avisamos
     if [ "$(detect_os)" = "linux" ]; then
-        info "Linux detectado: se usara USE_HOST_NETWORK=true automaticamente"
+        info "Linux detectado: se usara USE_HOST_NETWORK=host automaticamente"
     fi
 
     local ollama
@@ -290,11 +290,12 @@ init_env() {
         info ".env ya existe"
     fi
 
-    # En Linux, host.docker.internal no funciona. Forzar USE_HOST_NETWORK=true.
+    # En Linux, host.docker.internal no funciona. Forzar USE_HOST_NETWORK=host.
+    # El valor debe ser "host" o "bridge" (NUNCA true/false — Docker los rechaza).
     if [ "$(detect_os)" = "linux" ]; then
         if grep -q "^USE_HOST_NETWORK=" "$ENV_FILE"; then
-            sed -i 's/^USE_HOST_NETWORK=.*/USE_HOST_NETWORK=true/' "$ENV_FILE"
-            info "USE_HOST_NETWORK=true (Linux necesita red host para Ollama)"
+            sed -i 's/^USE_HOST_NETWORK=.*/USE_HOST_NETWORK=host/' "$ENV_FILE"
+            info "USE_HOST_NETWORK=host (Linux necesita red host para Ollama)"
         fi
     fi
 }
@@ -320,6 +321,187 @@ install_docker() {
     exit 1
 }
 
+# Verifica que Docker este instalado Y corriendo antes de cualquier comando.
+# Si no lo esta, muestra una guia clara segun el OS y termina con exit 1.
+# Esta funcion se llama al inicio de build, start, reindex, stop, logs, etc.
+ensure_docker_running() {
+    local status
+    status=$(check_docker)
+
+    if [ "$status" = "not_installed" ]; then
+        print_docker_not_installed_guide
+        exit 1
+    fi
+
+    # Docker esta instalado. Verificar que este corriendo.
+    if ! docker info &>/dev/null 2>&1; then
+        print_docker_not_running_guide
+        exit 1
+    fi
+}
+
+# Guia detallada: Docker no instalado. Que hacer segun el OS.
+print_docker_not_installed_guide() {
+    local os
+    os=$(detect_os)
+
+    echo ""
+    echo -e "${C_RED}============================================================${C_NC}"
+    echo -e "${C_RED} Docker no esta instalado en esta PC${C_NC}"
+    echo -e "${C_RED}============================================================${C_NC}"
+    echo ""
+    echo "El setup necesita Docker Desktop para construir y correr el servicio."
+    echo ""
+
+    case "$os" in
+        macos)
+            echo "Estas en macOS. Pasos para instalar Docker:"
+            echo ""
+            echo "  1. Descarga Docker Desktop desde:"
+            echo "       https://www.docker.com/products/docker-desktop/"
+            echo ""
+            echo "  2. Abre el archivo .dmg descargado y arrastra Docker a Aplicaciones."
+            echo ""
+            echo "  3. Abre Docker Desktop desde Aplicaciones y espera a que"
+            echo "     el icono de la barra de menu muestre 'Docker Desktop is running'."
+            echo ""
+            echo "  4. Vuelve a correr este script."
+            ;;
+        windows-gitbash)
+            echo "Estas en Windows. Pasos para instalar Docker:"
+            echo ""
+            echo "  1. Descarga Docker Desktop desde:"
+            echo "       https://www.docker.com/products/docker-desktop/"
+            echo ""
+            echo "  2. Ejecuta el instalador Docker Desktop Installer.exe"
+            echo "     - Te pedira usar WSL 2 como backend (recomendado)."
+            echo "     - Reinicia Windows cuando lo pida."
+            echo ""
+            echo "  3. Abre Docker Desktop desde el menu Inicio."
+            echo "     Espera a que el icono de la barra de tareas diga"
+            echo "     'Docker Desktop is running'."
+            echo ""
+            echo "  4. Vuelve a correr este script en PowerShell o Git Bash."
+            ;;
+        linux)
+            echo "Estas en Linux. Pasos para instalar Docker:"
+            echo ""
+            echo "  Ubuntu / Debian:"
+            echo "    curl -fsSL https://get.docker.com -o get-docker.sh"
+            echo "    sudo sh get-docker.sh"
+            echo "    sudo usermod -aG docker \$USER"
+            echo "    # Cierra sesion y vuelve a entrar para que tome efecto"
+            echo ""
+            echo "  Fedora / RHEL:"
+            echo "    sudo dnf install docker docker-compose-plugin"
+            echo "    sudo systemctl start docker"
+            echo "    sudo systemctl enable docker"
+            echo "    sudo usermod -aG docker \$USER"
+            echo ""
+            echo "  Arch:"
+            echo "    sudo pacman -S docker docker-compose"
+            echo "    sudo systemctl start docker.service"
+            echo "    sudo usermod -aG docker \$USER"
+            echo ""
+            echo "  Despues de instalar, vuelve a correr este script."
+            ;;
+        *)
+            echo "Instala Docker desde: https://www.docker.com/products/docker-desktop/"
+            echo "O usando el gestor de paquetes de tu distribucion."
+            ;;
+    esac
+    echo ""
+}
+
+# Guia detallada: Docker instalado pero NO corriendo.
+print_docker_not_running_guide() {
+    local os
+    os=$(detect_os)
+
+    echo ""
+    echo -e "${C_RED}============================================================${C_NC}"
+    echo -e "${C_RED} Docker esta instalado pero NO esta corriendo${C_NC}"
+    echo -e "${C_RED}============================================================${C_NC}"
+    echo ""
+    echo "Docker Desktop es un programa que tiene que estar abierto y"
+    echo "corriendo para que podamos construir y levantar contenedores."
+    echo ""
+    echo "Si llegaste aca, probablemente viste un error como:"
+    echo "  Cannot connect to the Docker daemon at unix:///.../docker.sock"
+    echo "  Is the docker daemon running?"
+    echo ""
+    echo "Eso significa que el cliente (docker) esta instalado pero el"
+    echo "servicio/daemon no esta activo. Solucion:"
+    echo ""
+
+    case "$os" in
+        macos)
+            echo "  1. Abre Docker Desktop desde Aplicaciones."
+            echo "     (Si no lo tienes instalado, mira la guia de instalacion)"
+            echo ""
+            echo "  2. Espera ~30 segundos a que el motor arranque. Lo sabras"
+            echo "     cuando el icono de la ballena en la barra superior"
+            echo "     deje de animarse y diga 'Docker Desktop is running'."
+            echo ""
+            echo "  3. Vuelve a correr este script."
+            echo ""
+            echo "  Si Docker Desktop esta abierto pero igual no anda:"
+            echo "    - Menu Docker > Troubleshoot > Restart Docker Desktop"
+            echo "    - O cierra y vuelve a abrir Docker Desktop"
+            ;;
+        windows-gitbash)
+            echo "  1. Abre Docker Desktop desde el menu Inicio."
+            echo "     (Si no lo tienes instalado, mira la guia de instalacion)"
+            echo ""
+            echo "  2. Espera ~30 segundos a que el motor arranque. El icono"
+            echo "     de la ballena en la barra de tareas pasara de"
+            echo "     'Docker Desktop is starting' a 'Docker Desktop is running'."
+            echo ""
+            echo "  3. Vuelve a correr este script en PowerShell o Git Bash."
+            echo ""
+            echo "  Si Docker Desktop esta abierto pero igual no anda:"
+            echo "    - Click derecho en el icono > Troubleshoot > Restart"
+            echo "    - O cierra y vuelve a abrir Docker Desktop"
+            echo ""
+            echo "  Si usas WSL 2 y el error persiste:"
+            echo "    - PowerShell como Administrador:"
+            echo "      wsl --shutdown"
+            echo "      wsl"
+            echo "    - Despues vuelve a abrir Docker Desktop."
+            ;;
+        linux)
+            echo "  1. Inicia el servicio de Docker:"
+            echo ""
+            echo "     sudo systemctl start docker"
+            echo "     sudo systemctl enable docker  # para que arranque con el sistema"
+            echo ""
+            echo "  2. Verifica que este corriendo:"
+            echo ""
+            echo "     sudo systemctl status docker"
+            echo ""
+            echo "  3. Si usas un usuario no-root, asegurate de estar en el grupo docker:"
+            echo ""
+            echo "     sudo usermod -aG docker \$USER"
+            echo "     # Cierra sesion y vuelve a entrar"
+            echo ""
+            echo "  4. Vuelve a correr este script."
+            echo ""
+            echo "  Si usas Docker Desktop (raro en Linux):"
+            echo "    - Abre Docker Desktop desde tu escritorio"
+            echo "    - Espera a que el motor arranque"
+            echo "    - Vuelve a correr este script"
+            ;;
+        *)
+            echo "Inicia el servicio de Docker segun tu sistema operativo."
+            echo "Vuelve a correr este script cuando este corriendo."
+            ;;
+    esac
+    echo ""
+    echo "Para verificar manualmente que Docker esta corriendo:"
+    echo "  docker info"
+    echo ""
+}
+
 ensure_buildx() {
     if [ "$(check_buildx)" = "available" ]; then return 0; fi
 
@@ -334,6 +516,7 @@ ensure_buildx() {
 }
 
 build_image() {
+    ensure_docker_running
     step "Construyendo imagen Docker..."
     info "Esto puede tardar 5-10 minutos la primera vez (descarga modelo + genera ChromaDB)."
 
@@ -364,6 +547,7 @@ build_image() {
 }
 
 reindex() {
+    ensure_docker_running
     step "Re-generando ChromaDB..."
     info "Levanta un contenedor efimero para regenerar el indice."
 
@@ -388,6 +572,7 @@ reindex() {
 }
 
 start_service() {
+    ensure_docker_running
     step "Iniciando servicio..."
     if [ "$DRY_RUN" = true ]; then
         echo -e "  ${C_MAGENTA}[DRY-RUN]${C_NC} docker compose up -d"
@@ -419,6 +604,7 @@ start_service() {
 }
 
 stop_service() {
+    ensure_docker_running
     step "Deteniendo servicio..."
     if [ "$DRY_RUN" = true ]; then
         echo -e "  ${C_MAGENTA}[DRY-RUN]${C_NC} docker compose down"
@@ -429,12 +615,14 @@ stop_service() {
 }
 
 show_logs() {
+    ensure_docker_running
     step "Mostrando logs (Ctrl+C para salir)..."
     if [ "$DRY_RUN" = true ]; then return 0; fi
     docker compose logs -f --tail=100 rag
 }
 
 test_health() {
+    ensure_docker_running
     step "Health check..."
     if [ "$DRY_RUN" = true ]; then return 0; fi
 
@@ -495,6 +683,7 @@ except Exception as e:
 }
 
 update_code() {
+    ensure_docker_running
     step "Actualizando codigo (git pull + rebuild)..."
 
     if [ ! -d ".git" ]; then
@@ -549,6 +738,7 @@ edit_config() {
 }
 
 uninstall_all() {
+    ensure_docker_running
     warn "Esto eliminara: contenedor, imagen, y opcionalmente volumes."
     if [ "$AUTO_MODE" = false ]; then
         read -p "Continuar? (s/n) " resp
@@ -585,8 +775,19 @@ full_setup() {
 # Menu interactivo
 # =============================================================================
 
+pause_interactive() {
+    # Pausa amigable al final de cada opcion. Tolerante a stdin no interactivo.
+    if [ -t 0 ]; then
+        echo ""
+        read -rp "Presiona Enter para volver al menu..." _
+    fi
+}
+
 show_menu() {
-    show_status
+    # Imprime el menu y el estado resumido. NO lee input.
+    # La lectura se hace en el caller con prompt_menu_input.
+    clear 2>/dev/null || true
+    banner
     echo "Selecciona una opcion:"
     echo ""
     echo "  1)  Setup completo           (verifica Docker, build, configura, levanta)"
@@ -601,8 +802,59 @@ show_menu() {
     echo "  10) Desinstalar              (down -v + remove imagen)"
     echo "  0)  Salir"
     echo ""
-    read -p "Opcion: " opt
+
+    # Mostrar estado actual como contexto (best-effort, no bloqueante)
+    if [ -t 0 ]; then
+        echo -e "${C_GRAY}--- Estado actual ---${C_NC}"
+        show_status_brief 2>/dev/null || true
+        echo ""
+    fi
+}
+
+# Lee el input del usuario de forma robusta.
+# - Detecta EOF (Ctrl+D) y retorna 1.
+# - Detecta input vacio y retorna "" sin error.
+# - Escribe el prompt a stderr para no contaminar stdout.
+prompt_menu_input() {
+    local opt=""
+    # Imprimir prompt a stderr para que no se mezcle con stdout
+    echo -n "Opcion: " >&2
+    if ! read -r opt; then
+        # EOF / stdin cerrado
+        echo "" >&2
+        return 1
+    fi
+    # Trim
+    opt="${opt// /}"
     echo "$opt"
+    return 0
+}
+
+# Version resumida del estado para mostrar junto al menu (no falla si docker no esta)
+show_status_brief() {
+    local docker_status
+    docker_status=$(check_docker 2>/dev/null || echo "not_installed")
+    if [ "$docker_status" = "not_installed" ]; then
+        warn "Docker no instalado"
+    else
+        info "Docker: OK | $(detect_os) | $(detect_arch)"
+    fi
+
+    local img
+    img=$(check_image 2>/dev/null || echo "missing")
+    if [ "$img" = "exists" ]; then
+        info "Imagen: ${IMAGE_NAME}:${IMAGE_TAG} OK"
+    else
+        info "Imagen: no construida (opcion 1 o 2)"
+    fi
+
+    local svc
+    svc=$(check_service 2>/dev/null || echo "stopped")
+    if [ "$svc" = "running" ]; then
+        info "Servicio: corriendo en http://localhost:${PUERTO:-8010}"
+    else
+        info "Servicio: detenido"
+    fi
 }
 
 # =============================================================================
@@ -623,21 +875,38 @@ case "$COMMAND" in
     "")
         # Modo interactivo
         while true; do
-            clear 2>/dev/null || true
-            opt=$(show_menu)
+            # Imprimir menu (a stdout, separado del read)
+            show_menu
+            # Leer opcion del usuario
+            if ! opt=$(prompt_menu_input); then
+                # EOF / Ctrl+D
+                echo ""
+                ok "Chau!"
+                exit 0
+            fi
+
             case "$opt" in
-                1)  full_setup; [ "$AUTO_MODE" = false ] && read -p "Enter para continuar..." ;;
-                2)  init_env; build_image; [ "$AUTO_MODE" = false ] && read -p "Enter para continuar..." ;;
-                3)  reindex; [ "$AUTO_MODE" = false ] && read -p "Enter para continuar..." ;;
-                4)  init_env; start_service; [ "$AUTO_MODE" = false ] && read -p "Enter para continuar..." ;;
-                5)  stop_service; [ "$AUTO_MODE" = false ] && read -p "Enter para continuar..." ;;
-                6)  show_logs ;;
-                7)  test_health; [ "$AUTO_MODE" = false ] && read -p "Enter para continuar..." ;;
-                8)  update_code; [ "$AUTO_MODE" = false ] && read -p "Enter para continuar..." ;;
-                9)  edit_config; [ "$AUTO_MODE" = false ] && read -p "Enter para continuar..." ;;
-                10) uninstall_all; [ "$AUTO_MODE" = false ] && read -p "Enter para continuar..." ;;
-                0)  ok "Chau!"; exit 0 ;;
-                *)  warn "Opcion invalida"; sleep 1 ;;
+                1)  full_setup; [ "$AUTO_MODE" = false ] && pause_interactive ;;
+                2)  init_env; build_image; [ "$AUTO_MODE" = false ] && pause_interactive ;;
+                3)  reindex; [ "$AUTO_MODE" = false ] && pause_interactive ;;
+                4)  init_env; start_service; [ "$AUTO_MODE" = false ] && pause_interactive ;;
+                5)  stop_service; [ "$AUTO_MODE" = false ] && pause_interactive ;;
+                6)  show_logs; pause_interactive ;;
+                7)  test_health; [ "$AUTO_MODE" = false ] && pause_interactive ;;
+                8)  update_code; [ "$AUTO_MODE" = false ] && pause_interactive ;;
+                9)  edit_config; [ "$AUTO_MODE" = false ] && pause_interactive ;;
+                10) uninstall_all; [ "$AUTO_MODE" = false ] && pause_interactive ;;
+                0|q|quit|exit|salir)
+                    ok "Chau!"
+                    exit 0
+                    ;;
+                "")
+                    # Input vacio: volver a mostrar menu sin warn
+                    ;;
+                *)
+                    warn "Opcion invalida: '$opt' (usa 0-10)"
+                    sleep 1
+                    ;;
             esac
         done
         ;;

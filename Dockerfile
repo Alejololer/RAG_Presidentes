@@ -36,8 +36,11 @@ COPY generate_embeddings.py .
 COPY utils.py .
 COPY presidentes_ecuador.json .
 
-# Generar el indice (queda en /app/chroma_db/)
-RUN python generate_embeddings.py \
+# Generar el indice (queda en /app/chroma_db/).
+# PYTHONUNBUFFERED=1 es CLAVE: fuerza flush de stdout para que el progreso
+# sea visible en tiempo real durante el build (sin esto, Python bufferea y
+# el usuario ve silencio durante 1-3 min).
+RUN PYTHONUNBUFFERED=1 python generate_embeddings.py \
     && echo "[OK] ChromaDB generado: $(ls -la chroma_db/ | head -3)"
 
 # -----------------------------------------------------------------------------
@@ -87,6 +90,11 @@ RUN sed -i 's/\r$//' /entrypoint.sh \
 
 # Puerto del servicio
 EXPOSE 8010
+
+# Forzar stdout sin buffer: los logs de uvicorn, healthcheck y errores
+# se ven en tiempo real con `docker logs` (sin esto, puede haber silencio
+# de varios segundos entre eventos).
+ENV PYTHONUNBUFFERED=1
 
 # Healthcheck: el contenedor se considera sano si /health responde 200
 HEALTHCHECK --interval=30s --timeout=5s --start-period=15s --retries=3 \
