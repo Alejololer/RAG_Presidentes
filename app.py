@@ -1,3 +1,4 @@
+import json
 import os
 
 from fastapi import FastAPI, Request
@@ -7,7 +8,14 @@ from fastapi.templating import Jinja2Templates
 from pydantic import BaseModel
 import requests
 
-from utils import retrieve, detect_president, get_known_names, SECTION_LABELS
+from utils import (
+    retrieve,
+    detect_president,
+    get_known_names,
+    SECTION_LABELS,
+    MODEL_NAME,
+    _get_collection,
+)
 from research_tool import research_for_chat
 
 # --- Configuración por entorno (compatible con arquitectura distribuida) ---
@@ -89,6 +97,49 @@ async def health():
         "presidentes_indexados": len(KNOWN_NAMES),
         "modelo_llm": OLLAMA_MODEL,
         "ollama_host": OLLAMA_HOST,
+    }
+
+
+@app.get("/stats")
+async def stats():
+    """Estado de la base de datos vectorial + auditoría de calidad del dataset.
+
+    Lee el reporte de auditoría precomputado (`audit_report.json`, generado por
+    `audit_data.py`) y lo combina con el conteo real de chunks en ChromaDB.
+    Pensado para mostrar el estado de la BD en la UI (demo)."""
+    # Conteo real de chunks indexados en ChromaDB (degrada con gracia).
+    try:
+        chunks = _get_collection(create=False).count()
+    except Exception:
+        chunks = None
+
+    calidad = None
+    try:
+        with open("audit_report.json", encoding="utf-8") as f:
+            rep = json.load(f)
+        tot = rep.get("totales", {})
+        anomalias = rep.get("anomalias_longitud", {})
+        calidad = {
+            "registros_raw": tot.get("registros_raw"),
+            "registros_limpios": tot.get("registros_limpios"),
+            "secciones_esperadas": tot.get("secciones_esperadas"),
+            "nombres_corregidos": len(rep.get("nombres_sucios", [])),
+            "claves_no_mapeadas": len(rep.get("claves_no_mapeadas", {})),
+            "secciones_faltantes": len(rep.get("secciones_faltantes", {})),
+            "chunks_con_cruce": len(rep.get("chunks_con_cruce_de_presidentes", {})),
+            "contradicciones_fechas": len(rep.get("contradicciones_fechas", {})),
+            "secciones_muy_cortas": len(anomalias.get("muy_cortas", [])),
+        }
+    except FileNotFoundError:
+        calidad = None
+
+    return {
+        "presidentes": len(KNOWN_NAMES),
+        "chunks": chunks,
+        "modelo_llm": OLLAMA_MODEL,
+        "modelo_embeddings": MODEL_NAME,
+        "vector_db": "ChromaDB (coseno)",
+        "calidad": calidad,
     }
 
 

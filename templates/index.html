@@ -2,44 +2,465 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>RAG - Presidentes del Ecuador (ChromaDB)</title>
   <style>
-    body { font-family: sans-serif; margin: 2rem; }
-    #chat { max-width: 800px; height: 400px; overflow-y: scroll; border: 1px solid #ccc; padding: 1rem; background: #f9f9f9; }
-    .user { font-weight: bold; margin-top: 1rem; }
-    .bot { color: #007acc; margin-bottom: 1rem; }
+    :root {
+      --bg: #0f1117;
+      --panel: #171a23;
+      --panel-2: #1f2330;
+      --border: #2a2f3d;
+      --text: #e6e8ee;
+      --muted: #9aa3b2;
+      --accent: #f4d03f;        /* amarillo bandera */
+      --accent-2: #1f6feb;      /* azul presidente */
+      --user: #2b3245;
+      --bot: #16202e;
+      --danger: #ff6b6b;
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      background: radial-gradient(1200px 600px at 50% -10%, #1b2030 0%, var(--bg) 60%);
+      color: var(--text);
+      display: flex;
+      justify-content: center;
+    }
+    .app {
+      width: 100%;
+      max-width: 840px;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      padding: 1rem;
+    }
+    header {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      padding: 1rem 1.25rem;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 16px 16px 0 0;
+    }
+    header .flag { font-size: 1.6rem; }
+    header h1 { font-size: 1.05rem; margin: 0; font-weight: 650; }
+    header .sub { font-size: .78rem; color: var(--muted); margin-top: 2px; }
+    header .badge {
+      margin-left: auto;
+      font-size: .7rem;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      padding: .25rem .55rem;
+      border-radius: 999px;
+      background: var(--panel-2);
+    }
+
+    #chat {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1.25rem;
+      background: var(--panel);
+      border-left: 1px solid var(--border);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: .9rem;
+    }
+    #chat::-webkit-scrollbar { width: 10px; }
+    #chat::-webkit-scrollbar-thumb { background: var(--border); border-radius: 999px; }
+
+    .empty {
+      margin: auto;
+      text-align: center;
+      color: var(--muted);
+      max-width: 460px;
+    }
+    .empty h2 { color: var(--text); font-size: 1.1rem; margin: .25rem 0; }
+    .chips { display: flex; flex-wrap: wrap; gap: .5rem; justify-content: center; margin-top: 1rem; }
+    .chip {
+      cursor: pointer;
+      font-size: .8rem;
+      padding: .4rem .7rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--panel-2);
+      color: var(--text);
+      transition: border-color .15s, transform .05s;
+    }
+    .chip:hover { border-color: var(--accent); }
+    .chip:active { transform: scale(.97); }
+
+    .row { display: flex; gap: .6rem; max-width: 92%; }
+    .row.user { align-self: flex-end; flex-direction: row-reverse; }
+    .avatar {
+      flex: 0 0 32px; height: 32px; width: 32px;
+      border-radius: 50%;
+      display: grid; place-items: center;
+      font-size: 1rem;
+      background: var(--panel-2);
+      border: 1px solid var(--border);
+    }
+    .bubble {
+      padding: .7rem .9rem;
+      border-radius: 14px;
+      line-height: 1.5;
+      font-size: .95rem;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+    .row.user .bubble { background: var(--user); border-top-right-radius: 4px; }
+    .row.bot .bubble  { background: var(--bot); border: 1px solid var(--border); border-top-left-radius: 4px; }
+    .who { font-size: .72rem; color: var(--accent-2); font-weight: 650; margin-bottom: .2rem; }
+    .row.bot.error .bubble { border-color: var(--danger); }
+    .row.bot.error .who { color: var(--danger); }
+
+    /* indicador de escritura */
+    .typing { display: inline-flex; gap: 4px; align-items: center; padding: .2rem 0; }
+    .typing span {
+      width: 7px; height: 7px; border-radius: 50%; background: var(--muted);
+      animation: blink 1.2s infinite ease-in-out;
+    }
+    .typing span:nth-child(2) { animation-delay: .2s; }
+    .typing span:nth-child(3) { animation-delay: .4s; }
+    @keyframes blink { 0%, 80%, 100% { opacity: .25; } 40% { opacity: 1; } }
+
+    .composer {
+      display: flex;
+      gap: .6rem;
+      padding: .85rem;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 0 0 16px 16px;
+      align-items: flex-end;
+    }
+    textarea {
+      flex: 1;
+      resize: none;
+      background: var(--panel-2);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: .7rem .85rem;
+      font: inherit;
+      font-size: .95rem;
+      max-height: 140px;
+      outline: none;
+    }
+    textarea:focus { border-color: var(--accent-2); }
+    button#send {
+      flex: 0 0 auto;
+      background: var(--accent);
+      color: #1a1500;
+      border: none;
+      border-radius: 12px;
+      padding: 0 1.1rem;
+      height: 44px;
+      font-weight: 650;
+      cursor: pointer;
+      transition: opacity .15s, transform .05s;
+    }
+    button#send:hover:not(:disabled) { opacity: .9; }
+    button#send:active:not(:disabled) { transform: scale(.97); }
+    button#send:disabled { opacity: .45; cursor: not-allowed; }
+    .hint { font-size: .68rem; color: var(--muted); text-align: center; padding: .4rem 0 0; }
+
+    header .badge { cursor: pointer; transition: border-color .15s, color .15s; }
+    header .badge:hover { border-color: var(--accent); color: var(--text); }
+    header .badge::before { content: "📊 "; }
+
+    /* panel de estado de la BD */
+    .overlay {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,.55);
+      backdrop-filter: blur(2px);
+      display: none;
+      z-index: 20;
+    }
+    .overlay.open { display: block; }
+    .panel {
+      position: fixed; top: 0; right: 0; height: 100%;
+      width: min(380px, 90vw);
+      background: var(--panel);
+      border-left: 1px solid var(--border);
+      box-shadow: -20px 0 60px rgba(0,0,0,.4);
+      transform: translateX(100%);
+      transition: transform .25s ease;
+      z-index: 21;
+      display: flex; flex-direction: column;
+      overflow-y: auto;
+    }
+    .panel.open { transform: translateX(0); }
+    .panel-head {
+      display: flex; align-items: center; gap: .5rem;
+      padding: 1.1rem 1.25rem;
+      border-bottom: 1px solid var(--border);
+      position: sticky; top: 0; background: var(--panel);
+    }
+    .panel-head h3 { margin: 0; font-size: 1rem; }
+    .panel-head .close {
+      margin-left: auto; cursor: pointer; background: none; border: none;
+      color: var(--muted); font-size: 1.3rem; line-height: 1;
+    }
+    .panel-head .close:hover { color: var(--text); }
+    .panel-body { padding: 1.1rem 1.25rem; display: flex; flex-direction: column; gap: 1.3rem; }
+    .section-title { font-size: .72rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin-bottom: .6rem; }
+
+    .kpis { display: grid; grid-template-columns: 1fr 1fr; gap: .6rem; }
+    .kpi {
+      background: var(--panel-2); border: 1px solid var(--border);
+      border-radius: 12px; padding: .8rem;
+    }
+    .kpi .num { font-size: 1.5rem; font-weight: 700; color: var(--accent); }
+    .kpi .lbl { font-size: .72rem; color: var(--muted); margin-top: .15rem; }
+
+    .meta-list, .qa-list { display: flex; flex-direction: column; gap: .5rem; }
+    .meta-row, .qa-row {
+      display: flex; align-items: center; gap: .5rem;
+      font-size: .85rem;
+      padding: .55rem .7rem;
+      background: var(--panel-2); border: 1px solid var(--border); border-radius: 10px;
+    }
+    .meta-row .k { color: var(--muted); }
+    .meta-row .v { margin-left: auto; font-family: ui-monospace, monospace; font-size: .8rem; }
+    .qa-row .dot { width: 9px; height: 9px; border-radius: 50%; flex: 0 0 auto; }
+    .dot.ok   { background: #3fb950; }
+    .dot.warn { background: var(--accent); }
+    .dot.bad  { background: var(--danger); }
+    .qa-row .qlbl { flex: 1; }
+    .qa-row .qval { font-weight: 650; font-family: ui-monospace, monospace; }
+    .panel .note { font-size: .72rem; color: var(--muted); line-height: 1.5; }
   </style>
 </head>
 <body>
-  <h2>Sistema RAG (ChromaDB) - Presidentes del Ecuador 🇪🇨</h2>
-  <div id="chat"></div>
-  <textarea id="prompt" rows="3" cols="80" placeholder="Escribe tu pregunta..."></textarea><br>
-  <button onclick="sendPrompt()">Enviar</button>
+  <div class="app">
+    <header>
+      <span class="flag">🇪🇨</span>
+      <div>
+        <h1>Presidentes del Ecuador</h1>
+        <div class="sub">Sistema RAG · te responden en primera persona</div>
+      </div>
+      <span class="badge" id="statsBtn" title="Ver estado de la base de datos">ChromaDB</span>
+    </header>
+
+    <div id="chat">
+      <div class="empty" id="empty">
+        <div class="flag" style="font-size:2.4rem">🇪🇨</div>
+        <h2>Pregúntale a un presidente</h2>
+        <p>Escribe el nombre de un mandatario y él te responderá en primera persona, usando solo el archivo histórico.</p>
+        <div class="chips">
+          <button class="chip">¿Qué lograste durante tu gobierno, Rafael Correa?</button>
+          <button class="chip">Háblame de tu mandato, García Moreno</button>
+          <button class="chip">¿Quién fuiste, Eloy Alfaro?</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="composer">
+      <textarea id="prompt" rows="1" placeholder="Escribe tu pregunta…"></textarea>
+      <button id="send" onclick="sendPrompt()">Enviar</button>
+    </div>
+    <div class="hint">Enter para enviar · Shift+Enter para salto de línea</div>
+  </div>
+
+  <!-- Panel de estado de la base de datos -->
+  <div class="overlay" id="overlay"></div>
+  <aside class="panel" id="panel" aria-hidden="true">
+    <div class="panel-head">
+      <span>📊</span>
+      <h3>Estado de la base de datos</h3>
+      <button class="close" id="closePanel" aria-label="Cerrar">×</button>
+    </div>
+    <div class="panel-body" id="panelBody">
+      <p class="note">Cargando…</p>
+    </div>
+  </aside>
 
   <script>
+    const chat   = document.getElementById("chat");
+    const input  = document.getElementById("prompt");
+    const sendBtn = document.getElementById("send");
+    let busy = false;
+
+    // auto-resize del textarea
+    input.addEventListener("input", () => {
+      input.style.height = "auto";
+      input.style.height = Math.min(input.scrollHeight, 140) + "px";
+    });
+
+    // Enter envía, Shift+Enter salto de línea
+    input.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" && !e.shiftKey) {
+        e.preventDefault();
+        sendPrompt();
+      }
+    });
+
+    // chips de ejemplo
+    document.querySelectorAll(".chip").forEach(c => {
+      c.addEventListener("click", () => {
+        input.value = c.textContent;
+        sendPrompt();
+      });
+    });
+
+    function addBubble(role, who, text, isError = false) {
+      const row = document.createElement("div");
+      row.className = "row " + role + (isError ? " error" : "");
+      const avatar = document.createElement("div");
+      avatar.className = "avatar";
+      avatar.textContent = role === "user" ? "🧑" : "🏛️";
+      const bubble = document.createElement("div");
+      bubble.className = "bubble";
+      if (who) {
+        const w = document.createElement("div");
+        w.className = "who";
+        w.textContent = who;
+        bubble.appendChild(w);
+      }
+      const body = document.createElement("div");
+      body.textContent = text;
+      bubble.appendChild(body);
+      row.appendChild(avatar);
+      row.appendChild(bubble);
+      chat.appendChild(row);
+      chat.scrollTop = chat.scrollHeight;
+      return body;
+    }
+
+    function showTyping() {
+      const row = document.createElement("div");
+      row.className = "row bot";
+      row.id = "typing-row";
+      row.innerHTML = '<div class="avatar">🏛️</div>' +
+        '<div class="bubble"><div class="typing"><span></span><span></span><span></span></div></div>';
+      chat.appendChild(row);
+      chat.scrollTop = chat.scrollHeight;
+    }
+    function removeTyping() {
+      const t = document.getElementById("typing-row");
+      if (t) t.remove();
+    }
+
+    function setBusy(state) {
+      busy = state;
+      sendBtn.disabled = state;
+      input.disabled = state;
+      sendBtn.textContent = state ? "…" : "Enviar";
+    }
+
     async function sendPrompt() {
-      const input = document.getElementById("prompt");
-      const chat = document.getElementById("chat");
+      if (busy) return;                          // no enviar mientras procesa
       const prompt = input.value.trim();
       if (!prompt) return;
-      const userMsg = document.createElement("div");
-      userMsg.className = "user";
-      userMsg.textContent = "🧑 " + prompt;
-      chat.appendChild(userMsg);
 
-      const res = await fetch("/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ prompt })
-      });
+      const empty = document.getElementById("empty");
+      if (empty) empty.remove();
 
-      const data = await res.json();
-      const botMsg = document.createElement("div");
-      botMsg.className = "bot";
-      botMsg.textContent = "🤖 " + data.response;
-      chat.appendChild(botMsg);
-      chat.scrollTop = chat.scrollHeight;
+      addBubble("user", null, prompt);
       input.value = "";
+      input.style.height = "auto";
+      setBusy(true);
+      showTyping();
+
+      try {
+        const res = await fetch("/chat", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ prompt })
+        });
+        removeTyping();
+        if (!res.ok) throw new Error("HTTP " + res.status);
+        const data = await res.json();
+        const who = data.presidente || "Guía histórico";
+        addBubble("bot", who, data.response || "(respuesta vacía)");
+      } catch (err) {
+        removeTyping();
+        addBubble("bot", "Error", "No se pudo obtener respuesta: " + err.message, true);
+      } finally {
+        setBusy(false);
+        input.focus();
+      }
+    }
+
+    /* ---- Panel de estado de la base de datos ---- */
+    const overlay = document.getElementById("overlay");
+    const panel   = document.getElementById("panel");
+    const panelBody = document.getElementById("panelBody");
+    let statsLoaded = false;
+
+    function openPanel() {
+      overlay.classList.add("open");
+      panel.classList.add("open");
+      panel.setAttribute("aria-hidden", "false");
+      if (!statsLoaded) loadStats();
+    }
+    function closePanel() {
+      overlay.classList.remove("open");
+      panel.classList.remove("open");
+      panel.setAttribute("aria-hidden", "true");
+    }
+    document.getElementById("statsBtn").addEventListener("click", openPanel);
+    document.getElementById("closePanel").addEventListener("click", closePanel);
+    overlay.addEventListener("click", closePanel);
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape") closePanel(); });
+
+    function kpi(num, lbl) {
+      return `<div class="kpi"><div class="num">${num}</div><div class="lbl">${lbl}</div></div>`;
+    }
+    function metaRow(k, v) {
+      return `<div class="meta-row"><span class="k">${k}</span><span class="v">${v}</span></div>`;
+    }
+    // status: 0 = ok (verde), 1 = warn (amarillo), 2 = bad (rojo)
+    function qaRow(lbl, val, status) {
+      const cls = status === 0 ? "ok" : status === 1 ? "warn" : "bad";
+      return `<div class="qa-row"><span class="dot ${cls}"></span><span class="qlbl">${lbl}</span><span class="qval">${val}</span></div>`;
+    }
+
+    async function loadStats() {
+      try {
+        const d = await (await fetch("/stats")).json();
+        const q = d.calidad || {};
+        let html = "";
+
+        // KPIs principales
+        html += `<div><div class="section-title">Resumen</div><div class="kpis">
+          ${kpi(d.presidentes ?? "—", "Presidentes")}
+          ${kpi(d.chunks ?? "—", "Chunks indexados")}
+        </div></div>`;
+
+        // Configuración técnica
+        html += `<div><div class="section-title">Motor</div><div class="meta-list">
+          ${metaRow("Vector DB", d.vector_db ?? "—")}
+          ${metaRow("LLM", d.modelo_llm ?? "—")}
+          ${metaRow("Embeddings", (d.modelo_embeddings ?? "—").split("/").pop())}
+        </div></div>`;
+
+        // Auditoría de calidad
+        if (d.calidad) {
+          html += `<div><div class="section-title">Auditoría de calidad</div><div class="qa-list">
+            ${qaRow("Registros limpios", `${q.registros_limpios}/${q.registros_raw}`, q.registros_limpios === q.registros_raw ? 0 : 2)}
+            ${qaRow("Secciones esperadas", q.secciones_esperadas, 0)}
+            ${qaRow("Claves no mapeadas", q.claves_no_mapeadas, q.claves_no_mapeadas === 0 ? 0 : 2)}
+            ${qaRow("Secciones faltantes", q.secciones_faltantes, q.secciones_faltantes === 0 ? 0 : 2)}
+            ${qaRow("Nombres corregidos", q.nombres_corregidos, q.nombres_corregidos === 0 ? 0 : 1)}
+            ${qaRow("Chunks con cruce", q.chunks_con_cruce, q.chunks_con_cruce === 0 ? 0 : 1)}
+            ${qaRow("Contradicciones de fechas", q.contradicciones_fechas, q.contradicciones_fechas === 0 ? 0 : 1)}
+            ${qaRow("Secciones muy cortas", q.secciones_muy_cortas, q.secciones_muy_cortas === 0 ? 0 : 1)}
+          </div>
+          <p class="note">🟢 correcto · 🟡 anomalía menor detectada por la auditoría · 🔴 problema crítico. El filtrado por metadata aísla cada presidente pese a los cruces de texto detectados.</p>
+          </div>`;
+        } else {
+          html += `<p class="note">Auditoría no disponible (falta <code>audit_report.json</code>).</p>`;
+        }
+
+        panelBody.innerHTML = html;
+        statsLoaded = true;
+      } catch (err) {
+        panelBody.innerHTML = `<p class="note">No se pudo cargar el estado: ${err.message}</p>`;
+      }
     }
   </script>
 </body>
