@@ -5,8 +5,14 @@
 
 services:
   rag:
-    image: rag-presidentes:1.0.0
+    # Imagen publica en Docker Hub. Se descarga la primera vez que se hace
+    # `docker compose up`. Si la imagen no existe en Docker Hub (ej. primer
+    # dev local antes de la primera release), Docker hace fallback a `build:`.
+    image: juanprof/rag-presidentes:1.0.0
     container_name: rag-presidentes
+    # Build local (fallback). Se usa si:
+    #   - la imagen no esta en Docker Hub todavia
+    #   - estas desarrollando y cambiaste codigo (setup.ps1 build)
     build:
       context: .
       dockerfile: Dockerfile

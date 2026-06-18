@@ -509,8 +509,53 @@ function Invoke-Reindex {
     }
 }
 
+function Invoke-Pull {
+    Ensure-DockerRunning
+    Write-Step "Descargando imagen de Docker Hub..."
+    Write-Info "Registry: juanprof/rag-presidentes"
+    Write-Info "Esto descarga ~1 GB la primera vez."
+
+    if ($DryRun) {
+        Write-Host "  [DRY-RUN] docker compose pull rag" -ForegroundColor Magenta
+        return
+    }
+
+    try {
+        docker compose pull rag
+        if ($LASTEXITCODE -ne 0) { throw "docker compose pull fallo" }
+        Write-Ok "Imagen descargada/actualizada"
+    } catch {
+        Write-Fail "No se pudo descargar la imagen del registry."
+        Write-Info "Posibles causas:"
+        Write-Info "  - Sin conexion a internet"
+        Write-Info "  - La imagen no fue publicada todavia (corre publish.ps1 primero)"
+        Write-Info "  - Tag especifico no existe (revisar IMAGE_VERSION en .env)"
+        throw
+    }
+}
+
 function Start-Service {
     Ensure-DockerRunning
+
+    # Si la imagen del registry no esta local, intentar pull automatico.
+    # Si el pull falla, hace build local (caso dev que no ha publicado aun).
+    $image = Test-ImageExists $ImageName $ImageTag
+    if (-not $image) {
+        Write-Info "Imagen local no encontrada, intentando descargar de Docker Hub..."
+        try {
+            Invoke-Pull
+        } catch {
+            Write-Warn "No se pudo descargar del registry. Intentando build local..."
+            try {
+                docker compose build rag
+                if ($LASTEXITCODE -ne 0) { throw "Build local fallo" }
+            } catch {
+                Write-Fail "Build local tambien fallo. Revisa tu conexion o publica la imagen primero."
+                throw
+            }
+        }
+    }
+
     Write-Step "Iniciando servicio..."
     if ($DryRun) {
         Write-Host "  [DRY-RUN] docker compose up -d" -ForegroundColor Magenta
@@ -698,16 +743,19 @@ function Show-Menu {
     Write-Banner
     Write-Host "Selecciona una opcion:" -ForegroundColor White
     Write-Host ""
-    Write-Host "  1)  Setup completo           (verifica Docker, build, configura, levanta)"
-    Write-Host "  2)  Build imagen             (rebuild con ultima version del codigo)"
-    Write-Host "  3)  Re-indexar dataset       (regenera ChromaDB desde el JSONL)"
-    Write-Host "  4)  Iniciar servicio         (docker compose up -d)"
-    Write-Host "  5)  Detener servicio         (docker compose down)"
-    Write-Host "  6)  Ver logs                 (docker compose logs -f)"
-    Write-Host "  7)  Verificar salud          (curl /health + smoke test /chat)"
-    Write-Host "  8)  Actualizar codigo        (git pull + rebuild + restart)"
-    Write-Host "  9)  Reconfigurar             (editar .env)"
-    Write-Host "  10) Desinstalar              (down -v + remove imagen)"
+    Write-Host "  [Uso diario]" -ForegroundColor Cyan
+    Write-Host "  1)  Iniciar servicio         (docker compose up -d, pull auto si no hay imagen)"
+    Write-Host "  2)  Detener servicio         (docker compose down)"
+    Write-Host "  3)  Ver logs                 (docker compose logs -f)"
+    Write-Host "  4)  Verificar salud          (curl /health + smoke test /chat)"
+    Write-Host ""
+    Write-Host "  [Avanzadas]" -ForegroundColor Cyan
+    Write-Host "  5)  Setup completo           (primera vez: build, configura, levanta)"
+    Write-Host "  6)  Build imagen             (rebuild local con ultima version del codigo)"
+    Write-Host "  7)  Pull imagen              (descarga de Docker Hub: juanprof/rag-presidentes)"
+    Write-Host "  8)  Re-indexar dataset       (regenera ChromaDB desde el JSONL)"
+    Write-Host "  9)  Actualizar codigo        (git pull + rebuild + restart)"
+    Write-Host "  10) Reconfigurar / Desinstalar (submenu)"
     Write-Host "  0)  Salir"
     Write-Host ""
     # Estado resumido (best-effort, no bloqueante)
@@ -715,6 +763,27 @@ function Show-Menu {
         Write-Host "--- Estado actual ---" -ForegroundColor Gray
         try { Show-StatusBrief } catch { Write-Warn "No se pudo leer el estado" }
         Write-Host ""
+    }
+}
+
+function Show-ConfigUninstall-Menu {
+    Clear-Host
+    Write-Banner
+    Write-Host "Submenu - Reconfigurar / Desinstalar" -ForegroundColor Cyan
+    Write-Host ""
+    Write-Host "  1) Reconfigurar (editar .env)" -ForegroundColor White
+    Write-Host "  2) Desinstalar (down -v + remove imagen)" -ForegroundColor White
+    Write-Host "  0) Volver al menu principal" -ForegroundColor White
+    Write-Host ""
+    $sub = Read-Host "Opcion"
+    switch ($sub) {
+        "1" { Edit-Config }
+        "2" { Uninstall-All }
+        "0" { return }
+        default {
+            Write-Warn "Opcion invalida: '$sub'"
+            if ([Environment]::UserInteractive) { Start-Sleep -Seconds 1 }
+        }
     }
 }
 
@@ -767,6 +836,7 @@ switch ($Command.ToLower()) {
     "setup"     { Invoke-FullSetup }
     "build"     { Initialize-Env; Build-Image }
     "reindex"   { Invoke-Reindex }
+    "pull"      { Invoke-Pull }
     "start"     { Initialize-Env; Start-Service }
     "stop"      { Stop-Service }
     "logs"      { Show-Logs }
@@ -785,16 +855,16 @@ switch ($Command.ToLower()) {
                 return
             }
             switch ($opt) {
-                "1"  { Invoke-FullSetup; Pause-Interactive }
-                "2"  { Initialize-Env; Build-Image; Pause-Interactive }
-                "3"  { Invoke-Reindex; Pause-Interactive }
-                "4"  { Initialize-Env; Start-Service; Pause-Interactive }
-                "5"  { Stop-Service; Pause-Interactive }
-                "6"  { Show-Logs; Pause-Interactive }
-                "7"  { Test-Health; Pause-Interactive }
-                "8"  { Update-Code; Pause-Interactive }
-                "9"  { Edit-Config; Pause-Interactive }
-                "10" { Uninstall-All; Pause-Interactive }
+                "1"  { Initialize-Env; Start-Service; Pause-Interactive }
+                "2"  { Stop-Service; Pause-Interactive }
+                "3"  { Show-Logs; Pause-Interactive }
+                "4"  { Test-Health; Pause-Interactive }
+                "5"  { Invoke-FullSetup; Pause-Interactive }
+                "6"  { Initialize-Env; Build-Image; Pause-Interactive }
+                "7"  { Invoke-Pull; Pause-Interactive }
+                "8"  { Invoke-Reindex; Pause-Interactive }
+                "9"  { Update-Code; Pause-Interactive }
+                "10" { Show-ConfigUninstall-Menu }
                 "0"  { Write-Ok "Chau!"; return }
                 "q"  { Write-Ok "Chau!"; return }
                 "quit"  { Write-Ok "Chau!"; return }
@@ -812,7 +882,7 @@ switch ($Command.ToLower()) {
     }
     default {
         Write-Fail "Comando desconocido: $Command"
-        Write-Info "Comandos validos: setup, build, reindex, start, stop, logs, health, update, config, uninstall"
+        Write-Info "Comandos validos: setup, build, reindex, pull, start, stop, logs, health, update, config, uninstall"
         exit 1
     }
 }

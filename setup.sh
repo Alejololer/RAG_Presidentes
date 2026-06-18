@@ -64,7 +64,7 @@ fi
 
 while [[ $# -gt 0 ]]; do
     case "$1" in
-        setup|build|reindex|start|stop|logs|health|update|config|uninstall)
+        setup|build|reindex|pull|start|stop|logs|health|update|config|uninstall|help)
             COMMAND="$1"; shift ;;
         --auto) AUTO_MODE=true; shift ;;
         --gpu) GPU_BUILD=true; shift ;;
@@ -571,8 +571,53 @@ reindex() {
     fi
 }
 
+# Descarga la imagen del registry (Docker Hub) si no esta local.
+# Si la imagen no existe ni local ni en el registry, falla con mensaje claro
+# (no cae automaticamente a build - eso lo maneja start_service).
+pull_image() {
+    ensure_docker_running
+    step "Descargando imagen de Docker Hub..."
+    info "Registry: juanprof/rag-presidentes"
+    info "Esto descarga ~1 GB la primera vez."
+
+    if [ "$DRY_RUN" = true ]; then
+        echo -e "  ${C_MAGENTA}[DRY-RUN]${C_NC} docker compose pull rag"
+        return 0
+    fi
+
+    if docker compose pull rag; then
+        ok "Imagen descargada/actualizada"
+    else
+        fail "No se pudo descargar la imagen del registry."
+        info "Posibles causas:"
+        info "  - Sin conexion a internet"
+        info "  - La imagen no fue publicada todavia (corre publish.ps1 primero)"
+        info "  - Tag especifico no existe (revisar .env IMAGE_VERSION)"
+        return 1
+    fi
+}
+
 start_service() {
     ensure_docker_running
+
+    # Si la imagen del registry (juanprof/rag-presidentes:VERSION) no esta
+    # localmente, intentar pull automatico. Si el pull falla, hace build
+    # local (caso dev que aun no publico la primera version).
+    if ! check_image > /dev/null 2>&1; then
+        info "Imagen local no encontrada, intentando descargar de Docker Hub..."
+        if pull_image 2>/dev/null; then
+            ok "Imagen descargada del registry"
+        else
+            warn "No se pudo descargar del registry. Intentando build local..."
+            if [ "$DRY_RUN" = false ]; then
+                docker compose build rag || {
+                    fail "Build local tambien fallo. Revisa tu conexion o publica la imagen primero."
+                    return 1
+                }
+            fi
+        fi
+    fi
+
     step "Iniciando servicio..."
     if [ "$DRY_RUN" = true ]; then
         echo -e "  ${C_MAGENTA}[DRY-RUN]${C_NC} docker compose up -d"
@@ -790,16 +835,19 @@ show_menu() {
     banner
     echo "Selecciona una opcion:"
     echo ""
-    echo "  1)  Setup completo           (verifica Docker, build, configura, levanta)"
-    echo "  2)  Build imagen             (rebuild con ultima version del codigo)"
-    echo "  3)  Re-indexar dataset       (regenera ChromaDB desde el JSONL)"
-    echo "  4)  Iniciar servicio         (docker compose up -d)"
-    echo "  5)  Detener servicio         (docker compose down)"
-    echo "  6)  Ver logs                 (docker compose logs -f)"
-    echo "  7)  Verificar salud          (curl /health + smoke test /chat)"
-    echo "  8)  Actualizar codigo        (git pull + rebuild + restart)"
-    echo "  9)  Reconfigurar             (editar .env)"
-    echo "  10) Desinstalar              (down -v + remove imagen)"
+    echo "  [Uso diario]"
+    echo "  1)  Iniciar servicio         (docker compose up -d, pull auto si no hay imagen)"
+    echo "  2)  Detener servicio         (docker compose down)"
+    echo "  3)  Ver logs                 (docker compose logs -f)"
+    echo "  4)  Verificar salud          (curl /health + smoke test /chat)"
+    echo ""
+    echo "  [Avanzadas]"
+    echo "  5)  Setup completo           (primera vez: build, configura, levanta)"
+    echo "  6)  Build imagen             (rebuild local con ultima version del codigo)"
+    echo "  7)  Pull imagen              (descarga de Docker Hub: juanprof/rag-presidentes)"
+    echo "  8)  Re-indexar dataset       (regenera ChromaDB desde el JSONL)"
+    echo "  9)  Actualizar codigo        (git pull + rebuild + restart)"
+    echo "  10) Reconfigurar / Desinstalar (submenu)"
     echo "  0)  Salir"
     echo ""
 
@@ -857,6 +905,26 @@ show_status_brief() {
     fi
 }
 
+# Submenu para la opcion 10: configurar o desinstalar
+submenu_config_uninstall() {
+    clear 2>/dev/null || true
+    echo ""
+    echo "  Submenu:"
+    echo ""
+    echo "  1) Reconfigurar (editar .env)"
+    echo "  2) Desinstalar (down -v + remove imagen)"
+    echo "  0) Volver al menu principal"
+    echo ""
+    local sub
+    read -rp "Opcion: " sub
+    case "$sub" in
+        1) edit_config ;;
+        2) uninstall_all ;;
+        0) return 0 ;;
+        *) warn "Opcion invalida" ;;
+    esac
+}
+
 # =============================================================================
 # Main
 # =============================================================================
@@ -865,6 +933,7 @@ case "$COMMAND" in
     setup)     full_setup ;;
     build)     init_env; build_image ;;
     reindex)   reindex ;;
+    pull)      pull_image ;;
     start)     init_env; start_service ;;
     stop)      stop_service ;;
     logs)      show_logs ;;
@@ -872,6 +941,9 @@ case "$COMMAND" in
     update)    update_code ;;
     config)    edit_config ;;
     uninstall) uninstall_all ;;
+    help|-h|--help)
+        sed -n '2,25p' "$0"
+        exit 0 ;;
     "")
         # Modo interactivo
         while true; do
@@ -886,16 +958,16 @@ case "$COMMAND" in
             fi
 
             case "$opt" in
-                1)  full_setup; [ "$AUTO_MODE" = false ] && pause_interactive ;;
-                2)  init_env; build_image; [ "$AUTO_MODE" = false ] && pause_interactive ;;
-                3)  reindex; [ "$AUTO_MODE" = false ] && pause_interactive ;;
-                4)  init_env; start_service; [ "$AUTO_MODE" = false ] && pause_interactive ;;
-                5)  stop_service; [ "$AUTO_MODE" = false ] && pause_interactive ;;
-                6)  show_logs; pause_interactive ;;
-                7)  test_health; [ "$AUTO_MODE" = false ] && pause_interactive ;;
-                8)  update_code; [ "$AUTO_MODE" = false ] && pause_interactive ;;
-                9)  edit_config; [ "$AUTO_MODE" = false ] && pause_interactive ;;
-                10) uninstall_all; [ "$AUTO_MODE" = false ] && pause_interactive ;;
+                1)  init_env; start_service; [ "$AUTO_MODE" = false ] && pause_interactive ;;
+                2)  stop_service; [ "$AUTO_MODE" = false ] && pause_interactive ;;
+                3)  show_logs; pause_interactive ;;
+                4)  test_health; [ "$AUTO_MODE" = false ] && pause_interactive ;;
+                5)  full_setup; [ "$AUTO_MODE" = false ] && pause_interactive ;;
+                6)  init_env; build_image; [ "$AUTO_MODE" = false ] && pause_interactive ;;
+                7)  pull_image; [ "$AUTO_MODE" = false ] && pause_interactive ;;
+                8)  reindex; [ "$AUTO_MODE" = false ] && pause_interactive ;;
+                9)  update_code; [ "$AUTO_MODE" = false ] && pause_interactive ;;
+                10) submenu_config_uninstall; [ "$AUTO_MODE" = false ] && pause_interactive ;;
                 0|q|quit|exit|salir)
                     ok "Chau!"
                     exit 0

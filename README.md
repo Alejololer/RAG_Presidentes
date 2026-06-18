@@ -86,40 +86,80 @@ proyecto/
 ├── .dockerignore               # Exclusiones de build
 ├── .env.example                # Plantilla de configuracion (copiar a .env)
 ├── entrypoint.sh               # Arranque del contenedor (verifica ChromaDB + Ollama)
-├── setup.ps1                   # Setup interactivo Windows
+├── rag.bat                     # Entry point Windows (menu de 10 opciones)
+├── setup.ps1                   # Setup interactivo Windows (motor detras de rag.bat)
 ├── setup.sh                    # Setup interactivo macOS/Linux
+├── publish.ps1                 # Build multi-arch + push a Docker Hub
+├── legacy/                     # Scripts .bat pre-Docker (deprecados)
+│   ├── iniciar_rag.bat
+│   ├── lanzar_rag_desde_cmd.bat
+│   └── README.md
 └── (código de la app)
 ```
 
 ### Setup en una PC nueva (Windows)
 
-```powershell
-# 1. Instalar prerequisitos
-#    - Docker Desktop: https://www.docker.com/products/docker-desktop/
-#    - Ollama: https://ollama.com
-#    - Modelo: ollama pull qwen2.5:7b
+```cmd
+REM 1. Instalar prerequisitos
+REM    - Docker Desktop: https://www.docker.com/products/docker-desktop/
+REM    - Ollama: https://ollama.com
+REM    - Modelo: ollama pull qwen2.5:7b
 
-# 2. Abrir PowerShell en la carpeta del proyecto y correr:
-.\setup.ps1                    # Menu interactivo
-# Seleccionar: 1) Setup completo
+REM 2. Doble clic en rag.bat (o desde CMD):
+rag.bat
+REM Opcion 5: Setup completo (primera vez)
+```
+
+O si preferis PowerShell directo:
+```powershell
+.\setup.ps1 setup
 ```
 
 ### Setup en una PC nueva (macOS / Linux)
 
 ```bash
 ./setup.sh                     # Menu interactivo
-# Seleccionar: 1) Setup completo
+# Opcion 5: Setup completo (primera vez)
 ```
 
-### Build multi-arquitectura
+La primera vez el script:
+1. Verifica Docker.
+2. **Descarga la imagen de Docker Hub** (`juanprof/rag-presidentes:1.0.0`, ~1 GB).
+3. Genera/usa `.env`.
+4. Levanta el servicio.
+
+Las siguientes veces es instantáneo (la imagen ya está local).
+
+### Publicar una version nueva (mantenedores)
 
 ```powershell
-# Construir para linux/amd64 (PC destino x86_64)
-.\setup.ps1 build --platform linux/amd64
+# 1. Login a Docker Hub (una vez, te pide user/pass)
+docker login
 
-# Construir para ambas plataformas (tarda el doble)
-.\setup.ps1 build --platform "linux/amd64,linux/arm64"
+# 2. Build multi-arch + push automatico
+.\publish.ps1 -Version 1.1.0
 ```
+
+Las imagenes quedan publicadas en:
+- `juanprof/rag-presidentes:1.1.0` (tag especifico)
+- `juanprof/rag-presidentes:latest` (tag mobile, NO recomendado para produccion)
+
+Verificable con:
+```bash
+docker pull juanprof/rag-presidentes:1.1.0
+```
+
+### Build local (sin publicar)
+
+Si queres iterar sin pushear al registry:
+
+```powershell
+.\setup.ps1 build --platform linux/amd64
+```
+
+Esto buildea la imagen localmente (no la sube a Docker Hub) y queda como
+`juanprof/rag-presidentes:1.0.0` en tu cache local. `start` la usa
+automaticamente.
 
 ### Configuración (.env)
 
