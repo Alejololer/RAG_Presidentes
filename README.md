@@ -89,7 +89,8 @@ proyecto/
 ├── rag.bat                     # Entry point Windows (menu de 10 opciones)
 ├── setup.ps1                   # Setup interactivo Windows (motor detras de rag.bat)
 ├── setup.sh                    # Setup interactivo macOS/Linux
-├── publish.ps1                 # Build multi-arch + push a Docker Hub
+├── publish.sh                  # Build multi-arch + push a Docker Hub (macOS/Linux)
+├── publish.ps1                 # Idem para Windows (PowerShell)
 ├── legacy/                     # Scripts .bat pre-Docker (deprecados)
 │   ├── iniciar_rag.bat
 │   ├── lanzar_rag_desde_cmd.bat
@@ -132,13 +133,35 @@ Las siguientes veces es instantáneo (la imagen ya está local).
 
 ### Publicar una version nueva (mantenedores)
 
-```powershell
+**macOS / Linux (vos en tu dev machine):**
+```bash
 # 1. Login a Docker Hub (una vez, te pide user/pass)
 docker login
 
 # 2. Build multi-arch + push automatico
+./publish.sh --version 1.1.0
+```
+
+**Windows (PowerShell):**
+```powershell
+# 1. Login a Docker Hub
+docker login
+
+# 2. Build + push
 .\publish.ps1 -Version 1.1.0
 ```
+
+Ambos scripts hacen exactamente lo mismo. Las flags equivalentes:
+
+| `publish.sh` (bash) | `publish.ps1` (PowerShell) |
+|---|---|
+| `--version 1.0.0` | `-Version 1.0.0` |
+| `--platform linux/amd64` | `-Platform linux/amd64` |
+| `--no-push` | `-NoPush` |
+| `--dry-run` | `-DryRun` |
+| `--help` | `-Help` |
+| `--user juanprof` | `-DockerUser juanprof` |
+| `--image rag-presidentes` | `-ImageName rag-presidentes` |
 
 Las imagenes quedan publicadas en:
 - `juanprof/rag-presidentes:1.1.0` (tag especifico)

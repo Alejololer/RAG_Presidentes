@@ -591,8 +591,8 @@ pull_image() {
         fail "No se pudo descargar la imagen del registry."
         info "Posibles causas:"
         info "  - Sin conexion a internet"
-        info "  - La imagen no fue publicada todavia (corre publish.ps1 primero)"
-        info "  - Tag especifico no existe (revisar .env IMAGE_VERSION)"
+        info "  - La imagen no fue publicada todavia (corre ./publish.sh o publish.ps1 primero)"
+        info "  - Tag especifico no existe (revisar IMAGE_VERSION en .env)"
         return 1
     fi
 }

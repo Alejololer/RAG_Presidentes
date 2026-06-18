@@ -99,7 +99,7 @@ Reescritura completa (jun 2026) que resolvió los bugs originales:
 - **`docker-compose.yml`** lee de `.env` (creado desde `.env.example` por el setup script). Usa `image: juanprof/rag-presidentes:1.0.0` del registry publico + `build:` local como fallback.
 - **`rag.bat`** (Windows): entry point con menu de 10 opciones. Doble clic para abrir menu. Todas las opciones delegan a `setup.ps1`.
 - **`setup.ps1`** (Windows, motor del .bat) y **`setup.sh`** (macOS/Linux): menu interactivo con 10 opciones + modo `--auto` + flag `--gpu` + `--platform` + `--dry-run`.
-- **`publish.ps1`**: build multi-arch + push a Docker Hub (`juanprof/rag-presidentes`). Sin CI/CD, manual. Flag `-NoPush` para build local, `-DryRun` para previsualizar.
+- **`publish.sh`** (macOS/Linux) y **`publish.ps1`** (Windows): build multi-arch + push a Docker Hub (`juanprof/rag-presidentes`). Sin CI/CD, manual. Flags equivalentes: `--version` / `-Version`, `--no-push` / `-NoPush`, `--dry-run` / `-DryRun`.
 - **Flujo en PC destino**: la primera vez `start` hace `docker compose pull` automaticamente desde Docker Hub (~1 GB). Las siguientes veces es instantáneo. Si la imagen no esta en el registry (caso dev pre-release), hace build local como fallback.
 - **Linux gotcha**: `host.docker.internal` no funciona en el bridge de Docker en Linux. El setup script configura `USE_HOST_NETWORK=host` automaticamente para que el contenedor use la red del host.
 - **HTTPS**: el contenedor expone HTTP plano. Para acceso desde internet usar Cloudflare Tunnel, Tailscale, o un reverse proxy externo. NO se incluye TLS en la imagen (agrega complejidad sin beneficio si ya hay proxy).

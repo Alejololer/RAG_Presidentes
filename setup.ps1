@@ -528,7 +528,7 @@ function Invoke-Pull {
         Write-Fail "No se pudo descargar la imagen del registry."
         Write-Info "Posibles causas:"
         Write-Info "  - Sin conexion a internet"
-        Write-Info "  - La imagen no fue publicada todavia (corre publish.ps1 primero)"
+        Write-Info "  - La imagen no fue publicada todavia (corre publish.ps1 o ./publish.sh primero)"
         Write-Info "  - Tag especifico no existe (revisar IMAGE_VERSION en .env)"
         throw
     }
