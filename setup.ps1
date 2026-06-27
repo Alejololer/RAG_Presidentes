@@ -120,20 +120,18 @@ function Test-DockerInstalled {
         return @{ Installed = $false; Running = $false; Version = "" }
     }
     $version = (docker --version 2>$null) -replace "Docker version ", "" -replace ",.*", ""
-    $running = $false
-    try {
-        $info = docker info 2>&1
-        $running = ($LASTEXITCODE -eq 0)
-    } catch { $running = $false }
+    # Test-DockerDaemon relaja ErrorActionPreference localmente; sin eso el stderr
+    # de docker info (WARNING de arranque frio) seria un error terminante en PS 5.1.
+    $running = Test-DockerDaemon
     return @{ Installed = $true; Running = $running; Version = $version }
 }
 
 function Test-DockerBuildx {
     if (-not (Get-Command docker -ErrorAction SilentlyContinue)) { return $false }
-    try {
-        $null = docker buildx version 2>&1
-        return ($LASTEXITCODE -eq 0)
-    } catch { return $false }
+    # Scope local de EAP="Continue": evita que el stderr de docker (cuando el
+    # daemon esta frio o buildx no esta) termine el script en PS 5.1.
+    & { $ErrorActionPreference = "Continue"; docker buildx version > $null 2>&1 }
+    return ($LASTEXITCODE -eq 0)
 }
 
 function Test-Ollama {
@@ -156,10 +154,9 @@ function Test-Ollama {
 
 function Test-ImageExists {
     param([string]$name, [string]$tag)
-    try {
-        $null = docker image inspect "${name}:${tag}" 2>&1
-        return ($LASTEXITCODE -eq 0)
-    } catch { return $false }
+    # Scope local de EAP="Continue": ver nota en Test-DockerDaemon.
+    & { $ErrorActionPreference = "Continue"; docker image inspect "${name}:${tag}" > $null 2>&1 }
+    return ($LASTEXITCODE -eq 0)
 }
 
 function Test-ServiceRunning {
@@ -274,16 +271,26 @@ function Ensure-DockerRunning {
     }
 
     # Docker esta instalado. Verificar que este corriendo.
-    try {
-        $null = docker info 2>&1
-        if ($LASTEXITCODE -ne 0) {
-            Show-DockerNotRunningGuide
-            exit 1
-        }
-    } catch {
+    if (-not (Test-DockerDaemon)) {
         Show-DockerNotRunningGuide
         exit 1
     }
+}
+
+# Devuelve $true si el daemon de Docker responde (docker info -> exit 0).
+#
+# IMPORTANTE (la causa del bug "Docker NO esta corriendo" en falso):
+# El script corre via rag.bat con `powershell.exe` (Windows PowerShell 5.1).
+# En 5.1, con $ErrorActionPreference="Stop" (global, linea ~39), CUALQUIER
+# escritura a stderr de un comando nativo se promueve a un error TERMINANTE.
+# `docker info` emite "WARNING: No blkio throttle..." a stderr en arranque frio,
+# asi que el try/catch caia al catch y reportaba el daemon como caido aunque el
+# exit code fuera 0. La solucion: relajar ErrorActionPreference a "Continue" en
+# un scope local (& { ... }) para esta llamada; el resto del script conserva
+# "Stop". $LASTEXITCODE es global, asi que sigue visible tras el bloque.
+function Test-DockerDaemon {
+    & { $ErrorActionPreference = "Continue"; docker info > $null 2>&1 }
+    return ($LASTEXITCODE -eq 0)
 }
 
 # Guia detallada: Docker no instalado. Pasos segun el OS.
