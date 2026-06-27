@@ -71,14 +71,17 @@ Write-Host ""
 # =============================================================================
 
 Write-Step "Verificando Docker..."
-try {
-    $null = docker version 2>&1
-    if ($LASTEXITCODE -ne 0) { throw "Docker no responde" }
-    Write-Ok "Docker disponible"
-} catch {
+# NOTA: scope local de EAP="Continue". En Windows PowerShell 5.1, con
+# $ErrorActionPreference="Stop" (global), el stderr de docker (p.ej. los
+# "WARNING: No blkio throttle..." que docker version/info emiten en arranque
+# frio) se promueve a error terminante y reportaria "Docker no disponible" en
+# falso aunque el exit code sea 0. Juzgar SOLO por el exit code.
+& { $ErrorActionPreference = "Continue"; docker version > $null 2>&1 }
+if ($LASTEXITCODE -ne 0) {
     Write-Fail "Docker no esta disponible. Abri Docker Desktop y reintenta."
     exit 1
 }
+Write-Ok "Docker disponible"
 
 # Validar formato de version (semver basico)
 if ($Version -notmatch "^\d+\.\d+\.\d+") {
@@ -133,16 +136,17 @@ if (-not $NoPush) {
 # =============================================================================
 
 Write-Step "Configurando builder multi-arch..."
-try {
-    $null = docker buildx create --name rag-multiarch --use 2>&1
-    Write-Info "Builder 'rag-multiarch' creado/ya existe"
-} catch {
+# Scope local de EAP="Continue": el stderr de docker no debe terminar el script
+# en PS 5.1. Si el builder ya existe, docker create devuelve != 0 y lo informamos.
+& { $ErrorActionPreference = "Continue"; docker buildx create --name rag-multiarch --use > $null 2>&1 }
+if ($LASTEXITCODE -eq 0) {
+    Write-Info "Builder 'rag-multiarch' creado"
+} else {
     Write-Info "Builder ya existe o se reutiliza"
 }
 
-try {
-    $null = docker buildx inspect --bootstrap 2>&1
-} catch {
+& { $ErrorActionPreference = "Continue"; docker buildx inspect --bootstrap > $null 2>&1 }
+if ($LASTEXITCODE -ne 0) {
     Write-Warn "No se pudo hacer bootstrap del builder (puede que ya este listo)"
 }
 Write-Host ""
@@ -205,14 +209,11 @@ if ($NoPush) {
 if (-not $NoPush) {
     Write-Step "Verificando que la imagen es pullable desde Docker Hub..."
     # No hacemos docker pull (tarda mucho), solo confirmamos via docker manifest
-    try {
-        $null = docker manifest inspect $TaggedImage 2>&1
-        if ($LASTEXITCODE -eq 0) {
-            Write-Ok "Manifest visible en Docker Hub"
-        } else {
-            Write-Warn "No se pudo inspeccionar el manifest (puede tardar unos minutos en propagarse)"
-        }
-    } catch {
+    # Scope local de EAP="Continue": ver nota arriba sobre PS 5.1.
+    & { $ErrorActionPreference = "Continue"; docker manifest inspect $TaggedImage > $null 2>&1 }
+    if ($LASTEXITCODE -eq 0) {
+        Write-Ok "Manifest visible en Docker Hub"
+    } else {
         Write-Warn "No se pudo inspeccionar el manifest (puede tardar unos minutos en propagarse)"
     }
 }
