@@ -10,7 +10,7 @@ import requests
 
 from utils import (
     retrieve,
-    detect_president,
+    resolve_president,
     get_known_names,
     SECTION_LABELS,
     MODEL_NAME,
@@ -46,6 +46,9 @@ KNOWN_NAMES = get_known_names()
 
 class Prompt(BaseModel):
     prompt: str
+    # Presidente actual de la conversación (sticky). El cliente reenvía el
+    # `presidente` que recibió en la respuesta anterior para dar continuidad.
+    presidente: str | None = None
 
 
 def build_context(resultados):
@@ -145,8 +148,9 @@ async def stats():
 
 @app.post("/chat")
 async def chat(data: Prompt):
-    # 1. Detectar de qué presidente trata la pregunta.
-    presidente = detect_president(data.prompt, KNOWN_NAMES)
+    # 1. Resolver el presidente: detecta el del mensaje o mantiene el sticky
+    #    de la conversación (persistencia entre mensajes de seguimiento).
+    presidente = resolve_president(data.prompt, data.presidente, KNOWN_NAMES)
 
     # 2. Recuperar contexto filtrado por ese presidente (evita mezcla).
     resultados = retrieve(data.prompt, president=presidente, top_k=RAG_TOP_K)

@@ -10,6 +10,7 @@ from utils import (
     build_chunks,
     get_known_names,
     detect_president,
+    resolve_president,
     retrieve,
     _key_to_slug,
     _normalize,
@@ -71,6 +72,34 @@ def test_deteccion():
     print()
 
 
+def test_persistencia():
+    print("=== Persistencia de presidente (sticky por conversación) ===")
+    names = get_known_names()
+    garcia = "Gabriel García Moreno"
+    alfaro = next((n for n in names if "Alfaro" in n), None)
+    # (pregunta, sticky entrante, esperado). Cubre:
+    # - mención explícita gana sobre el sticky (switch a mitad de conversación)
+    # - seguimiento sin nombre mantiene el sticky
+    # - sticky inválido/basura se ignora
+    # - sin nombre y sin sticky -> None
+    casos = [
+        ("Hablame de tu mandato, Garcia Moreno", None, garcia),
+        ("y que hiciste en educacion?", garcia, garcia),       # sticky se mantiene
+        ("Cuentame de Eloy Alfaro", garcia, alfaro),           # switch explícito
+        ("y sus obras?", "nombre basura inexistente", None),   # sticky inválido
+        ("cual es la capital de Francia?", None, None),        # sin nombre ni sticky
+    ]
+    todos_ok = True
+    for q, sticky, esperado in casos:
+        obtenido = resolve_president(q, sticky, names)
+        ok = obtenido == esperado
+        todos_ok = todos_ok and ok
+        marca = "OK" if ok else f"FALLO (esperaba {esperado!r})"
+        print(f"  [{marca}] sticky={sticky!r} {q!r} -> {obtenido!r}")
+    print("PERSISTENCIA:", "TODO OK" if todos_ok else "HAY FALLOS")
+    print()
+
+
 def test_aislamiento():
     print("=== Aislamiento por presidente (bug original) ===")
     names = get_known_names()
@@ -87,4 +116,5 @@ def test_aislamiento():
 if __name__ == "__main__":
     test_carga_y_chunking()
     test_deteccion()
+    test_persistencia()
     test_aislamiento()

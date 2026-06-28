@@ -340,6 +340,24 @@ def detect_president(question, known_names):
     return best if best_score >= 1 else None
 
 
+def resolve_president(question, sticky, known_names):
+    """
+    Resuelve el presidente de la conversación con persistencia ("sticky").
+
+    Si el mensaje actual nombra a un presidente, ese gana (permite cambiar de
+    presidente a mitad de conversación). Si no hay mención explícita, mantiene
+    el `sticky` que viene del cliente, validándolo contra `known_names` para no
+    aceptar nombres arbitrarios (el valor termina en el system prompt y en el
+    filtro `where` de ChromaDB). Devuelve el nombre canónico o None.
+    """
+    detected = detect_president(question, known_names)
+    if detected:
+        return detected
+    if sticky and sticky in known_names:
+        return sticky
+    return None
+
+
 # --- Recuperación ---------------------------------------------------------
 
 def retrieve(question, president=None, top_k=5, threshold=DISTANCE_THRESHOLD):

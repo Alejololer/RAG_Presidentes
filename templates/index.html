@@ -283,6 +283,7 @@
     const input  = document.getElementById("prompt");
     const sendBtn = document.getElementById("send");
     let busy = false;
+    let currentPresidente = null;   // presidente sticky de la conversación
 
     // auto-resize del textarea
     input.addEventListener("input", () => {
@@ -369,11 +370,12 @@
         const res = await fetch("/chat", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ prompt })
+          body: JSON.stringify({ prompt, presidente: currentPresidente })
         });
         removeTyping();
         if (!res.ok) throw new Error("HTTP " + res.status);
         const data = await res.json();
+        if (data.presidente) currentPresidente = data.presidente;  // recordar para el siguiente mensaje
         const who = data.presidente || "Guía histórico";
         addBubble("bot", who, data.response || "(respuesta vacía)");
       } catch (err) {
