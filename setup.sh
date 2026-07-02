@@ -35,7 +35,7 @@ cd "$SCRIPT_DIR"
 LOG_FILE="$SCRIPT_DIR/setup.log"
 ENV_FILE="$SCRIPT_DIR/.env"
 ENV_EXAMPLE="$SCRIPT_DIR/.env.example"
-IMAGE_NAME="rag-presidentes"
+IMAGE_NAME="alejololer/rag-presidentes"
 IMAGE_TAG="1.0.0"
 
 # Flags parseados

@@ -47,7 +47,7 @@ $OutputEncoding = [System.Text.Encoding]::UTF8
 $LogFile = Join-Path $ScriptDir "setup.log"
 $EnvFile = Join-Path $ScriptDir ".env"
 $EnvExample = Join-Path $ScriptDir ".env.example"
-$ImageName = "rag-presidentes"
+$ImageName = "alejololer/rag-presidentes"
 $ImageTag = "1.0.0"
 
 # =============================================================================

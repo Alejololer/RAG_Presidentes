@@ -5,17 +5,17 @@
 
 services:
   rag:
-    # Por defecto usa la imagen CONSTRUIDA LOCALMENTE (`rag-presidentes:1.0.0`),
-    # que es el nombre con el que el setup script taggea el build (setup.ps1 /
-    # setup.sh). Asi `docker compose up` corre tu codigo local y NO baja la de
-    # Docker Hub.
+    # Por defecto usa la imagen PUBLICA del registry (`alejololer/rag-presidentes:1.0.0`).
+    # Es el mismo nombre con el que:
+    #   - los setup scripts taggean el build local (setup.ps1 / setup.sh)
+    #   - publish.ps1 / publish.sh pushean a Docker Hub
+    # Por eso todo es congruente: en una PC nueva `docker compose up` BAJA la imagen
+    # publica; en una PC de dev que ya buildeo, usa el build local (mismo tag) y no baja nada.
     #
-    # Para usar la imagen publica del registry (distribucion a otras PCs):
-    #   en .env  ->  RAG_IMAGE=alejololer/rag-presidentes:1.0.0
-    # o inline:  RAG_IMAGE=alejololer/rag-presidentes:1.0.0 docker compose up -d
+    # Para fijar otra version/tag:  en .env -> RAG_IMAGE=alejololer/rag-presidentes:X.Y.Z
     #
-    # Si la imagen elegida no existe localmente, Docker hace fallback a `build:`.
-    image: ${RAG_IMAGE:-rag-presidentes:1.0.0}
+    # Si la imagen elegida no existe local ni en el registry, Docker hace fallback a `build:`.
+    image: ${RAG_IMAGE:-alejololer/rag-presidentes:1.0.0}
     container_name: rag-presidentes
     # Build local (fallback). Se usa si:
     #   - la imagen no esta en Docker Hub todavia
