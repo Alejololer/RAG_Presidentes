@@ -109,7 +109,7 @@ if /i "%~1"=="help" (
     echo   rag.bat config  ^<^> setup.ps1 config
     echo   rag.bat uninstall ^<^> setup.ps1 uninstall
     echo.
-    echo Imagen Docker Hub: juanprof/rag-presidentes:1.0.0
+    echo Imagen Docker Hub: alejololer/rag-presidentes:1.0.0
     echo.
     exit /b 0
 )

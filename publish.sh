@@ -2,7 +2,10 @@
 # =============================================================================
 # RAG Presidentes Ecuador - Publish a Docker Hub (bash)
 #
-# Construye la imagen multi-arch y la pushea a Docker Hub.
+# Construye la imagen (amd64 por defecto) y la pushea a Docker Hub.
+# NOTA: el Dockerfile NO genera embeddings en build; hornea el chroma_db/ local
+# (generado con `python generate_embeddings.py`, GPU si disponible). Si falta, este
+# script lo genera antes de buildear.
 #
 # Uso:
 #   ./publish.sh --version 1.0.0
@@ -21,10 +24,10 @@ set -euo pipefail
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd "$SCRIPT_DIR"
 
-DOCKER_USER="juanprof"
+DOCKER_USER="alejololer"
 IMAGE_NAME="rag-presidentes"
 VERSION=""
-PLATFORM="linux/amd64,linux/arm64"
+PLATFORM="linux/amd64"
 NO_PUSH=false
 DRY_RUN=false
 
@@ -170,7 +173,30 @@ if [ "$NO_PUSH" = false ]; then
 fi
 
 # =============================================================================
-# Buildx: asegurar builder multi-arch
+# ChromaDB: asegurar que exista localmente (se hornea por COPY en el Dockerfile)
+# =============================================================================
+# El Dockerfile ya NO genera embeddings en build. Si no hay chroma_db/, lo
+# generamos aca (get_model() usa GPU automaticamente si esta disponible).
+step "Verificando chroma_db local..."
+if [ ! -d chroma_db ] || [ -z "$(ls -A chroma_db 2>/dev/null)" ]; then
+    warn "No hay chroma_db/ local. Generandolo (necesario para el build)..."
+    PY=""
+    if [ -x ".venv/bin/python" ]; then PY=".venv/bin/python"
+    elif command -v python3 >/dev/null 2>&1; then PY="python3"
+    elif command -v python >/dev/null 2>&1; then PY="python"; fi
+    if [ -z "$PY" ]; then
+        fail "No hay chroma_db/ ni Python para generarlo. Genera el indice en una maquina con Python (GPU recomendado) antes de publicar."
+        exit 1
+    fi
+    PYTHONIOENCODING=utf-8 "$PY" generate_embeddings.py || { fail "Fallo generando chroma_db"; exit 1; }
+    ok "chroma_db generado"
+else
+    ok "chroma_db local presente"
+fi
+echo ""
+
+# =============================================================================
+# Buildx: asegurar builder
 # =============================================================================
 
 step "Configurando builder multi-arch..."
@@ -205,7 +231,7 @@ if [ "$NO_PUSH" = true ]; then
 else
     step "Build + Push de $TAGGED_IMAGE..."
     info "Plataforma: $PLATFORM"
-    info "Esto puede tardar 5-10 minutos la primera vez (descarga modelo + genera ChromaDB + push)."
+    info "Descarga modelo (cacheado), hornea el chroma_db local y pushea. Rapido si el cache esta caliente."
     echo ""
 
     if ! docker buildx build \

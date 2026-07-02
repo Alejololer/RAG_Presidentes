@@ -9,7 +9,7 @@ El sistema ahora se distribuye como imagen Docker. Las ventajas:
 - Sin instalar Python, torch, sentence-transformers localmente
 - Sin conflictos de venv entre maquinas
 - Reproducible: misma imagen, mismo comportamiento
-- Distribuible via Docker Hub (`juanprof/rag-presidentes`)
+- Distribuible via Docker Hub (`alejololer/rag-presidentes`)
 
 ## Que usar en su lugar
 

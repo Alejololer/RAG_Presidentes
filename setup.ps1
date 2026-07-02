@@ -460,12 +460,35 @@ function Ensure-Buildx {
     }
 }
 
+# El Dockerfile hornea chroma_db/ por COPY (NO lo genera en build). Si falta,
+# lo generamos localmente (get_model() usa GPU si esta disponible). Sin chroma_db/
+# ni Python, el build no puede continuar -> guiar al usuario a 'pull'.
+function Ensure-ChromaDb {
+    if ((Test-Path "chroma_db") -and (Get-ChildItem "chroma_db" -Recurse -File -ErrorAction SilentlyContinue | Select-Object -First 1)) {
+        Write-Ok "chroma_db local presente (se horneara en la imagen)"
+        return
+    }
+    Write-Warn "No hay chroma_db/ local; el build lo necesita. Generandolo..."
+    $py = if (Test-Path ".venv\Scripts\python.exe") { ".venv\Scripts\python.exe" }
+          elseif (Get-Command python -ErrorAction SilentlyContinue) { "python" }
+          else { $null }
+    if (-not $py) {
+        Write-Fail "No hay chroma_db/ ni Python para generarlo. Usa 'pull' para bajar la imagen publica, o genera el indice en una maquina con Python (GPU recomendado)."
+        throw "chroma_db ausente"
+    }
+    $env:PYTHONIOENCODING = "utf-8"
+    & $py generate_embeddings.py
+    if ($LASTEXITCODE -ne 0) { throw "Fallo generando chroma_db" }
+    Write-Ok "chroma_db generado"
+}
+
 function Build-Image {
     Ensure-DockerRunning
     Write-Step "Construyendo imagen Docker..."
-    Write-Info "Esto puede tardar 5-10 minutos la primera vez (descarga modelo + genera ChromaDB)."
+    Write-Info "Descarga modelo (cacheado) y hornea el chroma_db local. Rapido si el cache esta caliente."
 
     Ensure-Buildx
+    Ensure-ChromaDb
 
     $platform = if ($Platform) { $Platform } else { "linux/$(Get-Arch)" }
     Write-Info "Plataforma: $platform"
@@ -519,7 +542,7 @@ function Invoke-Reindex {
 function Invoke-Pull {
     Ensure-DockerRunning
     Write-Step "Descargando imagen de Docker Hub..."
-    Write-Info "Registry: juanprof/rag-presidentes"
+    Write-Info "Registry: alejololer/rag-presidentes"
     Write-Info "Esto descarga ~1 GB la primera vez."
 
     if ($DryRun) {
@@ -554,6 +577,7 @@ function Start-Service {
         } catch {
             Write-Warn "No se pudo descargar del registry. Intentando build local..."
             try {
+                Ensure-ChromaDb
                 docker compose build rag
                 if ($LASTEXITCODE -ne 0) { throw "Build local fallo" }
             } catch {
@@ -759,7 +783,7 @@ function Show-Menu {
     Write-Host "  [Avanzadas]" -ForegroundColor Cyan
     Write-Host "  5)  Setup completo           (primera vez: build, configura, levanta)"
     Write-Host "  6)  Build imagen             (rebuild local con ultima version del codigo)"
-    Write-Host "  7)  Pull imagen              (descarga de Docker Hub: juanprof/rag-presidentes)"
+    Write-Host "  7)  Pull imagen              (descarga de Docker Hub: alejololer/rag-presidentes)"
     Write-Host "  8)  Re-indexar dataset       (regenera ChromaDB desde el JSONL)"
     Write-Host "  9)  Actualizar codigo        (git pull + rebuild + restart)"
     Write-Host "  10) Reconfigurar / Desinstalar (submenu)"

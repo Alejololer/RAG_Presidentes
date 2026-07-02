@@ -515,10 +515,32 @@ ensure_buildx() {
     fi
 }
 
+# El Dockerfile hornea chroma_db/ por COPY (NO lo genera en build). Si falta,
+# lo generamos localmente (get_model() usa GPU si esta disponible). Sin chroma_db/
+# ni Python, el build no puede continuar -> guiar al usuario a 'pull'.
+ensure_chroma_db() {
+    if [ -d chroma_db ] && [ -n "$(ls -A chroma_db 2>/dev/null)" ]; then
+        ok "chroma_db local presente (se horneara en la imagen)"
+        return 0
+    fi
+    warn "No hay chroma_db/ local; el build lo necesita. Generandolo..."
+    local PY=""
+    if [ -x ".venv/bin/python" ]; then PY=".venv/bin/python"
+    elif command -v python3 >/dev/null 2>&1; then PY="python3"
+    elif command -v python >/dev/null 2>&1; then PY="python"; fi
+    if [ -z "$PY" ]; then
+        fail "No hay chroma_db/ ni Python para generarlo. Usa 'pull' para bajar la imagen publica, o genera el indice en una maquina con Python (GPU recomendado)."
+        exit 1
+    fi
+    PYTHONIOENCODING=utf-8 "$PY" generate_embeddings.py || { fail "Fallo generando chroma_db"; exit 1; }
+    ok "chroma_db generado"
+}
+
 build_image() {
     ensure_docker_running
     step "Construyendo imagen Docker..."
-    info "Esto puede tardar 5-10 minutos la primera vez (descarga modelo + genera ChromaDB)."
+    info "Descarga modelo (cacheado) y hornea el chroma_db local. Rapido si el cache esta caliente."
+    ensure_chroma_db
 
     ensure_buildx
 
@@ -577,7 +599,7 @@ reindex() {
 pull_image() {
     ensure_docker_running
     step "Descargando imagen de Docker Hub..."
-    info "Registry: juanprof/rag-presidentes"
+    info "Registry: alejololer/rag-presidentes"
     info "Esto descarga ~1 GB la primera vez."
 
     if [ "$DRY_RUN" = true ]; then
@@ -600,7 +622,7 @@ pull_image() {
 start_service() {
     ensure_docker_running
 
-    # Si la imagen del registry (juanprof/rag-presidentes:VERSION) no esta
+    # Si la imagen del registry (alejololer/rag-presidentes:VERSION) no esta
     # localmente, intentar pull automatico. Si el pull falla, hace build
     # local (caso dev que aun no publico la primera version).
     if ! check_image > /dev/null 2>&1; then
@@ -610,6 +632,7 @@ start_service() {
         else
             warn "No se pudo descargar del registry. Intentando build local..."
             if [ "$DRY_RUN" = false ]; then
+                ensure_chroma_db
                 docker compose build rag || {
                     fail "Build local tambien fallo. Revisa tu conexion o publica la imagen primero."
                     return 1
@@ -844,7 +867,7 @@ show_menu() {
     echo "  [Avanzadas]"
     echo "  5)  Setup completo           (primera vez: build, configura, levanta)"
     echo "  6)  Build imagen             (rebuild local con ultima version del codigo)"
-    echo "  7)  Pull imagen              (descarga de Docker Hub: juanprof/rag-presidentes)"
+    echo "  7)  Pull imagen              (descarga de Docker Hub: alejololer/rag-presidentes)"
     echo "  8)  Re-indexar dataset       (regenera ChromaDB desde el JSONL)"
     echo "  9)  Actualizar codigo        (git pull + rebuild + restart)"
     echo "  10) Reconfigurar / Desinstalar (submenu)"

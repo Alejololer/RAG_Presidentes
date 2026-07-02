@@ -125,7 +125,7 @@ O si preferis PowerShell directo:
 
 La primera vez el script:
 1. Verifica Docker.
-2. **Descarga la imagen de Docker Hub** (`juanprof/rag-presidentes:1.0.0`, ~1 GB).
+2. **Descarga la imagen de Docker Hub** (`alejololer/rag-presidentes:1.0.0`, ~1 GB).
 3. Genera/usa `.env`.
 4. Levanta el servicio.
 
@@ -160,16 +160,16 @@ Ambos scripts hacen exactamente lo mismo. Las flags equivalentes:
 | `--no-push` | `-NoPush` |
 | `--dry-run` | `-DryRun` |
 | `--help` | `-Help` |
-| `--user juanprof` | `-DockerUser juanprof` |
+| `--user alejololer` | `-DockerUser alejololer` |
 | `--image rag-presidentes` | `-ImageName rag-presidentes` |
 
 Las imagenes quedan publicadas en:
-- `juanprof/rag-presidentes:1.1.0` (tag especifico)
-- `juanprof/rag-presidentes:latest` (tag mobile, NO recomendado para produccion)
+- `alejololer/rag-presidentes:1.1.0` (tag especifico)
+- `alejololer/rag-presidentes:latest` (tag mobile, NO recomendado para produccion)
 
 Verificable con:
 ```bash
-docker pull juanprof/rag-presidentes:1.1.0
+docker pull alejololer/rag-presidentes:1.1.0
 ```
 
 ### Build local (sin publicar)
@@ -181,7 +181,7 @@ Si queres iterar sin pushear al registry:
 ```
 
 Esto buildea la imagen localmente (no la sube a Docker Hub) y queda como
-`juanprof/rag-presidentes:1.0.0` en tu cache local. `start` la usa
+`alejololer/rag-presidentes:1.0.0` en tu cache local. `start` la usa
 automaticamente.
 
 ### Configuración (.env)

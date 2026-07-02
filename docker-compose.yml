@@ -11,8 +11,8 @@ services:
     # Docker Hub.
     #
     # Para usar la imagen publica del registry (distribucion a otras PCs):
-    #   en .env  ->  RAG_IMAGE=juanprof/rag-presidentes:1.0.0
-    # o inline:  RAG_IMAGE=juanprof/rag-presidentes:1.0.0 docker compose up -d
+    #   en .env  ->  RAG_IMAGE=alejololer/rag-presidentes:1.0.0
+    # o inline:  RAG_IMAGE=alejololer/rag-presidentes:1.0.0 docker compose up -d
     #
     # Si la imagen elegida no existe localmente, Docker hace fallback a `build:`.
     image: ${RAG_IMAGE:-rag-presidentes:1.0.0}
@@ -20,6 +20,10 @@ services:
     # Build local (fallback). Se usa si:
     #   - la imagen no esta en Docker Hub todavia
     #   - estas desarrollando y cambiaste codigo (setup.ps1 build)
+    # OJO: el Dockerfile hornea chroma_db/ por COPY (no lo genera en build).
+    # Necesitas chroma_db/ local antes de buildear. Los setup scripts lo generan
+    # solos; si haces `docker compose build` directo, corre antes
+    # `python generate_embeddings.py` (usa GPU si esta disponible).
     build:
       context: .
       dockerfile: Dockerfile

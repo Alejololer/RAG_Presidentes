@@ -31,17 +31,13 @@ RUN pip install --no-cache-dir --upgrade pip \
 RUN python -c "from sentence_transformers import SentenceTransformer; \
     SentenceTransformer('intfloat/multilingual-e5-base')"
 
-# Copiar lo necesario para generar el indice ChromaDB
-COPY generate_embeddings.py .
-COPY utils.py .
-COPY presidentes_ecuador.json .
-
-# Generar el indice (queda en /app/chroma_db/).
-# PYTHONUNBUFFERED=1 es CLAVE: fuerza flush de stdout para que el progreso
-# sea visible en tiempo real durante el build (sin esto, Python bufferea y
-# el usuario ve silencio durante 1-3 min).
-RUN PYTHONUNBUFFERED=1 python generate_embeddings.py \
-    && echo "[OK] ChromaDB generado: $(ls -la chroma_db/ | head -3)"
+# NOTA: el indice ChromaDB NO se genera aqui. Se genera localmente (en GPU,
+# ~minutos vs ~14 min en CPU emulada) con `python generate_embeddings.py` y se
+# hornea por COPY en el runtime stage. Los vectores son identicos vengan de
+# GPU o CPU. Trade-off: el build depende del chroma_db/ local del maintainer
+# (menos reproducible). Para regenerar reproducible-en-build, restaurar el
+# `RUN generate_embeddings.py` que estaba aqui.
+# ponytail: bake local chroma_db; volver a generar-en-build si se pierde el artefacto local
 
 # -----------------------------------------------------------------------------
 # Stage 2: runtime
@@ -71,8 +67,9 @@ COPY --from=builder /usr/local/bin /usr/local/bin
 # Sin esto, el primer request tardaria minutos en descargar el modelo
 COPY --from=builder /root/.cache/huggingface /root/.cache/huggingface
 
-# Copiar el ChromaDB precomputado (decision: bake en imagen para arranque instantaneo)
-COPY --from=builder /app/chroma_db ./chroma_db
+# Copiar el ChromaDB precomputado LOCALMENTE (generado en GPU, ver builder stage).
+# Se hornea desde el contexto de build, no desde el builder.
+COPY chroma_db ./chroma_db
 
 # Copiar codigo de la aplicacion
 COPY app.py .

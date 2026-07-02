@@ -1,7 +1,10 @@
 # =============================================================================
 # RAG Presidentes Ecuador - Publish a Docker Hub
 #
-# Construye la imagen multi-arch y la pushea a Docker Hub para distribucion.
+# Construye la imagen (amd64 por defecto) y la pushea a Docker Hub para distribucion.
+# NOTA: el Dockerfile NO genera embeddings en build; hornea el chroma_db/ local
+# (generado con `python generate_embeddings.py`, GPU si disponible). Si falta, este
+# script lo genera antes de buildear.
 #
 # Uso:
 #   .\publish.ps1 -Version 1.0.0
@@ -15,8 +18,8 @@ param(
     [Parameter(Mandatory = $true)]
     [string]$Version,
 
-    [string]$Platform = "linux/amd64,linux/arm64",
-    [string]$DockerUser = "juanprof",
+    [string]$Platform = "linux/amd64",
+    [string]$DockerUser = "alejololer",
     [string]$ImageName = "rag-presidentes",
     [switch]$NoPush,
     [switch]$DryRun
@@ -132,10 +135,34 @@ if (-not $NoPush) {
 }
 
 # =============================================================================
-# Buildx: asegurar builder multi-arch
+# ChromaDB: asegurar que exista localmente (se hornea por COPY en el Dockerfile)
+# =============================================================================
+# El Dockerfile ya NO genera embeddings en build. Si no hay chroma_db/, lo
+# generamos aca (get_model() usa GPU automaticamente si esta disponible).
+Write-Step "Verificando chroma_db local..."
+if (-not (Test-Path "chroma_db") -or -not (Get-ChildItem "chroma_db" -Recurse -File -ErrorAction SilentlyContinue | Select-Object -First 1)) {
+    Write-Warn "No hay chroma_db/ local. Generandolo (necesario para el build)..."
+    $py = if (Test-Path ".venv\Scripts\python.exe") { ".venv\Scripts\python.exe" }
+          elseif (Get-Command python -ErrorAction SilentlyContinue) { "python" }
+          else { $null }
+    if (-not $py) {
+        Write-Fail "No hay chroma_db/ ni Python para generarlo. Genera el indice en una maquina con Python (GPU recomendado) antes de publicar."
+        exit 1
+    }
+    $env:PYTHONIOENCODING = "utf-8"
+    & $py generate_embeddings.py
+    if ($LASTEXITCODE -ne 0) { Write-Fail "Fallo generando chroma_db"; exit 1 }
+    Write-Ok "chroma_db generado"
+} else {
+    Write-Ok "chroma_db local presente"
+}
+Write-Host ""
+
+# =============================================================================
+# Buildx: asegurar builder
 # =============================================================================
 
-Write-Step "Configurando builder multi-arch..."
+Write-Step "Configurando builder..."
 # Scope local de EAP="Continue": el stderr de docker no debe terminar el script
 # en PS 5.1. Si el builder ya existe, docker create devuelve != 0 y lo informamos.
 & { $ErrorActionPreference = "Continue"; docker buildx create --name rag-multiarch --use > $null 2>&1 }
@@ -175,7 +202,7 @@ if ($NoPush) {
 } else {
     Write-Step "Build + Push de $TaggedImage..."
     Write-Info "Plataforma: $Platform"
-    Write-Info "Esto puede tardar 5-10 minutos la primera vez (descarga modelo + genera ChromaDB + push)."
+    Write-Info "Descarga modelo (cacheado), hornea el chroma_db local y pushea. Rapido si el cache esta caliente."
     Write-Host ""
 
     try {
